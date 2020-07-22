@@ -7,22 +7,15 @@ import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import SearchSitters from "./pages/SearchSitters";
+import BecomeSitter from "./pages/BecomeSitter";
+import HomePage from "./pages/HomePage";
+import OurServices from "./components/OurServices";
+import Dashboard from "./pages/Dashboard"
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
-import { Jumbotron } from "react-bootstrap";
-
-const Home = () => (
-  <Jumbotron>
-    <h1>Home</h1>
-  </Jumbotron>
-);
-const Other = () => (
-  <Jumbotron>
-    <h1>Other</h1>
-  </Jumbotron>
-);
 
 function App() {
   const dispatch = useDispatch();
@@ -38,8 +31,11 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/other" component={Other} />
+        <Route exact path="/" component={HomePage} />
+        <Route path="/search_sitters" component={SearchSitters} />
+        <Route path="/become_a_sitter" component={BecomeSitter} />
+        <Route path="/our_services" component={OurServices} />
+        <Route path="/dashboard" component={Dashboard}/>
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>
