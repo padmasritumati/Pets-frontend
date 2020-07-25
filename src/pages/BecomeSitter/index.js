@@ -1,11 +1,11 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 //import Upload from "../../components/Upload";
+import Phone from "./Phone";
 
 export default function BecomeSitter() {
- 
   return (
     <div>
       <h1>BecomeSitter</h1>
@@ -45,17 +45,7 @@ export default function BecomeSitter() {
           //<Upload></Upload>
         }
 
-        <h3 className="mt-5 mb-3">Add your phone number</h3>
-        <p>
-          We requires a verified phone number for important updates. <br></br>
-          Note:
-          your phone number won't be displayed on your profile.
-        </p>
-
-        <Form.Group as={Col} controlId="formGridZip" type="number">
-            <Form.Label>Phone Number </Form.Label>
-            <Form.Control />
-          </Form.Group>
+        <Phone></Phone>
 
         <Button variant="primary" type="submit">
           Submit
