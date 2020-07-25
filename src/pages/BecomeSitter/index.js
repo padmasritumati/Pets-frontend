@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 //import Upload from "../../components/Upload";
 import Phone from "./Phone";
+import Services from "./Services"
 
 export default function BecomeSitter() {
   return (
@@ -46,6 +47,7 @@ export default function BecomeSitter() {
         }
 
         <Phone></Phone>
+        <Services></Services>
 
         <Button variant="primary" type="submit">
           Submit
