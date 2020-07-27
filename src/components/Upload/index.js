@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 
-function Upload() {
 
-  const [images, setImages] = useState()
+function Upload() {
+  const [images, setImages] = useState([])
+  
 
   const beginUpload = tag => {
     const uploadOptions = {
@@ -26,11 +27,14 @@ function Upload() {
 
   useEffect( () => {
     fetchPhotos("image", setImages);
+    
   }, [])
 
+  console.log("image",images)
+
   return (
-    <CloudinaryContext cloudName="dsuvhhlxm">
-    <div >
+   <CloudinaryContext cloudName="dsuvhhlxm">
+      <div className="App">
         <button onClick={() => beginUpload("image")}>Upload Image</button>
       <section>
         {images.map(i => <Image
@@ -41,8 +45,8 @@ function Upload() {
             />)}
       </section>
     </div>
-    </CloudinaryContext>
-  
+   </CloudinaryContext>
   );
 }
+
 export default Upload;

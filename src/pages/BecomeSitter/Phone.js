@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import firebase from "./firebase";
 import { Link } from "react-router-dom";
+import {setPhone} from "../../store/becomeSitter/actions"
+import { useDispatch } from "react-redux";
+import Upload from "../../components/Upload";
 
 export default function Phone() {
   const [phone, set_phone] = useState();
+  const dispatch=useDispatch();
+
+  const handler=()=>{
+       dispatch(setPhone(phone)) 
+  }
 
   const setUpRecaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -68,8 +76,9 @@ export default function Phone() {
         <Button type="submit" onClick={onSignInSubmit}>
           Verify
         </Button>
+        <Upload></Upload>
         <Link to="/become_a_sitter/services" >
-          <Button >Save & continue</Button>
+          <Button onClick={handler}>Save & continue</Button>
         </Link>
       </Form>
       

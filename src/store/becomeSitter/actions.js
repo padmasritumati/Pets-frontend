@@ -1,16 +1,21 @@
-import { apiUrl } from "../../config/constants";
-import axios from "axios";
+//import { apiUrl } from "../../config/constants";
+//import axios from "axios";
 
 export const ADDRESS = "ADDRESS";
 export const PHONE = "PHONE";
 
-const address = address_of_sitter => {
-  return {
-    type: ADDRESS,
-    payload: address_of_sitter
-  };
-};
+export const setAddress = (house_number, street, city, postcode, country) => ({
+  type: ADDRESS,
+  payload: {
+    house_number,
+    street,
+    city,
+    postcode,
+    country,
+  },
+});
 
-export const addressSitter=(house_number,street,city,postcode,country)=>{
-dispatch()
-} 
+export const setPhone=(phone_number)=>({
+  type:PHONE,
+  payload:{phone_number}
+})
