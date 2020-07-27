@@ -3,7 +3,7 @@ import { Container, Col, Form, Row,Button } from "react-bootstrap";
 
 export default function Services() {
   return (
-    <Container className="mt-5 mb-5">
+    <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
       <h2>Which services would you like to offer?</h2>
       <Row className="mt-5 mb-5">
         <Col>
@@ -110,6 +110,11 @@ export default function Services() {
           <Button variant="outline-primary">Yes</Button>{' '}
           <Button variant="outline-primary">No</Button>{' '}
         </>
+      </Row>
+      <Row>
+        <Button>
+          Submit
+        </Button>
       </Row>
     </Container>
   );

@@ -4,7 +4,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 //import Upload from "../../components/Upload";
 import Phone from "./Phone";
-import Services from "./Services"
+import Services from "./Services";
+import { useHistory, Link } from "react-router-dom";
 
 export default function BecomeSitter() {
   return (
@@ -46,12 +47,10 @@ export default function BecomeSitter() {
           //<Upload></Upload>
         }
 
-        <Phone></Phone>
-        <Services></Services>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        
+        <Link to="/become_a_sitter/phone"> <Button variant="primary" type="submit">
+          Save & Continue
+        </Button></Link>
       </Form>
     </div>
   );

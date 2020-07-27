@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import firebase from "./firebase";
+import { Link } from "react-router-dom";
 
 export default function Phone() {
   const [phone, set_phone] = useState();
@@ -52,7 +53,7 @@ export default function Phone() {
 
   return (
     <div>
-      <Form >
+      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h2 className="mt-5 mb-3">Add your phone number</h2>
         <p>
           We requires a verified phone number for important updates. <br></br>
@@ -67,7 +68,11 @@ export default function Phone() {
         <Button type="submit" onClick={onSignInSubmit}>
           Verify
         </Button>
+        <Link to="/become_a_sitter/services" >
+          <Button >Save & continue</Button>
+        </Link>
       </Form>
+      
     </div>
   );
 }
