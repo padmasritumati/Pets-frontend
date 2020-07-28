@@ -4,7 +4,8 @@ import firebase from "./firebase";
 import { Link } from "react-router-dom";
 import {setPhone} from "../../store/becomeSitter/actions"
 import { useDispatch } from "react-redux";
-import Upload from "../../components/Upload";
+//import Upload from "../../components/Upload";
+import Images from "./Image"
 
 export default function Phone() {
   const [phone, set_phone] = useState();
@@ -76,10 +77,14 @@ export default function Phone() {
         <Button type="submit" onClick={onSignInSubmit}>
           Verify
         </Button>
-        <Upload></Upload>
+
+        <Images></Images>
+       
         <Link to="/become_a_sitter/services" >
           <Button onClick={handler}>Save & continue</Button>
         </Link>
+
+        
       </Form>
       
     </div>
