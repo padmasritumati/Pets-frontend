@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Container, Col, Form, Row, Button } from "react-bootstrap";
+import { setServices, becomeSitter } from "../../store/becomeSitter/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { selectBecomeSitter } from "../../store/becomeSitter/selectors";
 
 export default function Services() {
   const [boarding, set_Boarding] = useState("off");
@@ -17,35 +20,42 @@ export default function Services() {
   const [large, set_Large] = useState("off");
   const [gaint, set_Gaint] = useState("off");
   const [cat, set_Cat] = useState("false");
+  const dispatch = useDispatch();
+  const sitter = useSelector(selectBecomeSitter);
 
   const services = [
-    {service : {
-      boarding: boarding,
-      houseSitting: houseSitting,
-      dropInVisits: dropInVisits,
-      doggyDayCare: doggyDayCare,
-      dogWalking: dogWalking,
-    }},
-    {rates :{
-      boardingRate: boardingRate,
-      houseSittingRate: houseSittingRate,
-      dropInVisitsRate: dropInVisitsRate,
-      doggyDayCareRate: doggyDayCareRate,
-      dogWalkingRate: dogWalkingRate,
-    }},
-    {size:{
-      samll:small,
-      medium:medium,
-      large:large,
-      gaint:gaint
-    }},
     {
-    cat:cat
-    }
+      service: {
+        boarding: boarding,
+        houseSitting: houseSitting,
+        dropInVisits: dropInVisits,
+        doggyDayCare: doggyDayCare,
+        dogWalking: dogWalking,
+      },
+      rates: {
+        boardingRate: boardingRate,
+        houseSittingRate: houseSittingRate,
+        dropInVisitsRate: dropInVisitsRate,
+        doggyDayCareRate: doggyDayCareRate,
+        dogWalkingRate: dogWalkingRate,
+      },
+      size: {
+        samll: small,
+        medium: medium,
+        large: large,
+        gaint: gaint,
+      },
+
+      cat: cat,
+    },
   ];
-  const handler=()=>{
-    console.log(services)
-  }
+  const handler = () => {
+    dispatch(setServices(services));
+  };
+
+  const confirmHandler = () => {
+    dispatch(becomeSitter(sitter));
+  };
 
   return (
     <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -222,20 +232,25 @@ export default function Services() {
             >
               Yes
             </Button>{" "}
-            <Button
-              variant="outline-primary"
-              value="false"
-             
-            >
+            <Button variant="outline-primary" value="false">
               No
             </Button>{" "}
           </>
         </Col>
       </Row>
-
-      <Button type="submit" className="mt-5" onClick={handler}>
-        Submit
-      </Button>
+      <Row>
+        <Col>
+          <Button type="submit" className="mt-5" onClick={handler}>
+            Submit
+          </Button>
+        </Col>
+        <Col>
+          <Button className="mt-5 mb-3" type="submit" onClick={confirmHandler}>
+            {" "}
+            Confirm to become a sitter
+          </Button>
+        </Col>{" "}
+      </Row>
     </Container>
   );
 }

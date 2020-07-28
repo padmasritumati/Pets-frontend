@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import firebase from "./firebase";
 import { Link } from "react-router-dom";
-import {setPhone} from "../../store/becomeSitter/actions"
+import { setPhone } from "../../store/becomeSitter/actions";
 import { useDispatch } from "react-redux";
-//import Upload from "../../components/Upload";
-import Images from "./Image"
+import { CloudinaryContext, Image, Transformation } from "cloudinary-react";
+import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 
 export default function Phone() {
   const [phone, set_phone] = useState();
-  const dispatch=useDispatch();
+  const [images, setImages] = useState();
+  const dispatch = useDispatch();
 
-  const handler=()=>{
-       dispatch(setPhone(phone)) 
-  }
+  const handler = () => {
+    dispatch(setPhone(phone, images));
+  };
 
   const setUpRecaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -60,6 +61,31 @@ export default function Phone() {
       });
   };
 
+  //image code
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "dsuvhhlxm",
+      tags: [tag, "anImage"],
+      uploadPreset: "vnqxy7xe",
+    };
+
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos);
+        if (photos.event === "success") {
+          setImages(photos.info.public_id);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchPhotos("image", setImages);
+  }, []);
+
   return (
     <div>
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -78,15 +104,38 @@ export default function Phone() {
           Verify
         </Button>
 
-        <Images></Images>
-       
-        <Link to="/become_a_sitter/services" >
+        <CloudinaryContext cloudName="dsuvhhlxm">
+          <Form className="mt-5 mb-3">
+            <h3>Required Profile Photo</h3>
+            <p>Well-lit, clear frontal face photos</p>
+
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                beginUpload("image");
+                console.log("images", images);
+              }}
+            >
+              Upload Image
+            </Button>
+
+            <Image publicId={images}>
+              <Transformation
+                width="400"
+                height="400"
+                gravity="face"
+                radius="max"
+                crop="crop"
+              />
+              <Transformation width="200" crop="scale" />
+            </Image>
+          </Form>
+        </CloudinaryContext>
+
+        <Link to="/become_a_sitter/services">
           <Button onClick={handler}>Save & continue</Button>
         </Link>
-
-        
       </Form>
-      
     </div>
   );
 }
