@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Container, Col, Form, Row, Button } from "react-bootstrap";
-import { setServices, becomeSitter } from "../../store/becomeSitter/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { selectBecomeSitter } from "../../store/becomeSitter/selectors";
+import { service } from "../../store/becomeSitter/actions";
+import { useDispatch } from "react-redux";
+
 
 export default function Services() {
   const [boarding, set_Boarding] = useState("off");
@@ -21,40 +21,32 @@ export default function Services() {
   const [gaint, set_Gaint] = useState("off");
   const [cat, set_Cat] = useState("false");
   const dispatch = useDispatch();
-  const sitter = useSelector(selectBecomeSitter);
+ 
 
-  const services = [
-    {
-      service: {
-        boarding: boarding,
-        houseSitting: houseSitting,
-        dropInVisits: dropInVisits,
-        doggyDayCare: doggyDayCare,
-        dogWalking: dogWalking,
-      },
-      rates: {
-        boardingRate: boardingRate,
-        houseSittingRate: houseSittingRate,
-        dropInVisitsRate: dropInVisitsRate,
-        doggyDayCareRate: doggyDayCareRate,
-        dogWalkingRate: dogWalkingRate,
-      },
-      size: {
-        samll: small,
-        medium: medium,
-        large: large,
-        gaint: gaint,
-      },
+  const services = {
+    boarding: boarding,
+    houseSitting: houseSitting,
+    dropInVisits: dropInVisits,
+    doggyDayCare: doggyDayCare,
+    dogWalking: dogWalking,
 
-      cat: cat,
-    },
-  ];
-  const handler = () => {
-    dispatch(setServices(services));
+    boardingRate: boardingRate,
+    houseSittingRate: houseSittingRate,
+    dropInVisitsRate: dropInVisitsRate,
+    doggyDayCareRate: doggyDayCareRate,
+    dogWalkingRate: dogWalkingRate,
+
+    samll: small,
+    medium: medium,
+    large: large,
+    gaint: gaint,
+
+    cat: cat,
   };
 
-  const confirmHandler = () => {
-    dispatch(becomeSitter(sitter));
+  const handler = () => {
+    console.log("services",services)
+    dispatch(service(services));
   };
 
   return (
@@ -244,12 +236,6 @@ export default function Services() {
             Submit
           </Button>
         </Col>
-        <Col>
-          <Button className="mt-5 mb-3" type="submit" onClick={confirmHandler}>
-            {" "}
-            Confirm to become a sitter
-          </Button>
-        </Col>{" "}
       </Row>
     </Container>
   );

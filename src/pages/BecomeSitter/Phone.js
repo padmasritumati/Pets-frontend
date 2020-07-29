@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import firebase from "./firebase";
 import { Link } from "react-router-dom";
-import { setPhone } from "../../store/becomeSitter/actions";
+import { phone } from "../../store/becomeSitter/actions";
 import { useDispatch } from "react-redux";
 import { CloudinaryContext, Image, Transformation } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 
 export default function Phone() {
-  const [phone, set_phone] = useState();
+  const [phoneNo, set_phone] = useState();
   const [images, setImages] = useState();
   const dispatch = useDispatch();
 
   const handler = () => {
-    dispatch(setPhone(phone, images));
+    dispatch(phone(phoneNo, images));
   };
 
   const setUpRecaptcha = () => {
@@ -33,7 +33,7 @@ export default function Phone() {
     console.log("hi");
     event.preventDefault();
     setUpRecaptcha();
-    var phoneNumber = phone;
+    var phoneNumber = phoneNo;
     var appVerifier = window.recaptchaVerifier;
     firebase
       .auth()
@@ -72,7 +72,7 @@ export default function Phone() {
 
     openUploadWidget(uploadOptions, (error, photos) => {
       if (!error) {
-        console.log(photos);
+        //console.log(photos);
         if (photos.event === "success") {
           setImages(photos.info.public_id);
         }

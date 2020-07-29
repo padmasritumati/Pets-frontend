@@ -4,21 +4,18 @@ const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "ADDRESS": {
+    case "ADDRESS": 
       return { ...state, ...action.payload };
-    }
-    case "PHONE": {
-      //state["phone_number"] = action.payload.phone_number;
+    
+    case "PHONE": 
       return { ...state, ...action.payload };
-    }
-    case "SERVICES":{
-      return {...state,...action.payload};
-    }
-    case "BECOMESITTER":{
+    
+    case "SERVICES": 
+      return { ...state, ...action.payload };
+    
+
+    default: 
       return state;
-    }
-    default: {
-      return state;
-    }
+    
   }
 };

@@ -4,58 +4,95 @@ import axios from "axios";
 export const ADDRESS = "ADDRESS";
 export const PHONE = "PHONE";
 export const SERVICES = "SERVICES";
-export const IMAGE="IMAGE"
-export const BECOMESITTER="BECOMESITTER"
 
-export const setAddress = (house_number, street, city, postcode, country) => ({
+
+export const setAddress = (address) => ({
   type: ADDRESS,
-  payload: {
-    house_number,
-    street,
-    city,
-    postcode,
-    country,
-  },
+  payload: address,
 });
 
-export const setPhone = (phone_number,image) => ({
+export const setPhone = (phone) => ({
   type: PHONE,
-  payload: { phone_number,image },
+  payload: phone,
 });
-
-
 
 export const setServices = (services) => ({
   type: SERVICES,
   payload: services,
 });
 
-export const setBecomeSitter=(sitter)=>({
-  type:BECOMESITTER,
-  payload:sitter
-})
 
-export const becomeSitter = (sitter) => {
-  console.log("action",sitter)
+export const address = (house_number, street, city, postcode, country) => {
   return async (dispatch, getState) => {
-    //dispatch(appLoading());
     try {
-      const response = await axios.post(`${apiUrl}/become_a_sitter`, {
-        sitter
-      });
-      console.log(response)
-      dispatch(setBecomeSitter(response.data));
-      //dispatch(showMessageWithTimeout("success", true, "account created"));
-      //dispatch(appDoneLoading());
+      const token = getState().user.token;
+
+      const response = await axios.post(
+        `${apiUrl}/become_a_sitter/address`,
+        {
+          house_number,
+          street,
+          city,
+          postcode,
+          country,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setAddress(response.data));
     } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.message);
-        //dispatch(setMessage("danger", true, error.response.data.message));
-      } else {
-        console.log(error.message);
-        //dispatch(setMessage("danger", true, error.message));
-      }
-      //dispatch(appDoneLoading());
+      console.log(error.message);
     }
   };
 };
+
+export const phone = (phone, image) => {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+      console.log("token",token)
+
+      const response = await axios.post(
+        `${apiUrl}/become_a_sitter/phone`,
+        {
+          phone,
+          image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setPhone(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const service = (services) => {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+
+      const response = await axios.post(
+        `${apiUrl}/become_a_sitter/services`,
+        services,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setAddress(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+
