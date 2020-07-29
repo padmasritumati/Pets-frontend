@@ -14,7 +14,8 @@ import OurServices from "./components/OurServices";
 import Dashboard from "./pages/Dashboard"
 import Phone from "./pages/BecomeSitter/Phone"
 import Service from "./pages/BecomeSitter/Services"
-
+import SitterById from "./pages/SitterById"
+ 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
@@ -35,6 +36,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/search_sitters" component={SearchSitters} />
+        <Route path="/sitters/:id" component={SitterById} />
         <Route path="/become_a_sitter/address" component={BecomeSitter} />
         <Route path="/become_a_sitter/phone" component={Phone} />
         <Route path="/become_a_sitter/services" component={Service} />

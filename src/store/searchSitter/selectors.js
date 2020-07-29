@@ -1,0 +1,1 @@
+export const selectSitterList = state => state.searchSitter
