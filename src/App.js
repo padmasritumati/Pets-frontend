@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard"
 import Phone from "./pages/BecomeSitter/Phone"
 import Service from "./pages/BecomeSitter/Services"
 import SitterById from "./pages/SitterById"
+import PetOwner from "./pages/PetOwner"
  
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -41,6 +42,7 @@ function App() {
         <Route path="/become_a_sitter/phone" component={Phone} />
         <Route path="/become_a_sitter/services" component={Service} />
         <Route path="/our_services" component={OurServices} />
+        <Route path="/petowner" component={PetOwner}/>
         <Route path="/dashboard" component={Dashboard}/>
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
