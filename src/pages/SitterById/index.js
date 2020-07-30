@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import { sitterById } from "../../store/sitterById/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  selectSitterById,
-  selectSitterAddress,
-  selectSitterServices,
-} from "../../store/sitterById/selectors";
+import { selectSitterById } from "../../store/sitterById/selectors";
 import { Container, Row, Image, Col } from "react-bootstrap";
+import Review from "../../components/Review";
+//import StarRatings from "react-star-ratings";
 
 export default function SitterById() {
   const { id } = useParams();
@@ -16,10 +14,13 @@ export default function SitterById() {
   const address = sitter.address ? sitter.address : {};
   const services = sitter.service ? sitter.service : {};
 
+  
+
   useEffect(() => {
     dispatch(sitterById(id));
   }, [dispatch, id]);
 
+  
   return (
     <>
       <Container>
@@ -115,7 +116,7 @@ export default function SitterById() {
         <Row className="mt-5 mb-3">
           <h2>{sitter.full_name} can host and watch in your home</h2>
         </Row>
-        <Row >
+        <Row>
           {services.small ? (
             <Col>
               <h3>Small</h3>
@@ -156,6 +157,7 @@ export default function SitterById() {
             ""
           )}
         </Row>
+      <Review></Review>
       </Container>
     </>
   );
