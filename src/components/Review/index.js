@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 import { Row, Form, Button } from "react-bootstrap";
-import {addReviews} from "../../store/Review/action"
+import { addReviews, getReviews } from "../../store/Review/action";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import { useParams } from "react-router-dom";
+//import { reviewsSelector } from "../../store/Review/selectors";
 
 export default function Review() {
-  const {id} =useParams();
+  const { id } = useParams();
   const [rating, set_rating] = useState(0);
   const [comment, set_comment] = useState("");
-  const dispatch=useDispatch();
-  const token=useSelector(selectToken);
- 
- console.log("from review",id)
-  const clickHandler=()=>{
-    dispatch(addReviews(rating,comment,id))
-    set_rating(0)
-    set_comment("")
-  }
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  //const reviewList = useSelector(reviewsSelector);
+
+  useEffect(() => {
+    dispatch(getReviews());
+  }, [dispatch, token]);
+
+  const clickHandler = () => {
+    dispatch(addReviews(rating, comment, id));
+    set_rating(0);
+    set_comment("");
+  };
 
   function changeRating(newRating, name) {
     set_rating(newRating);
@@ -29,7 +34,9 @@ export default function Review() {
       <Form className="mb-5">
         <Form.Group>
           <Row>
-            <Form.Label><h2>Leave a review</h2></Form.Label>
+            <Form.Label>
+              <h2>Leave a review</h2>
+            </Form.Label>
           </Row>
 
           <Row>
@@ -47,7 +54,9 @@ export default function Review() {
         </Form.Group>
         <Form.Group>
           <Row>
-            <Form.Label><h3>Comment</h3></Form.Label>
+            <Form.Label>
+              <h3>Comment</h3>
+            </Form.Label>
           </Row>
           <Row>
             <textarea
@@ -58,7 +67,9 @@ export default function Review() {
             ></textarea>
           </Row>
         </Form.Group>
-        <Button variant="danger" onClick={clickHandler}>Submit</Button>
+        <Button variant="danger" onClick={clickHandler}>
+          Submit
+        </Button>
       </Form>
     </>
   );

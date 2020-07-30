@@ -2,7 +2,7 @@ import { apiUrl } from "../../config/constants";
 import axios from "axios";
 
 export const FETCH_REVIEWS = "FETCH_REVIEWS";
-export const ADD_REVIWES="ADD_REVIWES"
+export const ADD_REVIWES = "ADD_REVIWES";
 
 export const fetch_reviews = (reviews) => ({
   type: FETCH_REVIEWS,
@@ -14,11 +14,11 @@ export const add_reviews = (review) => ({
   payload: review,
 });
 
-
 export const getReviews = () => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${apiUrl}/review`);
+
       dispatch(fetch_reviews(response.data));
     } catch (e) {
       console.log("error", e.message);
@@ -26,7 +26,7 @@ export const getReviews = () => {
   };
 };
 
-export const addReviews = (rating,review_description,sitterUserId) => {
+export const addReviews = (rating, review_description, sitterUserId) => {
   return async (dispatch, getState) => {
     try {
       const token = getState().user.token;
@@ -34,7 +34,9 @@ export const addReviews = (rating,review_description,sitterUserId) => {
       const response = await axios.post(
         `${apiUrl}/review/`,
         {
-          rating,review_description,sitterUserId
+          rating,
+          review_description,
+          sitterUserId,
         },
         {
           headers: {
@@ -42,11 +44,9 @@ export const addReviews = (rating,review_description,sitterUserId) => {
           },
         }
       );
-      dispatch(fetch_reviews(response.data));
+      dispatch(add_reviews(response.data));
     } catch (error) {
       console.log(error.message);
     }
   };
 };
-
-

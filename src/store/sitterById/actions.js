@@ -11,7 +11,6 @@ export const setSitterById=(sitter)=>({
 export const sitterById = (id) => {
   return async (dispatch, getState) => {
     const response = await axios.get(`${apiUrl}/sitter/${id}`);
-    console.log(response.data)
     dispatch(setSitterById(response.data.sitter));
   };
 };

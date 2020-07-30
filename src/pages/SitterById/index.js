@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { selectSitterById } from "../../store/sitterById/selectors";
 import { Container, Row, Image, Col } from "react-bootstrap";
 import Review from "../../components/Review";
-//import StarRatings from "react-star-ratings";
+import ReviewList from "../../components/Review/ReviewList"
 
 export default function SitterById() {
   const { id } = useParams();
@@ -14,13 +14,10 @@ export default function SitterById() {
   const address = sitter.address ? sitter.address : {};
   const services = sitter.service ? sitter.service : {};
 
-  
-
   useEffect(() => {
     dispatch(sitterById(id));
   }, [dispatch, id]);
 
-  
   return (
     <>
       <Container>
@@ -157,7 +154,8 @@ export default function SitterById() {
             ""
           )}
         </Row>
-      <Review></Review>
+        <Review></Review>
+        <ReviewList></ReviewList>
       </Container>
     </>
   );
