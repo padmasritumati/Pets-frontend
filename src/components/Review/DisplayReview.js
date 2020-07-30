@@ -26,14 +26,14 @@ export default function Review(props) {
         </Col>
       </Row>{" "}
       <StarRatings
-        rating={rating}
+        rating={props.rating}
         starRatedColor="#403d50"
         starEmptyColor="grey"
         starDimension="20px"
         starSpacing="5px"
       />
       <Row>
-        <p>{comment}</p>
+        <p>{props.comment}</p>
       </Row>
     </Container>
   );

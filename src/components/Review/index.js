@@ -5,7 +5,7 @@ import { addReviews, getReviews } from "../../store/Review/action";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import { useParams } from "react-router-dom";
-//import { reviewsSelector } from "../../store/Review/selectors";
+
 
 export default function Review() {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export default function Review() {
   const [comment, set_comment] = useState("");
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  //const reviewList = useSelector(reviewsSelector);
+  
 
   useEffect(() => {
     dispatch(getReviews());
