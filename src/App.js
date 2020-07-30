@@ -12,10 +12,11 @@ import BecomeSitter from "./pages/BecomeSitter";
 import HomePage from "./pages/HomePage";
 import OurServices from "./components/OurServices";
 import Dashboard from "./pages/Dashboard"
-import Phone from "./pages/BecomeSitter/Phone"
-import Service from "./pages/BecomeSitter/Services"
+import Phone from "./components/Phone"
+import Service from "./components/Services"
 import SitterById from "./pages/SitterById"
 import PetOwner from "./pages/PetOwner"
+import Adderss from "./components/Address"
  
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -36,11 +37,12 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/address" component={Adderss}/>
         <Route path="/search_sitters" component={SearchSitters} />
         <Route path="/sitters/:id" component={SitterById} />
         <Route path="/become_a_sitter/address" component={BecomeSitter} />
-        <Route path="/become_a_sitter/phone" component={Phone} />
-        <Route path="/become_a_sitter/services" component={Service} />
+        <Route path="/phone" component={Phone} />
+        <Route path="/services" component={Service} />
         <Route path="/our_services" component={OurServices} />
         <Route path="/petowner" component={PetOwner}/>
         <Route path="/dashboard" component={Dashboard}/>

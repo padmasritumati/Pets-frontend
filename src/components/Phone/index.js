@@ -132,8 +132,8 @@ export default function Phone() {
           </Form>
         </CloudinaryContext>
 
-        <Link to="/become_a_sitter/services">
-          <Button onClick={handler}>Save & continue</Button>
+        <Link to="/services">
+          <Button onClick={handler}>Submit</Button>
         </Link>
       </Form>
     </div>
