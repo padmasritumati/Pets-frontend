@@ -10,11 +10,11 @@ export const service_success = (serviceList) => ({
 
 export const getServices = () => {
   return async (dispatch, getState) => {
-    const serviceListCount=getState().searchSitter.length;
+    const serviceListCount = getState().searchSitter.length;
     const response = await axios.get(
       `${apiUrl}/search_sitters?limit=${DEFAULT_PAGINATION_LIMIT}&offset=${serviceListCount}`
     );
-     console.log(response)
+
     dispatch(service_success(response.data.users.rows));
   };
 };
