@@ -12,6 +12,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -24,12 +25,23 @@ export default function SignUp() {
 
   function submitForm(event) {
     event.preventDefault();
-
-    dispatch(signUp(name, email, password));
+    let petOwner;
+    let petSitter;
+    
+    if (role === "Pet Owner") {
+      petOwner = true;
+      petSitter = false;
+    } else {
+      petOwner = false;
+      petSitter = true;
+    }
+    console.log(petOwner,petSitter)
+    dispatch(signUp(name, email, password,petOwner,petSitter));
 
     setEmail("");
     setPassword("");
     setName("");
+    setRole();
   }
 
   return (
@@ -40,7 +52,7 @@ export default function SignUp() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             value={name}
-            onChange={event => setName(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
             type="text"
             placeholder="Enter name"
             required
@@ -50,7 +62,7 @@ export default function SignUp() {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             type="email"
             placeholder="Enter email"
             required
@@ -64,11 +76,24 @@ export default function SignUp() {
           <Form.Label>Password</Form.Label>
           <Form.Control
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             type="password"
             placeholder="Password"
             required
           />
+        </Form.Group>
+
+        <Form.Group controlId="role">
+          <Form.Label>Role</Form.Label>
+          <Form.Control
+            as="select"
+            htmlSize={2}
+            custom
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option>Pet Owner</option>
+            <option>Pet Sitter</option>
+          </Form.Control>
         </Form.Group>
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>
