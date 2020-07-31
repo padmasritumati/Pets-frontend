@@ -11,13 +11,14 @@ import SearchSitters from "./pages/SearchSitters";
 import BecomeSitter from "./pages/BecomeSitter";
 import HomePage from "./pages/HomePage";
 import OurServices from "./components/OurServices";
-import Dashboard from "./pages/Dashboard"
-import Phone from "./components/Phone"
-import Service from "./components/Services"
-import SitterById from "./pages/SitterById"
-import PetOwner from "./pages/PetOwner"
-import Adderss from "./components/Address"
- 
+import Dashboard from "./pages/Dashboard";
+import Phone from "./components/Phone";
+import Service from "./components/Services";
+import SitterById from "./pages/SitterById";
+import PetOwner from "./pages/PetOwner";
+import Adderss from "./components/Address";
+import Pets from "./components/Pets";
+
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
@@ -37,15 +38,16 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/address" component={Adderss}/>
-        <Route path="/search_sitters" component={SearchSitters} />
-        <Route path="/sitters/:id" component={SitterById} />
-        <Route path="/become_a_sitter/address" component={BecomeSitter} />
+        <Route path="/address" component={Adderss} />
         <Route path="/phone" component={Phone} />
         <Route path="/services" component={Service} />
+        <Route path="/pets" component={Pets}/>
+        <Route path="/become_a_sitter/address" component={BecomeSitter} />
+        <Route path="/petowner" component={PetOwner} />
         <Route path="/our_services" component={OurServices} />
-        <Route path="/petowner" component={PetOwner}/>
-        <Route path="/dashboard" component={Dashboard}/>
+        <Route path="/search_sitters" component={SearchSitters} />
+        <Route path="/sitters/:id" component={SitterById} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
       </Switch>

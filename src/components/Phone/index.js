@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import firebase from "./firebase";
 import { Link } from "react-router-dom";
-import { phone } from "../../store/becomeSitter/actions";
-import { useDispatch } from "react-redux";
+import { phone } from "../../store/userDetails/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { CloudinaryContext, Image, Transformation } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
+import { selectUser } from "../../store/user/selectors";
 
 export default function Phone() {
   const [phoneNo, set_phone] = useState();
   const [images, setImages] = useState();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const handler = () => {
     dispatch(phone(phoneNo, images));
@@ -131,10 +133,15 @@ export default function Phone() {
             </Image>
           </Form>
         </CloudinaryContext>
-
-        <Link to="/services">
-          <Button onClick={handler}>Submit</Button>
-        </Link>
+        {user.petSitter ? (
+          <Link to="/services">
+            <Button onClick={handler}>Submit</Button>
+          </Link>
+        ) : (
+          <Link to="/pets">
+            <Button onClick={handler}>Submit</Button>
+          </Link>
+        )}
       </Form>
     </div>
   );

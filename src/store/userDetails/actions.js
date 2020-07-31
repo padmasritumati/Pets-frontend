@@ -4,7 +4,7 @@ import axios from "axios";
 export const ADDRESS = "ADDRESS";
 export const PHONE = "PHONE";
 export const SERVICES = "SERVICES";
-
+export const PETS = "PETS";
 
 export const setAddress = (address) => ({
   type: ADDRESS,
@@ -21,6 +21,10 @@ export const setServices = (services) => ({
   payload: services,
 });
 
+export const setPets = (pets) => ({
+  type: PETS,
+  payload: pets,
+});
 
 export const address = (house_number, street, city, postcode, country) => {
   return async (dispatch, getState) => {
@@ -28,7 +32,7 @@ export const address = (house_number, street, city, postcode, country) => {
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/become_a_sitter/address`,
+        `${apiUrl}/user_details/address`,
         {
           house_number,
           street,
@@ -53,10 +57,10 @@ export const phone = (phone, image) => {
   return async (dispatch, getState) => {
     try {
       const token = getState().user.token;
-      console.log("token",token)
+      console.log("token", token);
 
       const response = await axios.post(
-        `${apiUrl}/become_a_sitter/phone`,
+        `${apiUrl}/user_details/phone`,
         {
           phone,
           image,
@@ -80,7 +84,7 @@ export const service = (services) => {
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/become_a_sitter/services`,
+        `${apiUrl}/user_details/services`,
         services,
         {
           headers: {
@@ -88,11 +92,44 @@ export const service = (services) => {
           },
         }
       );
-      dispatch(setAddress(response.data));
+      dispatch(setServices(response.data));
     } catch (error) {
       console.log(error.message);
     }
   };
 };
 
+export const pet = (
+  type,
+  name,
+  weight,
+  breed,
+  ageInYears,
+  ageInMonths,
+  sex
+) => {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
 
+      const response = await axios.post(
+        `${apiUrl}/user_details/pets`,{
+        type,
+        name,
+        weight,
+        breed,
+        ageInYears,
+        ageInMonths,
+        sex},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setPets(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};

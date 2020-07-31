@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { address } from "../../store/becomeSitter/actions";
+import { address } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
 
 export default function BecomeSitter() {
@@ -15,7 +15,7 @@ export default function BecomeSitter() {
   const dispatch = useDispatch();
 
   const handler = () => {
-    dispatch(address(house, street, city, country, postcode));
+    dispatch(address(house, street, city, postcode,country));
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Col, Form, Row, Button } from "react-bootstrap";
-import { service } from "../../store/becomeSitter/actions";
+import { service } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
 
 
