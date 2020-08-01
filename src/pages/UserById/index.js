@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { setuserById } from "../../store/userById/actions";
+import { userById } from "../../store/userById/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectUserById } from "../../store/userById/selectors";
@@ -14,6 +14,7 @@ export default function SitterById() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const sitter = useSelector(selectUserById);
+  console.log("userById",sitter)
   const address = sitter.address ? sitter.address : {};
   const service = sitter.service ? sitter.service : {};
   const reviwe = useSelector(reviewsSelector);
@@ -28,7 +29,7 @@ export default function SitterById() {
   );
 
   useEffect(() => {
-    dispatch(setuserById(id));
+    dispatch(userById(id));
   }, [dispatch, id]);
 
   return (

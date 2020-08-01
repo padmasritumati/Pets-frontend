@@ -3,15 +3,16 @@ import { apiUrl } from "../../config/constants";
 
 export const USER_BY_ID="USER_BY_ID"
 
-export const setuserById=(user)=>({
+export const setuserById=(sitter)=>({
   type:USER_BY_ID,
-  payload:user
+  payload:sitter
 })
 
 export const userById = (id) => {
   return async (dispatch, getState) => {
     const response = await axios.get(`${apiUrl}/sitter/${id}`);
-    dispatch(setuserById(response.data.user));
+    console.log("form action",response.data)
+    dispatch(setuserById(response.data.sitter));
   };
 };
 
