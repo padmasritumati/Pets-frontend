@@ -11,6 +11,7 @@ export const openUploadWidget = (options, callback) => {
   window.cloudinary.openUploadWidget(scOptions, callback);
 };
 
+
 export async function  fetchPhotos  (imageTag, setter)  {
   const options = {
   cloudName: 'dsuvhhlxm',
@@ -18,11 +19,10 @@ export async function  fetchPhotos  (imageTag, setter)  {
   type: 'list',
   version: Math.ceil(new Date().getTime() / 1000),
 };
-
 const urlPath = url(imageTag.toString(), options);
 
 fetch(urlPath)
 .then(res => res.text())
-.then(text => (text ? setter(JSON.parse(text).resources.public_id) : []))
+.then(text => (text ? setter(JSON.parse(text).resources.url) : []))
 .catch(err => console.log(err));
 };

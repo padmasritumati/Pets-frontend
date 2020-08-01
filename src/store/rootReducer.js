@@ -3,7 +3,7 @@ import appState from "./appState/reducer";
 import user from "./user/reducer";
 import userDetails from "./userDetails/reducer";
 import searchSitter from "./searchSitter/reducer";
-import sitterById from "./sitterById/reducer"
+import usreById from "./userById/reducer"
 import reviews from "./Review/reducer"
 
 export default combineReducers({
@@ -11,6 +11,6 @@ export default combineReducers({
   user,
   userDetails,
   searchSitter,
-  sitterById,
+  usreById,
   reviews
 });

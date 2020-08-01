@@ -14,7 +14,7 @@ import OurServices from "./components/OurServices";
 import Dashboard from "./pages/Dashboard";
 import Phone from "./components/Phone";
 import Service from "./components/Services";
-import SitterById from "./pages/SitterById";
+import UserById from "./pages/UserById";
 import PetOwner from "./pages/PetOwner";
 import Adderss from "./components/Address";
 import Pets from "./components/Pets";
@@ -46,7 +46,7 @@ function App() {
         <Route path="/petowner" component={PetOwner} />
         <Route path="/our_services" component={OurServices} />
         <Route path="/search_sitters" component={SearchSitters} />
-        <Route path="/sitters/:id" component={SitterById} />
+        <Route path="/sitters/:id" component={UserById} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />

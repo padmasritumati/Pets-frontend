@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Col, Button, Row } from "react-bootstrap";
-import {pet} from "../../store/userDetails/actions"
+import { pet } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
+import { CloudinaryContext, Image } from "cloudinary-react";
+import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 
 export default function Pets() {
   const [type, setType] = useState();
@@ -11,12 +13,37 @@ export default function Pets() {
   const [ageInYears, setAgeInYears] = useState();
   const [ageInMonths, setAgeInMonths] = useState();
   const [sex, setSex] = useState();
-  const dispatch=useDispatch();
+  const [images, setImages] = useState();
+  const dispatch = useDispatch();
 
   const handler = () => {
-    console.log(type, name, weight, breed, ageInYears, ageInMonths, sex);
-    dispatch(pet(type, name, weight, breed, ageInYears, ageInMonths, sex))
+    dispatch(
+      pet(type, name, weight, breed, ageInYears, ageInMonths, sex, images)
+    );
   };
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "dsuvhhlxm",
+      tags: [tag, "anImage"],
+      uploadPreset: "vnqxy7xe",
+    };
+
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        //console.log(photos);
+        if (photos.event === "success") {
+          setImages(photos.info.url);
+        }
+      } else {
+        console.log(error);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchPhotos("image", setImages);
+  }, []);
 
   return (
     <div>
@@ -28,7 +55,7 @@ export default function Pets() {
             <>
               <Button
                 variant="outline-primary"
-                vlaue="dog"
+                value="dog"
                 onClick={(e) => setType(e.target.value)}
               >
                 Dog
@@ -108,6 +135,32 @@ export default function Pets() {
               onClick={(e) => setSex(e.target.value)}
             />
           </Col>
+        </Row>
+        <Row>
+          <CloudinaryContext cloudName="dsuvhhlxm">
+            <Form className="mt-5 mb-3">
+              <h4>Upload your pet image</h4>
+
+              <Button
+                variant="outline-primary"
+                onClick={() => {
+                  beginUpload("image");
+                  console.log("images", images);
+                }}
+              >
+                Upload Image
+              </Button>
+              {images ? (
+                <Image
+                  src={images}
+                  rounded="true"
+                  alt="171x180"
+                  width={171}
+                  height={180}
+                />
+              ) : null}
+            </Form>
+          </CloudinaryContext>
         </Row>
         <Button type="submit" onClick={handler}>
           Submit

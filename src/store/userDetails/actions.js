@@ -6,6 +6,7 @@ export const PHONE = "PHONE";
 export const SERVICES = "SERVICES";
 export const PETS = "PETS";
 
+
 export const setAddress = (address) => ({
   type: ADDRESS,
   payload: address,
@@ -25,6 +26,19 @@ export const setPets = (pets) => ({
   type: PETS,
   payload: pets,
 });
+
+export const getaddress = () => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const response = await axios.get(`${apiUrl}/user_details/address`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    dispatch((response.data.users.rows));
+  };
+};
 
 export const address = (house_number, street, city, postcode, country) => {
   return async (dispatch, getState) => {
@@ -106,21 +120,25 @@ export const pet = (
   breed,
   ageInYears,
   ageInMonths,
-  sex
+  sex,
+  image
 ) => {
   return async (dispatch, getState) => {
     try {
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/user_details/pets`,{
-        type,
-        name,
-        weight,
-        breed,
-        ageInYears,
-        ageInMonths,
-        sex},
+        `${apiUrl}/user_details/pets`,
+        {
+          type,
+          name,
+          weight,
+          breed,
+          ageInYears,
+          ageInMonths,
+          sex,
+          image
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,

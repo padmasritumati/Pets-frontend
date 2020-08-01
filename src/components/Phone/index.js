@@ -4,7 +4,7 @@ import firebase from "./firebase";
 import { Link } from "react-router-dom";
 import { phone } from "../../store/userDetails/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { CloudinaryContext, Image, Transformation } from "cloudinary-react";
+import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 import { selectUser } from "../../store/user/selectors";
 
@@ -76,7 +76,7 @@ export default function Phone() {
       if (!error) {
         //console.log(photos);
         if (photos.event === "success") {
-          setImages(photos.info.public_id);
+          setImages(photos.info.url);
         }
       } else {
         console.log(error);
@@ -121,16 +121,15 @@ export default function Phone() {
               Upload Image
             </Button>
 
-            <Image publicId={images}>
-              <Transformation
-                width="400"
-                height="400"
-                gravity="face"
-                radius="max"
-                crop="crop"
-              />
-              <Transformation width="200" crop="scale" />
-            </Image>
+            {images ? (
+                <Image
+                  src={images}
+                  rounded="true"
+                  alt="171x180"
+                  width={171}
+                  height={180}
+                />
+              ) : null}
           </Form>
         </CloudinaryContext>
         {user.petSitter ? (
