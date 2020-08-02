@@ -47,8 +47,8 @@ export const getservice = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    dispatch(setServices(response.data.pets));
+    //console.log(response,"services")
+    dispatch(setServices(response.data));
   };
 };
 
@@ -60,7 +60,7 @@ export const getpets = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(setPets(response.data.pets));
+    dispatch(setPets(response.data));
   };
 };
 

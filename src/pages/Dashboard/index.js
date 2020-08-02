@@ -25,11 +25,10 @@ export default function Dashboard() {
   const address = a ? a : {};
   const service = s ? s : {};
   const pets = p ? p : [];
-  console.log("p", p);
-  console.log("a", a);
+
+  
   console.log("pets", pets);
-  console.log("service", service);
-  console.log("address", address);
+ 
 
   useEffect(() => {
     if (user.id) {

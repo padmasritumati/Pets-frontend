@@ -2,26 +2,27 @@ import React, { useEffect } from "react";
 import { userById } from "../../store/userById/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { selectUserById} from "../../store/userById/selectors";
-import {selectAddresss,selectservice} from "../../store/userDetails/selectors"
+import { selectUserById } from "../../store/userById/selectors";
+import {
+  selectAddresss,
+  selectservice,
+} from "../../store/userDetails/selectors";
 import { Container, Row, Image, Col } from "react-bootstrap";
 import Review from "../../components/Review";
 import ReviewList from "../../components/Review/ReviewList";
 import { reviewsSelector } from "../../store/Review/selectors";
 import StarRatings from "react-star-ratings";
 import DisplayServices from "../../components/DisplayServices";
-import {getaddress,getservice} from "../../store/userDetails/actions"
+import { getaddress, getservice } from "../../store/userDetails/actions";
 
 export default function SitterById() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUserById);
-  const a=useSelector(selectAddresss);
-  const s=useSelector(selectservice);
-  const address=a?a:{}
-  const service=s?s:{}
 
-  
+  const address = user.address ? user.address : {};
+  const service = user.service ? user.service : {};
+
   const reviwe = useSelector(reviewsSelector);
 
   const reviewsFiltered = reviwe.filter((r) => {
@@ -35,13 +36,13 @@ export default function SitterById() {
 
   useEffect(() => {
     dispatch(userById(id));
-    dispatch(getaddress())
-    dispatch(getservice())
+    dispatch(getaddress());
+    dispatch(getservice());
   }, [dispatch, id]);
 
   return (
     <>
-     <Container>
+      <Container>
         <Row className="mt-5 mb-3">
           <Image
             src={user.image}
@@ -88,7 +89,7 @@ export default function SitterById() {
         <Row></Row>
         <ReviewList></ReviewList>
         <Review> </Review>
-     </Container>
+      </Container>
     </>
   );
 }
