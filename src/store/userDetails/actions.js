@@ -6,7 +6,6 @@ export const PHONE = "PHONE";
 export const SERVICES = "SERVICES";
 export const PETS = "PETS";
 
-
 export const setAddress = (address) => ({
   type: ADDRESS,
   payload: address,
@@ -36,7 +35,32 @@ export const getaddress = () => {
       },
     });
 
-    dispatch((response.data.users.rows));
+    dispatch(setAddress(response.data));
+  };
+};
+
+export const getservice = () => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const response = await axios.get(`${apiUrl}/user_details/service`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    dispatch(setServices(response.data.pets));
+  };
+};
+
+export const getpets = () => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const response = await axios.get(`${apiUrl}/user_details/pet`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch(setPets(response.data.pets));
   };
 };
 
@@ -85,7 +109,7 @@ export const phone = (phone, image) => {
           },
         }
       );
-      dispatch(setPhone(response.data));
+      dispatch(setPhone(response.data.pets));
     } catch (error) {
       console.log(error.message);
     }
@@ -137,7 +161,7 @@ export const pet = (
           ageInYears,
           ageInMonths,
           sex,
-          image
+          image,
         },
         {
           headers: {

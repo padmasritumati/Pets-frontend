@@ -8,6 +8,7 @@ import Sitter from "./Sitter";
 export default function SearchSitters() {
   const dispatch = useDispatch();
   const sitterList = useSelector(selectSitterList);
+  console.log("sitter",sitterList)
 
   useEffect(() => {
     dispatch(getServices());
