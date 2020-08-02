@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import Geocode from "react-geocode";
+import "./homepage.css";
+import { selectToken, selectUser } from "../../store/user/selectors";
 
 let autoComplete;
 
 export default function HomePage() {
-  
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+
   const [radio, setRadio] = useState();
   const [size, setSize] = useState();
   const [service, setService] = useState();
-  const [Address,setAddress]=useState()
+  const [Address, setAddress] = useState();
+
   const dogSelected = () => {
     return (
       <>
@@ -57,6 +63,7 @@ export default function HomePage() {
       </>
     );
   };
+
   const catSelected = () => {
     return (
       <>
@@ -88,14 +95,23 @@ export default function HomePage() {
     );
   };
   return (
-    <>
+    <div>
+      <header className="header">
+        <div className="text-box">
+          {" "}
+          <h1 className="heading-primary">
+            <span className="heading-primary-main">We’re The Dog People</span>
+            <span className="heading-primary-sub">Enjoy our services</span>
+          </h1>
+          <a href="#" className="btn">Our Service</a>
+        </div>
+      </header>
       <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <Form  className="search-box">
-          <Row  className="mt-5">
-            <Col  className="mt-3">
-              <h2 >I'm looking for a service for my:</h2>
+        <Form className="search-box">
+          <Row className="mt-5">
+            <Col className="mt-3">
+              <h2>I'm looking for a service for my:</h2>
               <Form.Check
-             
                 inline
                 label="Dog"
                 type="radio"
@@ -113,14 +129,14 @@ export default function HomePage() {
               />
             </Col>
           </Row>
-          <Row  className="mt-5">
-            <Col >
+          <Row className="mt-5">
+            <Col>
               <h2>What service do you need?</h2>
               {radio === "Cat" ? catSelected() : dogSelected()}
             </Col>
           </Row>
 
-          <Row  className="mt-5">
+          <Row className="mt-5">
             <Col>
               <h2>My Dog Size kgs</h2>
               <Form.Check
@@ -157,7 +173,7 @@ export default function HomePage() {
               />
             </Col>
           </Row>
-          <Row  className="mt-5">
+          <Row className="mt-5">
             <Col>
               <Form.Group controlId="formGridAddress">
                 <Form.Label>
@@ -169,6 +185,6 @@ export default function HomePage() {
           </Row>
         </Form>
       </Container>
-    </>
+    </div>
   );
 }
