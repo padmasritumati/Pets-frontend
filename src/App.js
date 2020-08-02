@@ -42,7 +42,7 @@ function App() {
         <Route path="/phone" component={Phone} />
         <Route path="/services" component={Service} />
         <Route path="/pets" component={Pets}/>
-        <Route path="/become_a_sitter/address" component={BecomeSitter} />
+        <Route path="/become_a_sitter" component={BecomeSitter} />
         <Route path="/petowner" component={PetOwner} />
         <Route path="/our_services" component={OurServices} />
         <Route path="/search_sitters" component={SearchSitters} />

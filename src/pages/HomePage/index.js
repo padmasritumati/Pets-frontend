@@ -9,7 +9,7 @@ export default function HomePage() {
   const [radio, setRadio] = useState();
   const [size, setSize] = useState();
   const [service, setService] = useState();
-  const [Address,setAddress]=useState();
+  const [Address,setAddress]=useState()
   const dogSelected = () => {
     return (
       <>
@@ -90,11 +90,12 @@ export default function HomePage() {
   return (
     <>
       <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <Form>
-          <Row>
-            <Col>
-              <h2>I'm looking for a service for my:</h2>
+        <Form  className="search-box">
+          <Row  className="mt-5">
+            <Col  className="mt-3">
+              <h2 >I'm looking for a service for my:</h2>
               <Form.Check
+             
                 inline
                 label="Dog"
                 type="radio"
@@ -112,14 +113,14 @@ export default function HomePage() {
               />
             </Col>
           </Row>
-          <Row>
-            <Col>
+          <Row  className="mt-5">
+            <Col >
               <h2>What service do you need?</h2>
               {radio === "Cat" ? catSelected() : dogSelected()}
             </Col>
           </Row>
 
-          <Row>
+          <Row  className="mt-5">
             <Col>
               <h2>My Dog Size kgs</h2>
               <Form.Check
@@ -156,7 +157,7 @@ export default function HomePage() {
               />
             </Col>
           </Row>
-          <Row>
+          <Row  className="mt-5">
             <Col>
               <Form.Group controlId="formGridAddress">
                 <Form.Label>
