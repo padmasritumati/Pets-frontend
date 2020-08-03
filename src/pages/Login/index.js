@@ -37,7 +37,7 @@ export default function SignUp() {
       <section>
         <div className="section-book">
           <div className="book">
-            <div class="book__form">
+            <div className="book__form">
               <Container className="mt-5">
                 <Form
                   as={Col}

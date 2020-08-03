@@ -251,7 +251,7 @@ export default function SearchSitters() {
         </Form>
         </div>
         <div className="col-1-of-2">
-          <div class="composition">
+          <div className="composition">
             <img
               src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449129/pet_image/one_dazjjf.jpg "
               width="200"
@@ -277,7 +277,7 @@ export default function SearchSitters() {
         </div>
       </div>
   
-      <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
+      <Container  className="mt-5">
      
         {yes ? (
           <Container>

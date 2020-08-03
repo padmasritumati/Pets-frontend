@@ -4,6 +4,7 @@ import { pet } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
 import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
+import { Link } from "react-router-dom";
 
 export default function Pets() {
   const [type, setType] = useState();
@@ -162,9 +163,9 @@ export default function Pets() {
             </Form>
           </CloudinaryContext>
         </Row>
-        <Button type="submit" onClick={handler}>
+        <Link to="/dashboard"><Button type="submit" onClick={handler}>
           Submit
-        </Button>
+        </Button></Link>
       </Form>
     </div>
   );

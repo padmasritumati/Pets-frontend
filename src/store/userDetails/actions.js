@@ -122,7 +122,7 @@ export const service = (services) => {
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/user_details/services`,
+        `${apiUrl}/user_details/pets`,
         services,
         {
           headers: {

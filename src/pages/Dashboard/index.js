@@ -45,7 +45,7 @@ export default function Dashboard() {
       <Container className="form">
         <Row className="mt-5 mb-3">
           <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={user.image} rounded />
+            <Card.Img variant="top" src={user.image}  />
             <Card.Body>
               <Card.Title>{user.full_name}</Card.Title>
               <Card.Text>
