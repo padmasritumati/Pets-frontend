@@ -60,7 +60,7 @@
   transition: all 0.5s;
 }
 .navbar-links ul li a:hover {
-  color: #555;
+  color: rgba(126, 213, 111, 0.8);
 }
 
 .navbar-links li a {
