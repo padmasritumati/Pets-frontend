@@ -1,34 +1,48 @@
-import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import './map.css'
+import React from "react";
+import GoogleMapReact from "google-map-react";
+import "./map.css";
 
-import { Icon } from '@iconify/react'
-import locationIcon from '@iconify/icons-mdi/map-marker'
+import { Icon } from "@iconify/react";
+import locationIcon from "@iconify/icons-mdi/map-marker";
+
+
 
 const LocationPin = ({ text }) => (
   <div className="pin">
     <Icon icon={locationIcon} className="pin-icon" />
     <p className="pin-text">{text}</p>
   </div>
-)
+);
 
-const Map = ({ location, zoomLevel }) => (
+const Map = ({
+  street,
+  city,
+  country,
+  postcode,
+  latitude,
+  longitude,
+  zoomLevel,
+}) => (
   <div className="map">
-    <h2 className="map-h2">Come Visit Us At Our Campus</h2>
+    <h2 className="map-h2">Map</h2>
 
     <div className="google-map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyBnpQ7R3rbu-B1iV0cHxwUdnLSsRsCyeFI' }}
-        defaultCenter={location}
+        bootstrapURLKeys={{ key: "AIzaSyBnpQ7R3rbu-B1iV0cHxwUdnLSsRsCyeFI" }}
+        defaultCenter={{
+          address: street,city,postcode,country,
+          lat:52.7 ,
+          lng:5 ,
+        }}
         defaultZoom={zoomLevel}
       >
         <LocationPin
-          lat={location.lat}
-          lng={location.lng}
-          text={location.address}
+          lat={52.7}
+          lng={5}
+          text={street,city,postcode,country}
         />
       </GoogleMapReact>
     </div>
   </div>
-)
-export default Map
+);
+export default Map;

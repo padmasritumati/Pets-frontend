@@ -66,6 +66,12 @@ export default function SearchSitters() {
   const [query, setQuery] = useState();
   const autoCompleteRef = useRef(null);
 
+  const location = {
+    address: '1600 Amphitheatre Parkway, Mountain View, california.',
+    lat: 37.42216,
+    lng: -122.08427,
+  } 
+
   useEffect(() => {
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=${apiKeyGoogle}&libraries=places&language=en`,
@@ -311,12 +317,14 @@ export default function SearchSitters() {
                   postcode={sitter.address.postcode}
                   latitude={sitter.address.latitude}
                   longitude={sitter.address.longitude}
-                  zoomLevel={14}
+                  zoomLevel={8}
                 />
               );
             })}
           </div>
-        ) : null}
+          ) : null}
+         
+
       </Container>
       
     </>
