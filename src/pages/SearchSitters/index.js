@@ -1,15 +1,54 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getServices } from "../../store/searchSitter/actions";
 import { selectSitterList } from "../../store/searchSitter/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { Jumbotron, Container ,Row,Col,Form} from "react-bootstrap";
-import Sitter from "./Sitter";
-import {selectToken,selectUser} from "../../store/user/selectors"
+import {  Container, Row, Col, Form, Button } from "react-bootstrap";
+import { selectToken, selectUser } from "../../store/user/selectors";
+import Geocode from "react-geocode";
+
+let autoComplete;
+let apiKeyGoogle = "AIzaSyBnsdjbczhjxm";
+
+const loadScript = (url, callback) => {
+  let script = document.createElement("script");
+  script.type = "text/javascript";
+
+  if (script.readyState) {
+    script.onreadystatechange = function () {
+      if (script.readyState === "loaded" || script.readyState === "complete") {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {
+    script.onload = () => callback();
+  }
+
+  script.src = url;
+  document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+function handleScriptLoad(updateQuery, autoCompleteRef) {
+  autoComplete = new window.google.maps.places.Autocomplete(
+    autoCompleteRef.current,
+    { types: ["geocode"], componentRestrictions: { country: "nl" } }
+  );
+  autoComplete.setFields(["address_components", "formatted_address"]);
+  autoComplete.addListener("place_changed", () =>
+    handlePlaceSelect(updateQuery)
+  );
+}
+
+async function handlePlaceSelect(updateQuery) {
+  const addressObject = autoComplete.getPlace();
+  const query = addressObject.formatted_address;
+  updateQuery(query);
+}
 
 export default function SearchSitters() {
   const dispatch = useDispatch();
   const sitterList = useSelector(selectSitterList);
-  console.log("sitter",sitterList)
+  console.log("sitter", sitterList);
 
   useEffect(() => {
     dispatch(getServices());
@@ -21,7 +60,18 @@ export default function SearchSitters() {
   const [radio, setRadio] = useState();
   const [size, setSize] = useState();
   const [service, setService] = useState();
-  const [Address, setAddress] = useState();
+  const [query, setQuery] = useState();
+  const autoCompleteRef = useRef(null);
+
+  useEffect(() => {
+    loadScript(
+      `https://maps.googleapis.com/maps/api/js?key=${apiKeyGoogle}&libraries=places&language=en`,
+      () => handleScriptLoad(setQuery, autoCompleteRef)
+    );
+  }, []);
+
+  Geocode.setApiKey(apiKeyGoogle);
+  Geocode.setRegion("nl");
 
   const dogSelected = () => {
     return (
@@ -104,25 +154,6 @@ export default function SearchSitters() {
 
   return (
     <>
-      <Jumbotron>
-        <h1>Sitters list</h1>
-      </Jumbotron>
-      <Container>
-        {sitterList.map((sitter) => {
-          return (
-            <Sitter
-              key={sitter.id}
-              id={sitter.id}
-              full_name={sitter.full_name}
-              image={sitter.image}
-              street={sitter.address.street}
-              city={sitter.address.city}
-              country={sitter.address.country}
-              service={sitter.service}
-            />
-          );
-        })}
-      </Container>
       <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <Form className="search-box">
           <Row className="mt-5">
@@ -196,10 +227,16 @@ export default function SearchSitters() {
                 <Form.Label>
                   <h2>Near</h2>
                 </Form.Label>
-                <Form.Control onChange={(e) => e.target.value} />
+                <Form.Control
+                  type="address"
+                  ref={autoCompleteRef}
+                  onChange={(event) => setQuery(event.target.value)}
+                  value={query}
+                />
               </Form.Group>
             </Col>
           </Row>
+          <Button>Search</Button>
         </Form>
       </Container>
     </>
