@@ -23,7 +23,7 @@ export default function SitterById({
     <>
       <Container>
         <Row className="mt-5 mb-3">
-          <h2>Services</h2>
+          <h2 className="headerService">Services</h2>
         </Row>
         
           {boarding ? (
@@ -99,7 +99,7 @@ export default function SitterById({
         )}
         
         <Row className="mt-5 mb-3">
-          <h2>{full_name} can host and watch in your home</h2>
+          <h2 className="headersize">Size of Pets</h2>
         </Row>
         <Row>
           {small ? (

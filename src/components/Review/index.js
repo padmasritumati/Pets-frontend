@@ -30,8 +30,8 @@ export default function Review() {
   }
 
   return (
-    <>
-      <Form className="mb-5">
+    <>{token?
+      <Form className="mb-5 form">
         <Form.Group>
           <Row>
             <Form.Label>
@@ -70,7 +70,7 @@ export default function Review() {
         <Button variant="danger" onClick={clickHandler}>
           Submit
         </Button>
-      </Form>
+      </Form>:null}
     </>
   );
 }

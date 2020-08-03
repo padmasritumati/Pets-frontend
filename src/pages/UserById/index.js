@@ -10,11 +10,13 @@ import { reviewsSelector } from "../../store/Review/selectors";
 import StarRatings from "react-star-ratings";
 import DisplayServices from "../../components/DisplayServices";
 import { getaddress, getservice } from "../../store/userDetails/actions";
+import {selectToken} from "../../store/user/selectors"
 
 export default function SitterById() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUserById);
+  const token= useSelector(selectToken)
 
   const address = user.address ? user.address : {};
   const service = user.service ? user.service : {};
@@ -64,13 +66,14 @@ export default function SitterById() {
             
           
         </Row>
-        <Row>
+        {token?  <Row>
         <Link to={`/contact/${user.id}`}>
               <Button>Contact {user.full_name}</Button>
             </Link>
-        </Row>
+        </Row>:null}
+      
         <Row className="mt-5 mb-3">
-          <h2>Services</h2>
+         
         </Row>
         <DisplayServices
           boarding={service.boarding}

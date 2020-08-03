@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container, Row, Col, Jumbotron } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
@@ -15,6 +15,7 @@ import {
   getpets,
 } from "../../store/userDetails/actions";
 import Pets from "../../components/DisplayPets";
+import "./dashboard.css"
 
 export default function Dashboard() {
   const user = useSelector(selectUser);
@@ -26,9 +27,7 @@ export default function Dashboard() {
   const service = s ? s : {};
   const pets = p ? p : [];
 
-  
   console.log("pets", pets);
- 
 
   useEffect(() => {
     if (user.id) {
@@ -41,10 +40,12 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Container>
+        <h1 className="headerdashboard"> Dashboard</h1>
+      
+      <Container className="form">
         <Row className="mt-5 mb-3">
           <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={user.image} />
+            <Card.Img variant="top" src={user.image} rounded />
             <Card.Body>
               <Card.Title>{user.full_name}</Card.Title>
               <Card.Text>
@@ -56,26 +57,24 @@ export default function Dashboard() {
         </Row>
         {user.petSitter ? (
           <Row className="mt-5 mb-3">
-            <Card>
-              <DisplayServices
-                boarding={service.boarding}
-                houseSitting={service.houseSitting}
-                dropInVisits={service.dropInVisits}
-                doggyDayCare={service.doggyDayCare}
-                dogWalking={service.dogWalking}
-                boardingRate={service.boardingRate}
-                houseSittingRate={service.houseSittingRate}
-                dropInVisitsRate={service.dropInVisitsRate}
-                doggyDayCareRate={service.doggyDayCareRate}
-                dogWalkingRate={service.dogWalkingRate}
-                small={service.small}
-                medium={service.medium}
-                large={service.large}
-                gaint={service.gaint}
-                cat={service.cat}
-                full_name={user.full_name}
-              />
-            </Card>
+            <DisplayServices
+              boarding={service.boarding}
+              houseSitting={service.houseSitting}
+              dropInVisits={service.dropInVisits}
+              doggyDayCare={service.doggyDayCare}
+              dogWalking={service.dogWalking}
+              boardingRate={service.boardingRate}
+              houseSittingRate={service.houseSittingRate}
+              dropInVisitsRate={service.dropInVisitsRate}
+              doggyDayCareRate={service.doggyDayCareRate}
+              dogWalkingRate={service.dogWalkingRate}
+              small={service.small}
+              medium={service.medium}
+              large={service.large}
+              gaint={service.gaint}
+              cat={service.cat}
+              full_name={user.full_name}
+            />
           </Row>
         ) : null}
 

@@ -46,7 +46,7 @@ export default function Pets() {
   }, []);
 
   return (
-    <div>
+    <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5 mb-3">
         <h1>Tell us a bit about your pet</h1>
         <h3 className="mt-5 ">What type of pet?</h3>

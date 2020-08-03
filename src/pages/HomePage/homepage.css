@@ -103,3 +103,19 @@ animation: moveInRight 1s ease-out;
   transform: translateY(-1px);
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
+.form{
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 7px;
+  padding: 2rem;
+  font-family: "Lato", serif;
+  font-weight: 500;
+}
+.btn{
+  text-decoration: none;
+  padding:15px 40px;
+  display: block;
+  background-color:rgba(126, 213, 111, 0.8),;
+  color:#fff;
+  border-radius: 100px;
+  transition: all .2s;
+}

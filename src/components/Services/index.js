@@ -50,7 +50,7 @@ export default function Services() {
   };
 
   return (
-    <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
+    <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5 form">
       <h2>Which services would you like to offer?</h2>
       <Row className="mt-5">
         <Col>

@@ -3,24 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import { logOut } from "../../store/user/actions";
 import "./navigation.css";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
+ const handler=()=>{
+  dispatch(logOut())
+ 
+ }
   return (
     <div className="homepage-navbar">
       <nav className="navbar">
         <div className="title">
-          <a  class="link" href="/">
-          <i className="fas fa-dog"></i>PETS
+          <a className="link" href="/">
+            <i className="fas fa-dog"></i>PETS
           </a>
         </div>
 
         <div className="navbar-links">
           <ul>
-           
             <li>
               <a href="/search_sitters">Search Sitters</a>
             </li>
@@ -48,12 +51,13 @@ export default function Navigation() {
                 <li>
                   <a href="/dashboard">{user.full_name}</a>
                 </li>
-                <button
+                <a href="/"><button
                   className="button-logout"
-                  onClick={() => dispatch(logOut())}
+                  onClick={handler}
                 >
                   Log out
-                </button>
+                </button></a>
+                
               </div>
             )}
           </ul>

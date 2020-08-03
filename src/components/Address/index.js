@@ -19,7 +19,7 @@ export default function BecomeSitter() {
   };
 
   return (
-    <div>
+    <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Let's get started :)</h1>
         <Form.Group controlId="formGridAddress1">
@@ -53,7 +53,7 @@ export default function BecomeSitter() {
 
         <Link to="/phone">
           {" "}
-          <Button variant="primary" onClick={handler}>
+          <Button  className="btn"  onClick={handler}>
             Submit
           </Button>
         </Link>

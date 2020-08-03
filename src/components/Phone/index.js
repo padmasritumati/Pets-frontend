@@ -89,7 +89,7 @@ export default function Phone() {
   }, []);
 
   return (
-    <div>
+    <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h2 className="mt-5 mb-3">Add your phone number</h2>
         <p>

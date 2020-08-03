@@ -5,6 +5,7 @@ export default function Pets(name,breed,weight,ageInYears,ageInMonths,image) {
   return (
     <>
       <Container>
+        <h1 className="headerpets">Pets</h1>
       <Row className="mt-5 mb-3">
       <Card style={{ width: "18rem" }}>
             <Card.Img variant="top" src={image} />
