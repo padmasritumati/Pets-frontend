@@ -18,6 +18,7 @@ import UserById from "./pages/UserById";
 import PetOwner from "./pages/PetOwner";
 import Adderss from "./components/Address";
 import Pets from "./components/Pets";
+import Contact from "./pages/Contact"
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -50,6 +51,7 @@ function App() {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/contact/:id" component={Contact}/>
       </Switch>
     </div>
   );

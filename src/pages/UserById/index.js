@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { userById } from "../../store/userById/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { selectUserById } from "../../store/userById/selectors";
-import { Container, Row, Image, Col } from "react-bootstrap";
+import { Container, Row, Image, Col, Button } from "react-bootstrap";
 import Review from "../../components/Review";
 import ReviewList from "../../components/Review/ReviewList";
 import { reviewsSelector } from "../../store/Review/selectors";
@@ -60,6 +60,14 @@ export default function SitterById() {
               starSpacing="5px"
             />
           </Col>
+          
+            
+          
+        </Row>
+        <Row>
+        <Link to={`/contact/${user.id}`}>
+              <Button>Contact {user.full_name}</Button>
+            </Link>
         </Row>
         <Row className="mt-5 mb-3">
           <h2>Services</h2>
