@@ -3,10 +3,6 @@ import { userById } from "../../store/userById/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectUserById } from "../../store/userById/selectors";
-import {
-  selectAddresss,
-  selectservice,
-} from "../../store/userDetails/selectors";
 import { Container, Row, Image, Col } from "react-bootstrap";
 import Review from "../../components/Review";
 import ReviewList from "../../components/Review/ReviewList";

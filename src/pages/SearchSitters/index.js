@@ -5,9 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {  Container, Row, Col, Form, Button } from "react-bootstrap";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import Geocode from "react-geocode";
+import Map from "../../components/Map"
+import Sitter from "./Sitter"
+
 
 let autoComplete;
-let apiKeyGoogle = "AIzaSyBnsdjbczhjxm";
+let apiKeyGoogle = "AIzaSyBnpQ7R3rbu-B1iV0cHxwUdnLSsRsCyeFI";
 
 const loadScript = (url, callback) => {
   let script = document.createElement("script");
@@ -56,7 +59,7 @@ export default function SearchSitters() {
 
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
-
+  const [yes,setYes]=useState();
   const [radio, setRadio] = useState();
   const [size, setSize] = useState();
   const [service, setService] = useState();
@@ -152,6 +155,10 @@ export default function SearchSitters() {
     );
   };
 
+  const handler=(e)=>{
+    setYes(e.target.value)
+  }
+
   return (
     <>
       <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -236,8 +243,42 @@ export default function SearchSitters() {
               </Form.Group>
             </Col>
           </Row>
-          <Button>Search</Button>
+          <Button value="true" onClick={handler}>Search</Button>
         </Form>
+        {yes?( <Container>
+        {sitterList.map((sitter) => {
+          return (
+            <Sitter
+              key={sitter.id}
+              id={sitter.id}
+              full_name={sitter.full_name}
+              image={sitter.image}
+              street={sitter.address.street}
+              city={sitter.address.city}
+              country={sitter.address.country}
+              postcode={sitter.address.postcode}
+              service={sitter.service}
+              zoomLevel={14}
+            />
+          );
+        })}
+      </Container>):null}
+      {yes?(<div>{sitterList.map((sitter) => {
+          return (
+            <Map
+              key={sitter.id}
+              street={sitter.address.street}
+              city={sitter.address.city}
+              country={sitter.address.country}
+              postcode={sitter.address.postcode}
+              latitude={sitter.address.latitude}
+              longitude={sitter.address.longitude}
+              zoomLevel={14}
+            />
+          );
+        })}</div>):null}
+       
+     
       </Container>
     </>
   );

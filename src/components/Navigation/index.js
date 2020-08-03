@@ -20,9 +20,7 @@ export default function Navigation() {
 
         <div className="navbar-links">
           <ul>
-            <li>
-              <a href="/our_services">Our Services</a>
-            </li>
+           
             <li>
               <a href="/search_sitters">Search Sitters</a>
             </li>
