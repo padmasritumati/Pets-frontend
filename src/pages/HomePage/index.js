@@ -13,7 +13,7 @@ export default function HomePage() {
             <span className="heading-primary-main">We’re The Dog People</span>
             <span className="heading-primary-sub">Enjoy our services</span>
           </h1>
-          <a href="#" className="btn">Our Service</a>
+          <a href="/search_sitters" className="btn">Our Service</a>
         </div>
       </header>
      

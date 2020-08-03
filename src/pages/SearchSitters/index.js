@@ -2,12 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { getServices } from "../../store/searchSitter/actions";
 import { selectSitterList } from "../../store/searchSitter/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import {  Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import Geocode from "react-geocode";
-import Map from "../../components/Map"
-import Sitter from "./Sitter"
-
+import Map from "../../components/Map";
+import Sitter from "./Sitter";
+import "./search.css";
 
 let autoComplete;
 let apiKeyGoogle = "AIzaSyBnpQ7R3rbu-B1iV0cHxwUdnLSsRsCyeFI";
@@ -59,7 +59,7 @@ export default function SearchSitters() {
 
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
-  const [yes,setYes]=useState();
+  const [yes, setYes] = useState();
   const [radio, setRadio] = useState();
   const [size, setSize] = useState();
   const [service, setService] = useState();
@@ -155,13 +155,15 @@ export default function SearchSitters() {
     );
   };
 
-  const handler=(e)=>{
-    setYes(e.target.value)
-  }
+  const handler = (e) => {
+    setYes(e.target.value);
+  };
 
   return (
     <>
-      <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
+    
+      <div className="row">
+        <div className="col-1-of-2">
         <Form className="search-box">
           <Row className="mt-5">
             <Col className="mt-3">
@@ -243,43 +245,80 @@ export default function SearchSitters() {
               </Form.Group>
             </Col>
           </Row>
-          <Button value="true" onClick={handler}>Search</Button>
+          <Button value="true" onClick={handler}>
+            Search
+          </Button>
         </Form>
-        {yes?( <Container>
-        {sitterList.map((sitter) => {
-          return (
-            <Sitter
-              key={sitter.id}
-              id={sitter.id}
-              full_name={sitter.full_name}
-              image={sitter.image}
-              street={sitter.address.street}
-              city={sitter.address.city}
-              country={sitter.address.country}
-              postcode={sitter.address.postcode}
-              service={sitter.service}
-              zoomLevel={14}
+        </div>
+        <div className="col-1-of-2">
+          <div class="composition">
+            <img
+              src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449129/pet_image/one_dazjjf.jpg "
+              width="200"
+              height="200"
+              alt="Photo 1"
+              className="composition__photo composition__photo--p1"
             />
-          );
-        })}
-      </Container>):null}
-      {yes?(<div>{sitterList.map((sitter) => {
-          return (
-            <Map
-              key={sitter.id}
-              street={sitter.address.street}
-              city={sitter.address.city}
-              country={sitter.address.country}
-              postcode={sitter.address.postcode}
-              latitude={sitter.address.latitude}
-              longitude={sitter.address.longitude}
-              zoomLevel={14}
+            <img
+              src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449434/pet_image/two_ekx35r.jpg"
+              width="200"
+              height="200"
+              alt="Photo 2"
+              className="composition__photo composition__photo--p2"
             />
-          );
-        })}</div>):null}
-       
+            <img
+              src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449506/pet_image/three_qagy0r.jpg"
+              width="200"
+              height="200"
+              alt="Photo 3"
+              className="composition__photo composition__photo--p3"
+            />
+          </div>
+        </div>
+      </div>
+  
+      <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
      
+        {yes ? (
+          <Container>
+            {sitterList.map((sitter) => {
+              return (
+                <Sitter
+                  key={sitter.id}
+                  id={sitter.id}
+                  full_name={sitter.full_name}
+                  image={sitter.image}
+                  street={sitter.address.street}
+                  city={sitter.address.city}
+                  country={sitter.address.country}
+                  postcode={sitter.address.postcode}
+                  service={sitter.service}
+                  zoomLevel={14}
+                />
+              );
+            })}
+          </Container>
+        ) : null}
+        {yes ? (
+          <div>
+            {sitterList.map((sitter) => {
+              return (
+                <Map
+                  key={sitter.id}
+                  street={sitter.address.street}
+                  city={sitter.address.city}
+                  country={sitter.address.country}
+                  postcode={sitter.address.postcode}
+                  latitude={sitter.address.latitude}
+                  longitude={sitter.address.longitude}
+                  zoomLevel={14}
+                />
+              );
+            })}
+          </div>
+        ) : null}
       </Container>
+      
     </>
   );
 }

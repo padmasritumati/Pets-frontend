@@ -26,7 +26,7 @@ export default function BecomeSitter() {
         <div class="col-1-of-4">
           <div class="box3">
           <h3 >
-              <a href="/service" className="linksitter">Add your services</a>
+              <a href="/services" className="linksitter">Add your services</a>
             </h3>
           </div>
         </div>
