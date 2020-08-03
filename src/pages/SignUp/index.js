@@ -102,15 +102,16 @@ export default function SignUp() {
                     </Form.Control>
                   </Form.Group>
                   <Form.Group className="mt-5">
-                    <Button
-                      variant="primary"
+                    <button
+                     
                       type="submit"
                       onClick={submitForm}
+                      className="btnsignup"
                     >
                       Sign up
-                    </Button>
+                    </button>
                   </Form.Group>
-                  <Link to="/login">Click here to log in</Link>
+                  <Link to="/login" className="linksignup">Click here to log in</Link>
                 </Form>
               </Container>
             </div>

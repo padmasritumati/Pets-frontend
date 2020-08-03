@@ -1,13 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-export default function BecomeSitter() {
+import "../BecomeSitter/sitter.css";
+
+export default function PetOwner() {
   return (
-    <div>
-      <h1>Add your Pets</h1>
-      <Link to="/address">Click here to add address</Link><br></br>
-      <Link to="/phone">click here to add phone</Link><br></br>
-      <Link to="/pets">click here to add pets</Link><br></br>
-    </div>
+    <section class="become-a-sitter">
+      <h1 className="h1">Add your pet</h1>
+      <div class="row">
+        <div class="col-1-of-4">
+          <div class="box1">
+            <h3>
+              <a href="/address" className="linksitter">
+                Add your address
+              </a>
+            </h3>
+          </div>
+        </div>
+
+        <div class="col-1-of-4">
+          <div class="box2">
+            <h3>
+              <a href="/phone" className="linksitter">
+                Add your phone number and image
+              </a>
+            </h3>
+          </div>
+        </div>
+
+        <div class="col-1-of-4">
+          <div class="box3">
+            <h3>
+              <a href="/pets" className="linksitter">
+                Add your Pets
+              </a>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

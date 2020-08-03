@@ -1,0 +1,70 @@
+.become-a-sitter {
+  padding: 20rem 0;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 131, 0.8)
+    ),
+    url(../../images/sitter.jpg);
+    position: relative;
+   
+}
+
+.box1 {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 3.5rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  margin-left: 200px;
+  
+  
+  
+}
+.box2 {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 3.5rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  margin-left: 200px;
+}
+.box3 {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 3.5rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+  margin-left: 200px;
+}
+
+.box1:hover,
+.box2:hover,
+.box3:hover
+ {
+  transform: translateY(-1.5rem) scale(1.03);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.linksitter,
+.linksitter:visited{
+  color: rgb(128,128,128);
+}
+.h1{
+  position: absolute;
+  left: 50%;
+  top:20%;
+  transform:translate(-50%,-50%);
+  text-align: center;
+  color: whitesmoke;
+}
