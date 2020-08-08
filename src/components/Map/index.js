@@ -39,7 +39,7 @@ const Map = ({
         <LocationPin
           lat={52.7}
           lng={5}
-          text={street,city,postcode,country}
+         
         />
       </GoogleMapReact>
     </div>
