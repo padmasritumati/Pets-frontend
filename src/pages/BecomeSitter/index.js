@@ -1,64 +1,36 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import React from "react";
 import { Link } from "react-router-dom";
-import { address } from "../../store/becomeSitter/actions";
-import { useDispatch } from "react-redux";
+import "./sitter.css";
 
 export default function BecomeSitter() {
-  const [house, set_house] = useState();
-  const [street, set_street] = useState();
-  const [city, set_city] = useState();
-  const [country, set_country] = useState();
-  const [postcode, set_postcode] = useState();
-  const dispatch = useDispatch();
-
-  const handler = () => {
-   dispatch(address(house, street, city, country, postcode));
-  };
-
   return (
-    <div>
-      <h1>BecomeSitter</h1>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5">Let's get started :)</h1>
-        <Form.Group controlId="formGridAddress1">
-          <Form.Label>House number</Form.Label>
-          <Form.Control onChange={(e) => set_house(e.target.value)} />
-        </Form.Group>
+    <section class="become-a-sitter">
+      <h1 className="h1">Become a Sitter</h1>
+      <div class="row">
+        <div class="col-1-of-4">
+          <div class="box1">
+          <h3 >
+              <a href="/address" className="linksitter">Add your address</a>
+            </h3>
+          </div>
+        </div>
 
-        <Form.Group controlId="formGridAddress2">
-          <Form.Label>street</Form.Label>
-          <Form.Control onChange={(e) => set_street(e.target.value)} />
-        </Form.Group>
+        <div class="col-1-of-4">
+          <div class="box2">
+            <h3 >
+              <a href="/phone" className="linksitter">Add your phone number and image</a>
+            </h3>
+          </div>
+        </div>
 
-        <Form.Row>
-          <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
-            <Form.Control onChange={(e) => set_city(e.target.value)} />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>postcode</Form.Label>
-            <Form.Control onChange={(e) => set_postcode(e.target.value)} />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              onChange={(e) => set_country(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-        </Form.Row>
-
-        <Link to="/become_a_sitter/phone">
-          {" "}
-          <Button variant="primary" onClick={handler}>
-            Save & Continue
-          </Button>
-        </Link>
-      </Form>
-    </div>
+        <div class="col-1-of-4">
+          <div class="box3">
+          <h3 >
+              <a href="/services" className="linksitter">Add your services</a>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

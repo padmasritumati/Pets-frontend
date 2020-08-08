@@ -1,1 +1,0 @@
-export const selectBecomeSitter = state => state.becomeSitter

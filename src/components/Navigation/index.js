@@ -1,31 +1,68 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectToken } from "../../store/user/selectors";
-import NavbarItem from "./NavbarItem";
-import LoggedIn from "./LoggedIn";
-import LoggedOut from "./LoggedOut";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken, selectUser } from "../../store/user/selectors";
+import { logOut } from "../../store/user/actions";
+import "./navigation.css";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
-
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
-
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+ const handler=()=>{
+  dispatch(logOut())
+ 
+ }
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">
-        Pets
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path="/search_sitters" linkText="Search Sitters" />
-          <NavbarItem path="/become_a_sitter/address" linkText="Become a sitter" />
-          {loginLogoutControls}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div className="homepage-navbar">
+      <nav className="navbar">
+        <div className="title">
+          <a className="link" href="/">
+            <i className="fas fa-dog"></i>PETS
+          </a>
+        </div>
+
+        <div className="navbar-links">
+          <ul>
+            <li>
+              <a href="/search_sitters">Search Sitters</a>
+            </li>
+            {!token ? (
+              <li>
+                <a href="/signup">Sign up</a>
+              </li>
+            ) : null}
+            {user.petSitter ? (
+              <li>
+                <a href="/become_a_sitter">Become a sitter</a>
+              </li>
+            ) : null}
+            {user.petOwner ? (
+              <li>
+                <a href="/petowner">Add your pet</a>
+              </li>
+            ) : null}
+            {!token ? (
+              <li>
+                <a href="/login">Log in</a>
+              </li>
+            ) : (
+              <div>
+                <li>
+                  <a href="/dashboard">{user.full_name}</a>
+                </li>
+                <a href="/"><button
+                  className="button-logout"
+                  onClick={handler}
+                >
+                  Log out
+                </button></a>
+                
+              </div>
+            )}
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 }

@@ -1,0 +1,17 @@
+.headerdashboard{
+  background:  rgba(126, 213, 111, 0.8);
+  margin-bottom: 10px;
+  padding: 30px;
+
+}
+.headerService,
+.headerpets{
+  background:#55c57a;
+  margin-bottom: 10px;
+  padding: 30px;
+}
+.headersize{
+  background:#28b485;
+  margin-bottom: 10px;
+  padding: 30px;
+}

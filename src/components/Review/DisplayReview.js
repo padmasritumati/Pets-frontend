@@ -4,6 +4,7 @@ import StarRatings from "react-star-ratings";
 
 export default function Review(props) {
   return (
+    <div className="form">
     <Container className="mt-4">
       <Row className="row justify-content-md-center">
         <Col className="col-1">
@@ -36,5 +37,6 @@ export default function Review(props) {
         <p>{props.comment}</p>
       </Row>
     </Container>
+    </div>
   );
 }

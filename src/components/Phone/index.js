@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import firebase from "./firebase";
 import { Link } from "react-router-dom";
-import { phone } from "../../store/becomeSitter/actions";
-import { useDispatch } from "react-redux";
-import { CloudinaryContext, Image, Transformation } from "cloudinary-react";
+import { phone } from "../../store/userDetails/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
+import { selectUser } from "../../store/user/selectors";
 
 export default function Phone() {
   const [phoneNo, set_phone] = useState();
   const [images, setImages] = useState();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const handler = () => {
     dispatch(phone(phoneNo, images));
@@ -74,7 +76,7 @@ export default function Phone() {
       if (!error) {
         //console.log(photos);
         if (photos.event === "success") {
-          setImages(photos.info.public_id);
+          setImages(photos.info.url);
         }
       } else {
         console.log(error);
@@ -87,7 +89,7 @@ export default function Phone() {
   }, []);
 
   return (
-    <div>
+    <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h2 className="mt-5 mb-3">Add your phone number</h2>
         <p>
@@ -119,22 +121,26 @@ export default function Phone() {
               Upload Image
             </Button>
 
-            <Image publicId={images}>
-              <Transformation
-                width="400"
-                height="400"
-                gravity="face"
-                radius="max"
-                crop="crop"
-              />
-              <Transformation width="200" crop="scale" />
-            </Image>
+            {images ? (
+                <Image
+                  src={images}
+                  rounded="true"
+                  alt="171x180"
+                  width={171}
+                  height={180}
+                />
+              ) : null}
           </Form>
         </CloudinaryContext>
-
-        <Link to="/become_a_sitter/services">
-          <Button onClick={handler}>Save & continue</Button>
-        </Link>
+        {user.petSitter ? (
+          <Link to="/services">
+            <Button onClick={handler}>Submit</Button>
+          </Link>
+        ) : (
+          <Link to="/pets">
+            <Button onClick={handler}>Submit</Button>
+          </Link>
+        )}
       </Form>
     </div>
   );
