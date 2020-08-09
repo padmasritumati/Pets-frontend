@@ -8,9 +8,10 @@ import Geocode from "react-geocode";
 import Map from "../../components/Map";
 import Sitter from "./Sitter";
 import "./search.css";
+import { apiKeyGoogle } from "../../config/constants";
 
 let autoComplete;
-let apiKeyGoogle = "AIzaSyBnpQ7R3rbu-B1iV0cHxwUdnLSsRsCyeFI";
+
 
 const loadScript = (url, callback) => {
   let script = document.createElement("script");
