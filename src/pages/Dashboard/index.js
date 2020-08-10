@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Container, Row, Col, Jumbotron } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
@@ -14,7 +14,7 @@ import {
   getservice,
   getpets,
 } from "../../store/userDetails/actions";
-import Pets from "../../components/DisplayPets";
+//import Pets from "../../components/DisplayPets";
 import "./dashboard.css"
 
 export default function Dashboard() {

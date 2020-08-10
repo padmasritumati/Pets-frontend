@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Image, Col } from "react-bootstrap";
+import { Image, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Sitter(props) {

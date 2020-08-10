@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { getServices } from "../../store/searchSitter/actions";
 import { selectSitterList } from "../../store/searchSitter/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Form, Button ,Image} from "react-bootstrap";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import Geocode from "react-geocode";
 import Map from "../../components/Map";
@@ -65,13 +65,9 @@ export default function SearchSitters() {
   const [service, setService] = useState();
   const [query, setQuery] = useState();
   const autoCompleteRef = useRef(null);
+  console.log(token,user,size,service)
 
-  const location = {
-    address: "1600 Amphitheatre Parkway, Mountain View, california.",
-    lat: 37.42216,
-    lng: -122.08427,
-  };
-
+  
   useEffect(() => {
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=${apiKeyGoogle}&libraries=places&language=en`,
@@ -257,21 +253,21 @@ export default function SearchSitters() {
         </div>
         <div className="col-1-of-2">
           <div className="composition">
-            <img
+            <Image
               src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449129/pet_image/one_dazjjf.jpg "
               width="200"
               height="200"
               alt="Photo 1"
               className="composition__photo composition__photo--p1"
             />
-            <img
+            <Image
               src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449434/pet_image/two_ekx35r.jpg"
               width="200"
               height="200"
               alt="Photo 2"
               className="composition__photo composition__photo--p2"
             />
-            <img
+            <Image
               src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449506/pet_image/three_qagy0r.jpg"
               width="200"
               height="200"

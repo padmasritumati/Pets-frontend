@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//mport { Link } from "react-router-dom";
 import "./sitter.css";
 
 export default function BecomeSitter() {

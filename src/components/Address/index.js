@@ -57,8 +57,9 @@ export default function BecomeSitter() {
     const addressObject = autoComplete.getPlace();
     let address = addressObject.address_components;
     address.map((el) => {
-      console.log("i", el.types);
+      
       el.types.map((type) => {
+        
         switch (type) {
           case "postal_code": {
             set_postcode(el.long_name);
@@ -80,8 +81,8 @@ export default function BecomeSitter() {
             set_street(el.long_name);
             break
           }
-        }
-      });
+          default:{console.log("default")}
+       }})
     });
 
     console.log(addressObject);
@@ -103,7 +104,7 @@ export default function BecomeSitter() {
       `https://maps.googleapis.com/maps/api/js?key=${apiKeyGoogle}&libraries=places&language=en`,
       () => handleScriptLoad(setQuery, autoCompleteRef)
     );
-  }, []);
+  }, [ ]);
 
   Geocode.setApiKey(apiKeyGoogle);
   Geocode.setRegion("nl");

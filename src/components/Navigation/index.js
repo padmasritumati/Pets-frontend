@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import { logOut } from "../../store/user/actions";
 import "./navigation.css";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 export default function Navigation() {
   const token = useSelector(selectToken);

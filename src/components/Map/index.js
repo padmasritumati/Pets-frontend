@@ -4,7 +4,7 @@ import "./map.css";
 
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
-import Sitter from "../../pages/SearchSitters/Sitter";
+//import Sitter from "../../pages/SearchSitters/Sitter";
 import { apiKeyGoogle } from "../../config/constants";
 
 const LocationPin = ({ text }) => (
