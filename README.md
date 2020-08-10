@@ -32,7 +32,7 @@ The goal of this project is to build a full-stack app using new technologies .
 
 ## User stories and Wireframe 
 
-# User stories
+### User stories
 
 - As a page visitor, I can sign up and sign in as a user. I must register before I become a pet sitter.
 - As a pet owner, I am able to select the services that i need.
@@ -42,7 +42,7 @@ The goal of this project is to build a full-stack app using new technologies .
 - As a pet sitter ,I am able to fix the price for the services i provide.
 - As a user of this site,I am able to see details about my account (dashboard).
 
-# Wireframe 
+### Wireframe 
 
 - [Wireframe](https://wireframepro.mockflow.com/view/Pets_wireframe#/page/8c0037ff0d064a4da8860d29ad51b759)
 
