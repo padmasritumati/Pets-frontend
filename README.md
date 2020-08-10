@@ -2,9 +2,9 @@
 
 Pets is an application that connects pet owners with dog people who’ll treat their pets like family. You can (pet owner) select the most suitable service based on location, facilities and customer rating.You can contact pet sitters by email to ask for more details.
 
-# [Check out the deployed version here](https://happy-pets.netlify.app/)
+## [Check out the deployed version here](https://happy-pets.netlify.app/)
 
-# [Task board](https://github.com/users/padmasritumati/projects/1)
+### [Task board](https://github.com/users/padmasritumati/projects/1)
 
 ## Table of contents:
 
