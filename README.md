@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#  🐾 🐈‍ Pets Server 🐾 🐕
 
-## Available Scripts
+Pets is an application that connects pet owners with dog people who’ll treat their pets like family. You can (pet owner) select the most suitable service based on location, facilities and customer rating.You can contact pet sitters by email to ask for more details.
 
-In the project directory, you can run:
+# [Check out the deployed version here](https://happy-pets.netlify.app/)
 
-### `npm start`
+# [Task board] (https://github.com/users/padmasritumati/projects/1)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of contents:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- **[App demo](#app-demo)**
+- **[Goals for this project](#goals-for-this-project)**
+- **[User stories and Wireframe](#user-stories)**
+- **[Server](#server)**
+- **[Technologies used](#technologies-used)**
+- **[Set up](#set-up)**
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## App demo
 
-### `npm run build`
+To Do
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Goals for this project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The goal of this project is to build a full-stack app using new technologies .
 
-### `npm run eject`
+- Practice full-stack development
+- Apply what I learned in the bootcamp
+- Practice learning new technology independently
+- Practice disciplined git usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## User stories and Wireframe 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# User stories
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- As a page visitor, I can sign up and sign in as a user. I must register before I become a pet sitter.
+- As a pet owner, I am able to select the services that i need.
+- As a pet owner, I am able to select the sitter based on the location which is near to me.
+- As a pet owner, I am able to give rating and review to the sitter for the service they provided to my pet.
+- As a user ,I am be able to register as a pet sitter.
+- As a pet sitter ,I am able to fix the price for the services i provide.
+- As a user of this site,I am able to see details about my account (dashboard).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Wireframe 
 
-## Learn More
+- [Wireframe](https://wireframepro.mockflow.com/view/Pets_wireframe#/page/8c0037ff0d064a4da8860d29ad51b759)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[**Here**](https://github.com/padmasritumati/Pets-backend) you can find the server repository for this project.
 
-### Code Splitting
+## Technologies used
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- React, React Router DOM
+- Redux, Redux-Thunk
+- React Geocode, Google Maps API,Firebase API
+- CSS, HTML, Bootstrap, Material-UI
+- Cloudinary 
 
-### Analyzing the Bundle Size
+## Set up
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- Clone the app
+- Cd into your project
+- npm install
+- npm start
 
-### Making a Progressive Web App
+You will need to create your own Google API Key for Geocoding API, Places API, Maps Javascript API,Firebase API,Cloudinary API
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
