@@ -4,43 +4,39 @@ import "./map.css";
 
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
-
-
+import Sitter from "../../pages/SearchSitters/Sitter";
+import { apiKeyGoogle } from "../../config/constants";
 
 const LocationPin = ({ text }) => (
   <div className="pin">
     <Icon icon={locationIcon} className="pin-icon" />
-    <p className="pin-text">{text}</p>
+    <h1 className="pin-text">{text}</h1>
   </div>
 );
 
-const Map = ({
-  street,
-  city,
-  country,
-  postcode,
-  latitude,
-  longitude,
-  zoomLevel,
-}) => (
+const Map = ({ sitterList }) => (
   <div className="map">
     <h2 className="map-h2">Map</h2>
-
     <div className="google-map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBnpQ7R3rbu-B1iV0cHxwUdnLSsRsCyeFI" }}
-        defaultCenter={{
-          address: street,city,postcode,country,
-          lat:52.7 ,
-          lng:5 ,
+        bootstrapURLKeys={{
+          key: apiKeyGoogle,
+          language: "en",
+          region: "US"
         }}
-        defaultZoom={zoomLevel}
+        defaultCenter={{ lat:52.0907, lng: 5.1214 }}
+        defaultZoom={12}
       >
-        <LocationPin
-          lat={52.7}
-          lng={5}
-         
-        />
+        {sitterList.map((sitter,i) => {
+          return (
+            <LocationPin
+            key={i}
+              lat={sitter.address.latitude}
+              lng={sitter.address.longitude}
+              text={sitter.full_name}
+            />
+          );
+        })}
       </GoogleMapReact>
     </div>
   </div>

@@ -12,7 +12,6 @@ import { apiKeyGoogle } from "../../config/constants";
 
 let autoComplete;
 
-
 const loadScript = (url, callback) => {
   let script = document.createElement("script");
   script.type = "text/javascript";
@@ -68,10 +67,10 @@ export default function SearchSitters() {
   const autoCompleteRef = useRef(null);
 
   const location = {
-    address: '1600 Amphitheatre Parkway, Mountain View, california.',
+    address: "1600 Amphitheatre Parkway, Mountain View, california.",
     lat: 37.42216,
     lng: -122.08427,
-  } 
+  };
 
   useEffect(() => {
     loadScript(
@@ -168,94 +167,93 @@ export default function SearchSitters() {
 
   return (
     <>
-    
       <div className="row">
         <div className="col-1-of-2">
-        <Form className="search-box">
-          <Row className="mt-5">
-            <Col className="mt-3">
-              <h2>I'm looking for a service for my:</h2>
-              <Form.Check
-                inline
-                label="Dog"
-                type="radio"
-                name="catOrDog"
-                value="Dog"
-                onChange={(e) => setRadio(e.target.value)}
-              />
-              <Form.Check
-                inline
-                label="Cat"
-                type="radio"
-                name="catOrDog"
-                value="Cat"
-                onChange={(e) => setRadio(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row className="mt-5">
-            <Col>
-              <h2>What service do you need?</h2>
-              {radio === "Cat" ? catSelected() : dogSelected()}
-            </Col>
-          </Row>
-
-          <Row className="mt-5">
-            <Col>
-              <h2>My Dog Size kgs</h2>
-              <Form.Check
-                inline
-                label="Small(0-7)"
-                type="radio"
-                name="size"
-                value="Small"
-                onChange={(e) => setSize(e.target.value)}
-              />
-              <Form.Check
-                inline
-                label="Medium(7-18)"
-                type="radio"
-                name="size"
-                value="Medium"
-                onChange={(e) => setSize(e.target.value)}
-              />
-              <Form.Check
-                inline
-                label="Large(18-45)"
-                type="radio"
-                name="size"
-                value="Large"
-                onChange={(e) => setRadio(e.target.value)}
-              />
-              <Form.Check
-                inline
-                label="Gaint(45+)"
-                type="radio"
-                name="size"
-                value="Gaint"
-                onChange={(e) => setRadio(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row className="mt-5">
-            <Col>
-              <Form.Group controlId="formGridAddress">
-                <Form.Label>
-                  <h2>Near</h2>
-                </Form.Label>
-                <Form.Control
-                  type="address"
-                  ref={autoCompleteRef}
-                  onChange={(event) => setQuery(event.target.value)}
-                  value={query}
+          <Form className="search-box">
+            <Row className="mt-5">
+              <Col className="mt-3">
+                <h2>I'm looking for a service for my:</h2>
+                <Form.Check
+                  inline
+                  label="Dog"
+                  type="radio"
+                  name="catOrDog"
+                  value="Dog"
+                  onChange={(e) => setRadio(e.target.value)}
                 />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Button value="true" onClick={handler}>
-            Search
-          </Button>
-        </Form>
+                <Form.Check
+                  inline
+                  label="Cat"
+                  type="radio"
+                  name="catOrDog"
+                  value="Cat"
+                  onChange={(e) => setRadio(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row className="mt-5">
+              <Col>
+                <h2>What service do you need?</h2>
+                {radio === "Cat" ? catSelected() : dogSelected()}
+              </Col>
+            </Row>
+
+            <Row className="mt-5">
+              <Col>
+                <h2>My Dog Size kgs</h2>
+                <Form.Check
+                  inline
+                  label="Small(0-7)"
+                  type="radio"
+                  name="size"
+                  value="Small"
+                  onChange={(e) => setSize(e.target.value)}
+                />
+                <Form.Check
+                  inline
+                  label="Medium(7-18)"
+                  type="radio"
+                  name="size"
+                  value="Medium"
+                  onChange={(e) => setSize(e.target.value)}
+                />
+                <Form.Check
+                  inline
+                  label="Large(18-45)"
+                  type="radio"
+                  name="size"
+                  value="Large"
+                  onChange={(e) => setRadio(e.target.value)}
+                />
+                <Form.Check
+                  inline
+                  label="Gaint(45+)"
+                  type="radio"
+                  name="size"
+                  value="Gaint"
+                  onChange={(e) => setRadio(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row className="mt-5">
+              <Col>
+                <Form.Group controlId="formGridAddress">
+                  <Form.Label>
+                    <h2>Near</h2>
+                  </Form.Label>
+                  <Form.Control
+                    type="address"
+                    ref={autoCompleteRef}
+                    onChange={(event) => setQuery(event.target.value)}
+                    value={query}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Button value="true" onClick={handler}>
+              Search
+            </Button>
+          </Form>
         </div>
         <div className="col-1-of-2">
           <div className="composition">
@@ -283,9 +281,8 @@ export default function SearchSitters() {
           </div>
         </div>
       </div>
-  
-      <Container  className="mt-5">
-     
+
+      <Container className="mt-5">
         {yes ? (
           <Container>
             {sitterList.map((sitter) => {
@@ -308,26 +305,10 @@ export default function SearchSitters() {
         ) : null}
         {yes ? (
           <div>
-            {sitterList.map((sitter) => {
-              return (
-                <Map
-                  key={sitter.id}
-                  street={sitter.address.street}
-                  city={sitter.address.city}
-                  country={sitter.address.country}
-                  postcode={sitter.address.postcode}
-                  latitude={sitter.address.latitude}
-                  longitude={sitter.address.longitude}
-                  zoomLevel={8}
-                />
-              );
-            })}
+            <Map sitterList={sitterList} />
           </div>
-          ) : null}
-         
-
+        ) : null}
       </Container>
-      
     </>
   );
 }

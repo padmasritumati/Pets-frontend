@@ -1,20 +1,22 @@
 .homepage-navbar {
-  position: relative;
+  position: fixed;
   top: 0;
-  display: block;
+  overflow: hidden;
+  display: inline-block;
   width: 100%;
   height: 10vh;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   margin-left: 2.5rem;
   font-family: "Lato", sans-serif;
   font-weight: 400;
+
 }
 
-.link { color: #7ed56f; } /* CSS link color (red) */
-.link:hover { color: #00FF00; } /* CSS link hover (green) */
+.link { color: #fff; } /* CSS link color (red) */
+.link:hover { color:#fff; } /* CSS link hover (green) */
 .navbar {
   display: flex;
   position: relative;
@@ -49,9 +51,11 @@
   display: block;
   padding: 5px;
   text-decoration: none;
-  color: rgb(40,180,133);
+  color: #fff;
+  font-weight: 400;
+  font-size: 30px;
 
-  text-transform: uppercase;
+ 
   margin: 1vw;
 }
 .navbar-links ul li a,
