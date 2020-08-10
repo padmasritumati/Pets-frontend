@@ -4,7 +4,7 @@ Pets is an application that connects pet owners with dog people who’ll treat t
 
 # [Check out the deployed version here](https://happy-pets.netlify.app/)
 
-# [Task board] (https://github.com/users/padmasritumati/projects/1)
+# [Task board](https://github.com/users/padmasritumati/projects/1)
 
 ## Table of contents:
 
@@ -55,7 +55,7 @@ The goal of this project is to build a full-stack app using new technologies .
 - React, React Router DOM
 - Redux, Redux-Thunk
 - React Geocode, Google Maps API,Firebase API
-- CSS, HTML, Bootstrap, Material-UI
+- CSS, HTML, Bootstrap.
 - Cloudinary 
 
 ## Set up
