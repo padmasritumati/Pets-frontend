@@ -3,7 +3,6 @@ import { Container, Col, Form, Row, Button } from "react-bootstrap";
 import { service } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
 
-
 export default function Services() {
   const [boarding, set_Boarding] = useState("off");
   const [boardingRate, set_BoardingRate] = useState("20");
@@ -21,7 +20,6 @@ export default function Services() {
   const [gaint, set_Gaint] = useState("off");
   const [cat, set_Cat] = useState("false");
   const dispatch = useDispatch();
- 
 
   const services = {
     boarding: boarding,
@@ -45,7 +43,7 @@ export default function Services() {
   };
 
   const handler = () => {
-    console.log("services",services)
+    console.log("services", services);
     dispatch(service(services));
   };
 
@@ -54,7 +52,10 @@ export default function Services() {
       <h2>Which services would you like to offer?</h2>
       <Row className="mt-5">
         <Col>
-          <h3>Boarding</h3>
+          <h3>
+            {" "}
+            <i class="fas fa-luggage-cart"></i> Boarding
+          </h3>
           <p>The owner's pets come to your home and stay overnight.</p>
           <Form.Group as={Col} controlId="formGridRate">
             <Form.Label>Rate</Form.Label>
@@ -79,7 +80,9 @@ export default function Services() {
 
       <Row className="mt-5">
         <Col>
-          <h3>House Sitting</h3>
+          <h3>
+            <i class="fas fa-house-user"></i> House Sitting
+          </h3>
           <p>
             You go to the pet owner's home and stay overnight, taking care of
             their dogs and home.
@@ -107,7 +110,9 @@ export default function Services() {
 
       <Row className="mt-5">
         <Col>
-          <h3>Drop-In Visits</h3>
+          <h3>
+            <i class="fas fa-door-open"></i> Drop-In Visits
+          </h3>
           <p>
             Pet Owners ask you to do home visits to feed and play with their
             pets.
@@ -135,7 +140,9 @@ export default function Services() {
 
       <Row className="mt-5">
         <Col>
-          <h3>Doggy Day Care</h3>
+          <h3>
+            <i class="fas fa-sun"></i> Doggy Day Care
+          </h3>
           <p>he owner's pets stay at your home during the day</p>
           <Form.Group as={Col} controlId="formGridRate">
             <Form.Label>Rate</Form.Label>
@@ -160,7 +167,9 @@ export default function Services() {
 
       <Row className="mt-5">
         <Col>
-          <h3>Dog Walking</h3>
+          <h3>
+            <i class="fas fa-paw"></i> Dog Walking
+          </h3>
           <p>Pet Owners request dog walks in their neighbourhood.</p>
           <Form.Group as={Col} controlId="formGridRate">
             <Form.Label>Rate</Form.Label>
@@ -185,54 +194,69 @@ export default function Services() {
 
       <Row className="mt-5">
         <h2>What size dogs do you accept?</h2>
-        <Col>
-          <Form.Check
-            type="checkbox"
-            id="custom-switch-small"
-            label="Small(0-7kg)"
-            onChange={(e) => set_Small(e.target.value)}
-          />
-          <Form.Check
-            type="checkbox"
-            id="custom-switch-Medium"
-            label="Medium(7-18kg)"
-            onChange={(e) => set_Medium(e.target.value)}
-          />
-          <Form.Check
-            type="checkbox"
-            id="custom-switch-large"
-            label="Large(18-45kg)"
-            onChange={(e) => set_Large(e.target.value)}
-          />
-          <Form.Check
-            type="checkbox"
-            id="custom-switch-Gaint"
-            label="Gaint(45kg +)"
-            onChange={(e) => set_Gaint(e.target.value)}
-          />
-        </Col>
+        <Row>
+          <Col>
+            <Form.Check
+              type="checkbox"
+              id="custom-switch-small"
+              label="Small(0-7kg)"
+              onChange={(e) => set_Small(e.target.value)}
+            ></Form.Check>
+          </Col>
+          <Col>
+            <Form.Check
+              type="checkbox"
+              id="custom-switch-Medium"
+              label="Medium(7-18kg)"
+              onChange={(e) => set_Medium(e.target.value)}
+            />
+          </Col>
+          <Col>
+            {" "}
+            <Form.Check
+              type="checkbox"
+              id="custom-switch-large"
+              label="Large(18-45kg)"
+              onChange={(e) => set_Large(e.target.value)}
+            />
+          </Col>
+
+          <Col>
+            {" "}
+            <Form.Check
+              type="checkbox"
+              id="custom-switch-Gaint"
+              label="Gaint(45kg +)"
+              onChange={(e) => set_Gaint(e.target.value)}
+            />
+          </Col>
+        </Row>
       </Row>
 
       <Row className="mt-5">
-        <h2>Do you accept cats?</h2>
-        <Col>
-          <>
+        <h2>
+          Do you accept cats<i class="fas fa-cat"></i>?
+        </h2><br></br>
+        <Row>
+          <Col>
             <Button
-              variant="outline-primary"
+              variant="outline-dark"
               value="true"
               onClick={(e) => set_Cat("true")}
             >
               Yes
-            </Button>{" "}
-            <Button variant="outline-primary" value="false">
+            </Button>
+          </Col>{" "}
+          <Col>
+            <Button variant="outline-dark" value="false">
               No
             </Button>{" "}
-          </>
-        </Col>
+          </Col>
+        </Row>
       </Row>
       <Row>
         <Col>
-          <Button type="submit" className="mt-5" onClick={handler}>
+          <Button type="submit" variant="outline-dark" className="mt-5" onClick={handler}>
             Submit
           </Button>
         </Col>

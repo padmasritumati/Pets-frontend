@@ -9,10 +9,9 @@ export default function Navigation() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
- const handler=()=>{
-  dispatch(logOut())
- 
- }
+  const handler = () => {
+    dispatch(logOut());
+  };
   return (
     <div className="homepage-navbar">
       <nav className="navbar">
@@ -51,12 +50,9 @@ export default function Navigation() {
                 <li>
                   <a href="/dashboard">{user.full_name}</a>
                 </li>
-                <a href="/"><button
-                  className="button-logout"
-                  onClick={handler}
-                >
+                <li><a href="/" onClick={handler}>
                   Log out
-                </button></a>
+                </a></li>
                 
               </div>
             )}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image"
 import { Link } from "react-router-dom";
 import { address } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
@@ -110,9 +111,10 @@ export default function BecomeSitter() {
   Geocode.setRegion("nl");
 
   return (
+ 
     <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5">Let's get started :)</h1>
+        <h1 className="mt-5 mb-5"><i class="fas fa-map-marker-alt"></i> Address Form </h1>
         <Form.Group controlId="formGridAddress1">
           <Form.Label>Address</Form.Label>
           <Form.Control
@@ -165,11 +167,13 @@ export default function BecomeSitter() {
         </Form.Row>
         <Link to="/phone">
           {" "}
-          <Button className="btn" onClick={handler}>
+          <Button className="btn" variant="outline-dark" onClick={handler}>
             Submit
           </Button>
+          
         </Link>
       </Form>
     </div>
+    
   );
 }

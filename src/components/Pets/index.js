@@ -55,18 +55,18 @@ export default function Pets() {
           <Col>
             <>
               <Button
-                variant="outline-primary"
+                variant="outline-dark"
                 value="dog"
                 onClick={(e) => setType(e.target.value)}
               >
-                Dog
+                <i class="fas fa-dog"></i>Dog
               </Button>{" "}
               <Button
-                variant="outline-primary"
+                variant="outline-dark"
                 value="cat"
                 onClick={(e) => setType(e.target.value)}
               >
-                Cat
+                <i class="fas fa-cat"></i>Cat
               </Button>{" "}
             </>
           </Col>
@@ -138,19 +138,21 @@ export default function Pets() {
           </Col>
         </Row>
         <Row>
+          <Col>
           <CloudinaryContext cloudName="dsuvhhlxm">
             <Form className="mt-5 mb-3">
               <h4>Upload your pet image</h4>
 
               <Button
-                variant="outline-primary"
+                variant="outline-dark"
                 onClick={() => {
                   beginUpload("image");
                   console.log("images", images);
                 }}
               >
-                Upload Image
+                <i class="fas fa-camera"></i>  Upload Image
               </Button>
+              {" "}
               {images ? (
                 <Image
                   src={images}
@@ -162,10 +164,16 @@ export default function Pets() {
               ) : null}
             </Form>
           </CloudinaryContext>
+          </Col>
         </Row>
-        <Link to="/dashboard"><Button type="submit" onClick={handler}>
+        
+        <Row className="mt-5">
+        <Col>
+        <Link to="/dashboard"><Button type="submit"  variant="outline-dark" onClick={handler}>
           Submit
         </Button></Link>
+        </Col>
+        </Row>
       </Form>
     </div>
   );
