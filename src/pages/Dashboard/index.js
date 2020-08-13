@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container, Row, Col, Image } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
@@ -15,7 +15,7 @@ import {
   getpets,
 } from "../../store/userDetails/actions";
 //import Pets from "../../components/DisplayPets";
-import "./dashboard.css"
+import "./dashboard.css";
 
 export default function Dashboard() {
   const user = useSelector(selectUser);
@@ -40,21 +40,27 @@ export default function Dashboard() {
 
   return (
     <div>
-        <h1 className="headerdashboard"> Dashboard</h1>
-      
+      <h1 className="headerdashboard"> Dashboard</h1>
       <Container className="form">
-        <Row className="mt-5 mb-3">
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={user.image}  />
-            <Card.Body>
-              <Card.Title>{user.full_name}</Card.Title>
-              <Card.Text>
-                {address.street} {address.house_number} {address.city},
-                {address.postcode}
-              </Card.Text>
-            </Card.Body>
-          </Card>
+        <Row>
+          <Image src={user.image} width={171} height={180} roundedCircle />
+          <Col>
+            <h1>{user.full_name}</h1>
+            <h3>
+              {" "}
+              {address.street} {address.house_number} {address.city},
+              {address.postcode}
+            </h3>
+          </Col>
         </Row>
+      </Container>
+      {user.petSitter ? (
+        <h1 className="headerdashboard"> services</h1>
+      ) : (
+        <h1 className="headerdashboard"> Pets</h1>
+      )}
+
+      <Container>
         {user.petSitter ? (
           <Row className="mt-5 mb-3">
             <DisplayServices
@@ -77,26 +83,28 @@ export default function Dashboard() {
             />
           </Row>
         ) : null}
+      </Container>
 
+      <Container>
         {pets ? (
           <Row className="mt-5 mb-3">
             {pets.map((pet, i) => {
               return (
                 <Col key={i}>
-                  <Card style={{ width: "18rem" }}>
-                    <Card.Img variant="top" src={pet.image} />
-                    <Card.Body>
-                      <Card.Title>
-                        {pet.name}
-                        <br></br>
-                        {pet.breed}
-                      </Card.Title>
-                      <Card.Text>
-                        {pet.ageInYears} years,{pet.ageInMonths} months old,
-                        {pet.weight} kg.
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
+                  <Image
+                    src={pet.image}
+                    width={171}
+                    height={180}
+                    roundedCircle
+                  />
+                  <h2>
+                    {pet.name}({pet.breed})
+                  </h2>
+                  <h5>
+                    {" "}
+                    {pet.ageInYears} years,{pet.ageInMonths} months old,
+                    {pet.weight} kg.
+                  </h5>
                 </Col>
               );
             })}{" "}
