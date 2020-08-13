@@ -47,11 +47,11 @@ export default function SignUp() {
 
   return (
     <>
-      <section>
-        <div className="section-signup">
+      
+        
           <div className="signup">
             <div className="signup__form">
-              <Container>
+              <Container className="form">
                 <Form as={Col} md={{ span: 6, offset: 3 }} className="form-login">
                   <h1 className="mt-5 mb-5">Signup</h1>
                   <Form.Group controlId="formBasicName">
@@ -116,8 +116,8 @@ export default function SignUp() {
               </Container>
             </div>
           </div>
-        </div>
-      </section>
+       
+     
     </>
   );
 }
