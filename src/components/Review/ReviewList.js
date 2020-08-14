@@ -26,7 +26,7 @@ export default function Review({ image, name, dateCreated, rating, comment }) {
         reviewsListToDisplay.length ? (
           <div>
             {" "}
-            <h2 >Reviews ({reviewsListToDisplay.length})</h2>
+            <h2 className="headerdashboard">Reviews ({reviewsListToDisplay.length})</h2>
             {reviewsListToDisplay.map((review, i) => (
               <DisplayReview
                 key={i}

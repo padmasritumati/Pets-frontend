@@ -10,13 +10,13 @@ import { reviewsSelector } from "../../store/Review/selectors";
 import StarRatings from "react-star-ratings";
 import DisplayServices from "../../components/DisplayServices";
 import { getaddress, getservice } from "../../store/userDetails/actions";
-import {selectToken} from "../../store/user/selectors"
+import { selectToken } from "../../store/user/selectors";
 
 export default function SitterById() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUserById);
-  const token= useSelector(selectToken)
+  const token = useSelector(selectToken);
 
   const address = user.address ? user.address : {};
   const service = user.service ? user.service : {};
@@ -40,20 +40,15 @@ export default function SitterById() {
 
   return (
     <>
+      <h1 className="headerdashboard"> {user.full_name}</h1>
       <Container>
         <Row className="mt-5 mb-3">
-          <Image
-            src={user.image}
-            rounded
-            alt="171x180"
-            width={171}
-            height={180}
-          />
+          <Image src={user.image} width={171} height={180} roundedCircle />
           <Col>
-            <h2>{user.full_name}</h2>
-            <p>
+            <h1>{user.full_name}</h1>
+            <h3>
               {address.street},{address.city},{address.postcode}
-            </p>
+            </h3>
             <StarRatings
               rating={averageOfRating ? averageOfRating : 0}
               starRatedColor="#000000"
@@ -62,19 +57,17 @@ export default function SitterById() {
               starSpacing="5px"
             />
           </Col>
-          
-            
-          
         </Row>
-        {token?  <Row>
-        <Link to={`/contact/${user.id}`}>
-              <Button>Contact {user.full_name}</Button>
+        {token ? (
+          <Row>
+            <Link to={`/contact/${user.id}`}>
+              <Button variant="outline-dark" className="mb-4" >Contact {user.full_name}</Button>
             </Link>
-        </Row>:null}
-      
-        <Row className="mt-5 mb-3">
-         
-        </Row>
+          </Row>
+        ) : null}
+      </Container>
+      <h1 className="headerdashboard"> services</h1>
+      <Container>
         <DisplayServices
           boarding={service.boarding}
           houseSitting={service.houseSitting}
@@ -94,9 +87,11 @@ export default function SitterById() {
           full_name={user.full_name}
         />
         <Row></Row>
-        <ReviewList></ReviewList>
-        <Review> </Review>
       </Container>
+
+      <ReviewList></ReviewList>
+
+      <Review> </Review>
     </>
   );
 }

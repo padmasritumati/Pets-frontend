@@ -64,7 +64,7 @@ export const getpets = () => {
   };
 };
 
-export const address = (house_number, street, city, postcode, country) => {
+export const address = (house_number, street, city, postcode, country,lat,lng) => {
   return async (dispatch, getState) => {
     try {
       const token = getState().user.token;
@@ -77,6 +77,8 @@ export const address = (house_number, street, city, postcode, country) => {
           city,
           postcode,
           country,
+          lat,
+          lng
         },
         {
           headers: {

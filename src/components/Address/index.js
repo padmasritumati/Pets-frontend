@@ -96,8 +96,9 @@ export default function BecomeSitter() {
     Geocode.fromAddress(query).then((response) => {
       const { lat, lng } = response.results[0].geometry.location;
       console.log("lat,lng", lat, lng);
+      dispatch(address(house, street, city, postcode, country,lat, lng));
     });
-    dispatch(address(house, street, city, postcode, country));
+   
   };
 
   useEffect(() => {
@@ -114,7 +115,7 @@ export default function BecomeSitter() {
  
     <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5"><i class="fas fa-map-marker-alt"></i> Address Form </h1>
+        <h1 className="mt-5 mb-5"><i className="fas fa-map-marker-alt"></i> Address Form </h1>
         <Form.Group controlId="formGridAddress1">
           <Form.Label>Address</Form.Label>
           <Form.Control
