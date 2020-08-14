@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Container, Row, Col, Image,Button } from "react-bootstrap";
+import { Card, Container, Row, Col, Image, Button } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
@@ -53,16 +53,12 @@ export default function Dashboard() {
               {address.postcode}
             </h3>
           </Col>
-          
-          <Link to={`/contact/${user.id}`}>
-              <Button variant="outline-dark" className="mb-4" >Contact {user.full_name}</Button>
-            </Link>
         </Row>
       </Container>
       {user.petSitter ? (
-        <h1 className="headerdashboard"> services</h1>
+        <h1 className="headerservice"> services</h1>
       ) : (
-        <h1 className="headerdashboard"> Pets</h1>
+        <h1 className="headerpets"> Pets</h1>
       )}
 
       <Container>

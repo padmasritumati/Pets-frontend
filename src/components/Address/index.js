@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image"
+import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import { address } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
@@ -58,32 +58,33 @@ export default function BecomeSitter() {
     const addressObject = autoComplete.getPlace();
     let address = addressObject.address_components;
     address.map((el) => {
-      
       el.types.map((type) => {
-        
         switch (type) {
           case "postal_code": {
             set_postcode(el.long_name);
-            break
+            break;
           }
           case "country": {
             set_country(el.long_name);
-            break
+            break;
           }
           case "locality": {
             set_city(el.long_name);
-            break
+            break;
           }
           case "street_number": {
             set_house(el.long_name);
-            break
+            break;
           }
           case "route": {
             set_street(el.long_name);
-            break
+            break;
           }
-          default:{console.log("default")}
-       }})
+          default: {
+            console.log("default");
+          }
+        }
+      });
     });
 
     console.log(addressObject);
@@ -96,9 +97,8 @@ export default function BecomeSitter() {
     Geocode.fromAddress(query).then((response) => {
       const { lat, lng } = response.results[0].geometry.location;
       console.log("lat,lng", lat, lng);
-      dispatch(address(house, street, city, postcode, country,lat, lng));
+      dispatch(address(house, street, city, postcode, country, lat, lng));
     });
-   
   };
 
   useEffect(() => {
@@ -106,16 +106,17 @@ export default function BecomeSitter() {
       `https://maps.googleapis.com/maps/api/js?key=${apiKeyGoogle}&libraries=places&language=en`,
       () => handleScriptLoad(setQuery, autoCompleteRef)
     );
-  }, [ ]);
+  }, []);
 
   Geocode.setApiKey(apiKeyGoogle);
   Geocode.setRegion("nl");
 
   return (
- 
     <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5"><i className="fas fa-map-marker-alt"></i> Address Form </h1>
+        <h1 className="mt-5 mb-5">
+          <i className="fas fa-map-marker-alt"></i> Address Form{" "}
+        </h1>
         <Form.Group controlId="formGridAddress1">
           <Form.Label>Address</Form.Label>
           <Form.Control
@@ -171,10 +172,8 @@ export default function BecomeSitter() {
           <Button className="btn" variant="outline-dark" onClick={handler}>
             Submit
           </Button>
-          
         </Link>
       </Form>
     </div>
-    
   );
 }

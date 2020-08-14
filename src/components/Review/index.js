@@ -31,7 +31,7 @@ export default function Review() {
     <>
       {token ? (
         <div>
-        <h2 className="headerdashboard">Leave a review</h2>
+        <h2 className="headerdr">Leave a review</h2>
         <Form className="form">
           <Form.Group>
             <Row><h3>Rating</h3></Row>

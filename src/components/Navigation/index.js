@@ -13,12 +13,14 @@ export default function Navigation() {
     dispatch(logOut());
   };
   return (
-    <div className="homepage-navbar">
+    <div className="navbar-homepage ">
       <nav className="navbar">
         <div className="title">
+         
           <a className="link" href="/">
             <i className="fas fa-dog"></i>PETS
           </a>
+        
         </div>
 
         <div className="navbar-links">
