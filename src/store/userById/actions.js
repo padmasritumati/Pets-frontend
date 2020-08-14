@@ -1,26 +1,33 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
-import {showMessageWithTimeout} from "../appState/actions"
+import { showMessageWithTimeout } from "../appState/actions";
 
-export const USER_BY_ID="USER_BY_ID"
+export const USER_BY_ID = "USER_BY_ID";
 
-export const setuserById=(user)=>({
-  type:USER_BY_ID,
-  payload:user
-})
-
-
+export const setuserById = (user) => ({
+  type: USER_BY_ID,
+  payload: user,
+});
 
 export const userById = (id) => {
   return async (dispatch, getState) => {
     const response = await axios.get(`${apiUrl}/userById/${id}`);
-    console.log("form action",response.data)
+    console.log("form action", response.data);
     dispatch(setuserById(response.data.user));
   };
 };
 
-export const sendEmail=(message,userId,sitterId)=> {
-  return async (dispatch, getState) =>{
+export const sendEmail = (
+  message,
+  userId,
+  sitterId,
+  time,
+  date,
+  enddate,
+  selectedservice,
+  pet
+) => {
+  return async (dispatch, getState) => {
     try {
       const token = getState().user.token;
       const res = await axios.post(
@@ -29,6 +36,11 @@ export const sendEmail=(message,userId,sitterId)=> {
           mailToId: sitterId,
           message,
           userId,
+          time,
+          date,
+          enddate,
+          selectedservice,
+          pet,
         },
         {
           headers: {
@@ -45,6 +57,4 @@ export const sendEmail=(message,userId,sitterId)=> {
       dispatch(showMessageWithTimeout("danger", true, "Something went wrong"));
     }
   };
-}
-
-
+};

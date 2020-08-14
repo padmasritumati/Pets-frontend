@@ -1,24 +1,28 @@
 .section-book {
   padding: 15rem 0;
-  background-image: linear-gradient(to right bottom,  rgba(126, 213, 111, 0.8),
-  rgba(40, 180, 131, 0.8));
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(126, 213, 111, 0.8),
+    rgba(40, 180, 131, 0.8)
+  );
 }
 
 .book {
-  background-image: linear-gradient(105deg, 
-                                  rgba(255,255,255, .9) 0%,
-                                  rgba(255,255,255, .9) 50%,
-                                  transparent 50%) ,
-                          url(../../images/login.png);
-  background-size: 100%;
+  background-image: linear-gradient(
+      105deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.9) 50%,
+      transparent 50%
+    ),
+    url(../../images/login.png);
+  background-size: cover;
   border-radius: 3px;
-  box-shadow: 0 1.5rem 4rem rgba(0,0,0, .2);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
   height: 50rem;
 }
-  .book__form {
-    width: 50%;
-    padding: 6rem;
-
+.book__form {
+  width: 50%;
+  padding: 6rem;
 }
 
 .form-login p {
@@ -26,26 +30,25 @@
   font-family: "Lato", sans-serif;
 }
 
-.btnsignup{
+.btnsignup {
   text-transform: uppercase;
   text-decoration: none;
-  padding:15px 40px;
+  padding: 15px 40px;
   display: inline-block;
-  background-color:rgba(126, 213, 111, 0.8);
-  color:rgb(255,255,255);
+  background-color: rgba(126, 213, 111, 0.8);
+  color: rgb(255, 255, 255);
   border-radius: 200px;
   font-weight: 500px;
- 
 }
-.btnsignup:hover{
+.btnsignup:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-.btnsignup:active{
+.btnsignup:active {
   transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .linklogin,
-.linklogin:visited{
- color: black;
+.linklogin:visited {
+  color: black;
 }

@@ -91,7 +91,7 @@ export default function Phone() {
   return (
     <div className="form">
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h2 className="mt-5 mb-3">Add your phone number</h2>
+        <h2 className="mt-5 mb-3"><i class="fas fa-phone"></i> Add your phone number</h2>
         <p>
           We requires a verified phone number for important updates. <br></br>
           Note: your phone number won't be displayed on your profile.
@@ -102,29 +102,29 @@ export default function Phone() {
           <Form.Label>Phone Number</Form.Label>
           <Form.Control onChange={(e) => set_phone(e.target.value)} />
         </Form.Group>
-        <Button type="submit" onClick={onSignInSubmit}>
+        <Button type="submit" variant="outline-dark" onClick={onSignInSubmit}>
           Verify
         </Button>
 
         <CloudinaryContext cloudName="dsuvhhlxm">
           <Form className="mt-5 mb-3">
-            <h3>Required Profile Photo</h3>
+            <h3><i class="fas fa-camera"></i> Required Profile Photo</h3>
             <p>Well-lit, clear frontal face photos</p>
 
             <Button
-              variant="outline-primary"
+              variant="outline-dark"
               onClick={() => {
                 beginUpload("image");
                 console.log("images", images);
               }}
             >
-              Upload Image
+             <i class="fas fa-camera"></i> Upload Image
             </Button>
-
+            {" "             }
+            
             {images ? (
                 <Image
                   src={images}
-                  rounded="true"
                   alt="171x180"
                   width={171}
                   height={180}
@@ -134,11 +134,11 @@ export default function Phone() {
         </CloudinaryContext>
         {user.petSitter ? (
           <Link to="/services">
-            <Button onClick={handler}>Submit</Button>
+            <Button variant="outline-dark" onClick={handler}>Submit</Button>
           </Link>
         ) : (
           <Link to="/pets">
-            <Button onClick={handler}>Submit</Button>
+            <Button variant="outline-dark" onClick={handler}>Submit</Button>
           </Link>
         )}
       </Form>

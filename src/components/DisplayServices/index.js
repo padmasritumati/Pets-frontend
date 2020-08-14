@@ -21,26 +21,24 @@ export default function SitterById({
 }) {
   return (
     <>
-      <Container>
-        <Row className="mt-5 mb-3">
-          <h2 className="headerService">Services</h2>
-        </Row>
-        
-          {boarding ? (
-            <Row>
-              <Col>
-                <h3>Boarding</h3>
-                <p>in the sitter's home</p>
-              </Col>
-              <Col>
-                <h3>€{boardingRate}</h3>
-                <p>per nigth</p>
-              </Col>
-            </Row>
-          ) : (
-            ""
-          )}
-        
+      <Container className="form">
+        <Row></Row>
+
+        {boarding ? (
+          <Row>
+            <Col>
+              <h3>Boarding</h3>
+              <p>in the sitter's home</p>
+            </Col>
+            <Col>
+              <h3>€{boardingRate}</h3>
+              <p>per nigth</p>
+            </Col>
+          </Row>
+        ) : (
+          ""
+        )}
+
         {houseSitting ? (
           <Row>
             <Col>
@@ -97,9 +95,9 @@ export default function SitterById({
         ) : (
           ""
         )}
-        
-        <Row className="mt-5 mb-3">
-          <h2 className="headersize">Size of Pets</h2>
+
+        <Row className="mt-3 mb-2">
+          <h1 >Size of Pets</h1>
         </Row>
         <Row>
           {small ? (

@@ -5,19 +5,20 @@
   }
   
   .signup {
-    background-image: linear-gradient(260deg, 
+    background-image: linear-gradient(280deg, 
                                     rgba(255,255,255, .9) 0%,
                                     rgba(255,255,255, .9) 50%,
                                     transparent 50%) ,
-                            url(../../images/signup.webp);
-    background-size: 100%;
+                            url(../../images/dog.jpeg);
+    background-size: cover;
     border-radius: 3px;
     box-shadow: 0 1.5rem 4rem rgba(0,0,0, .2);
     height: 50rem;
   }
     .signup__form {
       width: 150%;
-      padding: 6rem;
+      padding: 2rem;
+     
   
   }
   

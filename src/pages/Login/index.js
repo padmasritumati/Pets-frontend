@@ -34,57 +34,48 @@ export default function SignUp() {
 
   return (
     <>
-      <section>
-        <div className="section-book">
-          <div className="book">
-            <div className="book__form">
-              <Container className="mt-5">
-                <Form
-                  as={Col}
-                  md={{ span: 6, offset: 3 }}
-                  className="form-login"
-                >
-                  <h1 className="mt-5 mb-5">Login</h1>
-                  <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                      type="email"
-                      placeholder="Enter email"
-                      required
-                    />
-                  </Form.Group>
+      <div className="book">
+        <div className="book__form">
+          <Container className="mt-5  form">
+            <Form as={Col} md={{ span: 6, offset: 3 }} className="form-login">
+              <h1 className="mt-5 mb-5">Login</h1>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  type="email"
+                  placeholder="Enter email"
+                  required
+                />
+              </Form.Group>
 
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      type="password"
-                      placeholder="Password"
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mt-5">
-                    <button
-                      
-                      type="submit"
-                      onClick={submitForm}
-                      className="btnlogin"
-                    >
-                      Log in
-                    </button>
-                  </Form.Group>
-                  <Link to="/signup" style={{ textAlign: "center" }} className="linklogin">
-                    Click here to sign up
-                  </Link>
-                </Form>
-              </Container>
-            </div>
-          </div>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  type="password"
+                  placeholder="Password"
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mt-5">
+                <button type="submit" onClick={submitForm} className="btnlogin">
+                  Log in
+                </button>
+              </Form.Group>
+              <Link
+                to="/signup"
+                style={{ textAlign: "center" }}
+                className="linklogin"
+              >
+                Click here to sign up
+              </Link>
+            </Form>
+          </Container>
         </div>
-      </section>
+      </div>
     </>
   );
 }

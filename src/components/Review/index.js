@@ -30,16 +30,15 @@ export default function Review() {
   return (
     <>
       {token ? (
-        <Form className="mb-5 form">
+        <div>
+        <h2 className="headerdr">Leave a review</h2>
+        <Form className="form">
           <Form.Group>
-            <Row>
-              <Form.Label>
-                <h2>Leave a review</h2>
-              </Form.Label>
-            </Row>
-
+            <Row><h3>Rating</h3></Row>
+          
             <Row>
               {" "}
+              
               <StarRatings
                 rating={rating}
                 starRatedColor="#ebcc34"
@@ -66,10 +65,11 @@ export default function Review() {
               ></textarea>
             </Row>
           </Form.Group>
-          <Button variant="danger" onClick={clickHandler}>
+          <Button variant="outline-dark" onClick={clickHandler}>
             Submit
           </Button>
         </Form>
+        </div>
       ) : null}
     </>
   );

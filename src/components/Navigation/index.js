@@ -9,17 +9,18 @@ export default function Navigation() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
- const handler=()=>{
-  dispatch(logOut())
- 
- }
+  const handler = () => {
+    dispatch(logOut());
+  };
   return (
-    <div className="homepage-navbar">
+    <div className="navbar-homepage ">
       <nav className="navbar">
         <div className="title">
+         
           <a className="link" href="/">
             <i className="fas fa-dog"></i>PETS
           </a>
+        
         </div>
 
         <div className="navbar-links">
@@ -49,14 +50,11 @@ export default function Navigation() {
             ) : (
               <div>
                 <li>
-                  <a href="/dashboard">{user.full_name}</a>
+                  <a href={`/dashboard/${user.id}`} >{user.full_name}</a>
                 </li>
-                <a href="/"><button
-                  className="button-logout"
-                  onClick={handler}
-                >
+                <li><a href="/" onClick={handler}>
                   Log out
-                </button></a>
+                </a></li>
                 
               </div>
             )}
