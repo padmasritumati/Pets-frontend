@@ -34,8 +34,7 @@ export default function SitterById() {
 
   useEffect(() => {
     dispatch(userById(id));
-    dispatch(getaddress());
-    dispatch(getservice());
+   
   }, [dispatch, id]);
 
   return (

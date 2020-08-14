@@ -48,7 +48,7 @@ export default function Navigation() {
             ) : (
               <div>
                 <li>
-                  <a href="/dashboard">{user.full_name}</a>
+                  <a href={`/dashboard/${user.id}`} >{user.full_name}</a>
                 </li>
                 <li><a href="/" onClick={handler}>
                   Log out

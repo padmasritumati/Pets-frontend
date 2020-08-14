@@ -4,8 +4,8 @@
 }
 .composition {
   position: relative;
-  left:50%;
-  top:40%
+  left:30%;
+  top:20%
 }
 .composition__photo--p1 {
   left: 0;
@@ -57,11 +57,14 @@
   transform: scale(0.95);
 }
 .col-1-of-2 {
-  width: calc(40% - 6rem / 2);
+  width: calc(35% - 6rem / 2);
   margin-top: 20px;
   
 }
 .row {
   max-width: 200rem;
   margin: 0 auto;
+}
+.mapdisplay{
+  background-color: #E0FFFF;
 }

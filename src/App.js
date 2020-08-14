@@ -48,7 +48,7 @@ function App() {
         <Route path="/our_services" component={OurServices} />
         <Route path="/search_sitters" component={SearchSitters} />
         <Route path="/sitters/:id" component={UserById} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard/:id" component={Dashboard} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/contact/:id" component={Contact}/>

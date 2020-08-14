@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { getServices } from "../../store/searchSitter/actions";
 import { selectSitterList } from "../../store/searchSitter/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Form, Button ,Image} from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import Geocode from "react-geocode";
 import Map from "../../components/Map";
@@ -65,9 +65,8 @@ export default function SearchSitters() {
   const [service, setService] = useState();
   const [query, setQuery] = useState();
   const autoCompleteRef = useRef(null);
-  console.log(token,user,size,service)
+  console.log(token, user, size, service);
 
-  
   useEffect(() => {
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=${apiKeyGoogle}&libraries=places&language=en`,
@@ -164,9 +163,9 @@ export default function SearchSitters() {
   return (
     <>
       <div className="row">
-        <div className="col-1-of-2">
+        <div>
           <Form className="search-box">
-            <Row className="mt-5">
+            <Row>
               <Col className="mt-3">
                 <h2>I'm looking for a service for my:</h2>
                 <Form.Check
@@ -278,9 +277,10 @@ export default function SearchSitters() {
         </div>
       </div>
 
-      <Container className="mt-5">
+      <div className="mt-5 mapdisplay">
         {yes ? (
-          <Container>
+          <Row>
+            <Col>
             {sitterList.map((sitter) => {
               return (
                 <Sitter
@@ -297,14 +297,17 @@ export default function SearchSitters() {
                 />
               );
             })}
-          </Container>
+            </Col>
+            <Col className="col-9">
+            {yes ? (
+              <div>
+                <Map sitterList={sitterList} />
+              </div>
+            ) : null}
+            </Col>
+          </Row>
         ) : null}
-        {yes ? (
-          <div>
-            <Map sitterList={sitterList} />
-          </div>
-        ) : null}
-      </Container>
+      </div>
     </>
   );
 }
