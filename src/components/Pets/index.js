@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import { pet } from "../../store/userDetails/actions";
-import { useDispatch } from "react-redux";
+import { selectUser } from "../../store/user/selectors";
+import { useSelector, useDispatch } from "react-redux";
+
 import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 import { Link } from "react-router-dom";
@@ -16,6 +18,7 @@ export default function Pets() {
   const [sex, setSex] = useState();
   const [images, setImages] = useState();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const handler = () => {
     dispatch(
@@ -169,7 +172,7 @@ export default function Pets() {
         
         <Row className="mt-5">
         <Col>
-        <Link to="/dashboard"><Button type="submit"  variant="outline-dark" onClick={handler}>
+        <Link to={`/dashboard/${user.id}`}><Button type="submit"  variant="outline-dark" onClick={handler}>
           Submit
         </Button></Link>
         </Col>

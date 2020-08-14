@@ -282,6 +282,7 @@ export default function SearchSitters() {
           <Row>
             <Col>
             {sitterList.map((sitter) => {
+              console.log(sitter,"from sitter")
               return (
                 <Sitter
                   key={sitter.id}

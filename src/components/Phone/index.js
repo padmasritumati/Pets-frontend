@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 import { selectUser } from "../../store/user/selectors";
+import {showMessageWithTimeout} from "../../store/appState/actions"
 
 export default function Phone() {
   const [phoneNo, set_phone] = useState();
@@ -51,6 +52,7 @@ export default function Phone() {
             // User signed in successfully.
             //var user = result.user;
             console.log("user loged in");
+            dispatch(showMessageWithTimeout("success", false, "Number verified", 1500));
           })
           .catch(function (error) {
             // User couldn't sign in (bad verification code?)
