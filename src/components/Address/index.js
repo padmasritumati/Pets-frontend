@@ -57,6 +57,7 @@ export default function BecomeSitter() {
   async function handlePlaceSelect(updateQuery) {
     const addressObject = autoComplete.getPlace();
     let address = addressObject.address_components;
+    console.log("from address",addressObject)
     address.map((el) => {
       el.types.map((type) => {
         switch (type) {
@@ -100,6 +101,8 @@ export default function BecomeSitter() {
       dispatch(address(house, street, city, postcode, country, lat, lng));
     });
   };
+
+  
 
   useEffect(() => {
     loadScript(

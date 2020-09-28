@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Col, Button } from "react-bootstrap";
-import firebase from "./firebase";
+import firebase from "../../pages/SignUp/firebase";
 import { Link } from "react-router-dom";
 import { phone } from "../../store/userDetails/actions";
 import { useDispatch, useSelector } from "react-redux";

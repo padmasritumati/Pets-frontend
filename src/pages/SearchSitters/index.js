@@ -9,6 +9,7 @@ import Map from "../../components/Map";
 import Sitter from "./Sitter";
 import "./search.css";
 import { apiKeyGoogle } from "../../config/constants";
+import { showMessageWithTimeout } from "../../store/appState/actions";
 
 let autoComplete;
 
@@ -53,9 +54,7 @@ export default function SearchSitters() {
   const sitterList = useSelector(selectSitterList);
   console.log("sitter", sitterList);
 
-  useEffect(() => {
-    dispatch(getServices());
-  }, [dispatch]);
+
 
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
@@ -64,8 +63,13 @@ export default function SearchSitters() {
   const [size, setSize] = useState();
   const [service, setService] = useState();
   const [query, setQuery] = useState();
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const autoCompleteRef = useRef(null);
-  console.log(token, user, size, service);
+  let lng;
+  console.log(radio,token, user, size, service, query,lng);
+
+  
 
   useEffect(() => {
     loadScript(
@@ -155,7 +159,35 @@ export default function SearchSitters() {
       </>
     );
   };
-
+  
+  const handlerClick=()=> {
+    if (!query && !radio && !service && !size) {
+      dispatch(
+        showMessageWithTimeout("danger", true, "Please enter all fields")
+      );
+    } else {
+      Geocode.fromAddress(query).then(
+        (response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+          setLatitude(lat);
+          setLongitude(lng);
+          //setToggle(true);
+          console.log("inside handler",radio,service,size,lat,lng)
+          dispatch(getServices( radio,service,size,lat,lng));
+        },
+        (error) => {
+          console.error(error);
+          dispatch(
+            showMessageWithTimeout(
+              "danger",
+              true,
+              "Sorry, we could not find the address"
+            )
+          );
+        }
+      );
+    }
+  }
   const handler = (e) => {
     setYes(e.target.value);
   };
@@ -195,39 +227,43 @@ export default function SearchSitters() {
 
             <Row className="mt-5">
               <Col>
-                <h2>My Dog Size kgs</h2>
-                <Form.Check
-                  inline
-                  label="Small(0-7)"
-                  type="radio"
-                  name="size"
-                  value="Small"
-                  onChange={(e) => setSize(e.target.value)}
-                />
-                <Form.Check
-                  inline
-                  label="Medium(7-18)"
-                  type="radio"
-                  name="size"
-                  value="Medium"
-                  onChange={(e) => setSize(e.target.value)}
-                />
-                <Form.Check
-                  inline
-                  label="Large(18-45)"
-                  type="radio"
-                  name="size"
-                  value="Large"
-                  onChange={(e) => setRadio(e.target.value)}
-                />
-                <Form.Check
-                  inline
-                  label="Gaint(45+)"
-                  type="radio"
-                  name="size"
-                  value="Gaint"
-                  onChange={(e) => setRadio(e.target.value)}
-                />
+                {radio === "Cat" ? null : (
+                  <>
+                    <h2>My Dog Size kgs</h2>
+                    <Form.Check
+                      inline
+                      label="Small(0-7)"
+                      type="radio"
+                      name="size"
+                      value="Small"
+                      onChange={(e) => setSize(e.target.value)}
+                    />
+                    <Form.Check
+                      inline
+                      label="Medium(7-18)"
+                      type="radio"
+                      name="size"
+                      value="Medium"
+                      onChange={(e) => setSize(e.target.value)}
+                    />
+                    <Form.Check
+                      inline
+                      label="Large(18-45)"
+                      type="radio"
+                      name="size"
+                      value="Large"
+                      onChange={(e) => setSize(e.target.value)}
+                    />
+                    <Form.Check
+                      inline
+                      label="Gaint(45+)"
+                      type="radio"
+                      name="size"
+                      value="Gaint"
+                      onChange={(e) => setSize(e.target.value)}
+                    />
+                  </>
+                )}
               </Col>
             </Row>
             <Row className="mt-5">
@@ -245,7 +281,7 @@ export default function SearchSitters() {
                 </Form.Group>
               </Col>
             </Row>
-            <Button value="true" onClick={handler}>
+            <Button value="true" onClick={handlerClick}>
               Search
             </Button>
           </Form>
@@ -281,30 +317,30 @@ export default function SearchSitters() {
         {yes ? (
           <Row>
             <Col>
-            {sitterList.map((sitter) => {
-              console.log(sitter,"from sitter")
-              return (
-                <Sitter
-                  key={sitter.id}
-                  id={sitter.id}
-                  full_name={sitter.full_name}
-                  image={sitter.image}
-                  street={sitter.address.street}
-                  city={sitter.address.city}
-                  country={sitter.address.country}
-                  postcode={sitter.address.postcode}
-                  service={sitter.service}
-                  zoomLevel={14}
-                />
-              );
-            })}
+              {sitterList.map((sitter) => {
+                console.log(sitter, "from sitter");
+                return (
+                  <Sitter
+                    key={sitter.id}
+                    id={sitter.id}
+                    full_name={sitter.full_name}
+                    image={sitter.image}
+                    street={sitter.address.street}
+                    city={sitter.address.city}
+                    country={sitter.address.country}
+                    postcode={sitter.address.postcode}
+                    service={sitter.service}
+                    zoomLevel={14}
+                  />
+                );
+              })}
             </Col>
             <Col className="col-9">
-            {yes ? (
-              <div>
-                <Map sitterList={sitterList} />
-              </div>
-            ) : null}
+              {yes ? (
+                <div>
+                  <Map sitterList={sitterList} />
+                </div>
+              ) : null}
             </Col>
           </Row>
         ) : null}

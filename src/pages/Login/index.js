@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-//import Button from "react-bootstrap/Button";
 import { login } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Col } from "react-bootstrap";
+import { Col, Row, Image, Button,Form,Container } from "react-bootstrap";
 import "./login.css";
 
 export default function SignUp() {
@@ -23,24 +20,25 @@ export default function SignUp() {
   }, [token, history]);
 
   function submitForm(event) {
-    console.log("hi");
+    //console.log("hi");
     event.preventDefault();
-
     dispatch(login(email, password));
-
     setEmail("");
     setPassword("");
   }
 
   return (
     <>
-      <div className="book">
-        <div className="book__form">
-          <Container className="mt-5  form">
-            <Form as={Col} md={{ span: 6, offset: 3 }} className="form-login">
-              <h1 className="mt-5 mb-5">Login</h1>
+      <Container className="form-login">
+        <Row>
+          <Col className="mt-5">
+            <Form as={Col} md={{ span: 6, offset: 3 }} >
+              <h1 className="mt-5 mb-5, login" align="center">
+                Log in
+              </h1>
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
+                <img src="https://img.icons8.com/fluent-systems-regular/24/000000/new-post.png" />
+                <Form.Label className=" mb-2">Email address</Form.Label>
                 <Form.Control
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -51,6 +49,7 @@ export default function SignUp() {
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
+                <img src="https://img.icons8.com/fluent-systems-regular/24/000000/password-window.png" />
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   value={password}
@@ -60,22 +59,40 @@ export default function SignUp() {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mt-5">
-                <button type="submit" onClick={submitForm} className="btnlogin">
-                  Log in
-                </button>
+              <Form.Group>
+                <Button
+                className="but"
+                  variant="dark"
+                  align="center"
+                  onClick={submitForm}
+                >
+                  LOG IN
+                </Button>
               </Form.Group>
               <Link
                 to="/signup"
+                align="center"
                 style={{ textAlign: "center" }}
                 className="linklogin"
               >
                 Click here to sign up
               </Link>
             </Form>
-          </Container>
-        </div>
-      </div>
+          </Col>
+
+          <Col>
+            <Col className="col-8">
+              <Image
+                className="image"
+                src={require("../../images/catanddog.jpg")}
+                alt="cat-dog"
+                width="600"
+                height="550"
+              />
+            </Col>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
