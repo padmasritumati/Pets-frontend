@@ -3,7 +3,7 @@ import { Card, Container, Row, Col, Image, Button } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
-import DisplayServices from "../../components/DisplayServices";
+//import DisplayServices from "../../components/DisplayServices";
 import {
   selectAddresss,
   selectservice,
@@ -61,7 +61,7 @@ export default function Dashboard() {
         <h1 className="headerpets"> Pets</h1>
       )}
 
-      <Container>
+   {/**   <Container>
         {user.petSitter ? (
           <Row className="mt-5 mb-3">
             <DisplayServices
@@ -111,7 +111,7 @@ export default function Dashboard() {
             })}{" "}
           </Row>
         ) : null}
-      </Container>
+          </Container>**/}
     </div>
   );
 }

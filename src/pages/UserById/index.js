@@ -8,7 +8,7 @@ import Review from "../../components/Review";
 import ReviewList from "../../components/Review/ReviewList";
 import { reviewsSelector } from "../../store/Review/selectors";
 import StarRatings from "react-star-ratings";
-import DisplayServices from "../../components/DisplayServices";
+//import DisplayServices from "../../components/DisplayServices";
 import { getaddress, getservice } from "../../store/userDetails/actions";
 import { selectToken } from "../../store/user/selectors";
 
@@ -66,7 +66,7 @@ export default function SitterById() {
         ) : null}
       </Container>
       <h1 className="headerdashboard"> services</h1>
-      <Container>
+     {/** <Container>
         <DisplayServices
           boarding={service.boarding}
           houseSitting={service.houseSitting}
@@ -86,7 +86,7 @@ export default function SitterById() {
           full_name={user.full_name}
         />
         <Row></Row>
-      </Container>
+     </Container>**/}
 
       <ReviewList></ReviewList>
 
