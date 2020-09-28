@@ -4,36 +4,23 @@ import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
 //import DisplayServices from "../../components/DisplayServices";
-import {
-  selectAddresss,
-  selectservice,
-  selectpets,
-} from "../../store/userDetails/selectors";
-import {
-  getaddress,
-  getservice,
-  getpets,
-} from "../../store/userDetails/actions";
+import { selectservice, selectpets } from "../../store/userDetails/selectors";
+import { getservice, getpets } from "../../store/userDetails/actions";
 //import Pets from "../../components/DisplayPets";
 import "./dashboard.css";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const user = useSelector(selectUser);
-  const a = useSelector(selectAddresss);
   const s = useSelector(selectservice);
   const p = useSelector(selectpets);
   const dispatch = useDispatch();
-  const address = a ? a : {};
   const service = s ? s : {};
   const pets = p ? p : [];
-
-  console.log("pets", pets);
 
   useEffect(() => {
     if (user.id) {
       dispatch(userById(user.id));
-      dispatch(getaddress());
       dispatch(getservice());
       dispatch(getpets());
     }
@@ -45,23 +32,64 @@ export default function Dashboard() {
       <Container className="form">
         <Row>
           <Image src={user.image} width={171} height={180} roundedCircle />
-          <Col>
+          <Col md={{ span: 6, offset: 0.5 }}>
             <h1>{user.full_name}</h1>
-            <h3>
-              {" "}
-              {address.street} {address.house_number} {address.city},
-              {address.postcode}
-            </h3>
+            <p>Address: {user.address}</p>
+            <p>Phone: {user.phone}</p>
+            <p>Email: {user.email}</p>
+            {user.petSitter ? (
+              <p>You are registered as petsitter</p>
+            ) : (
+              <p>You are registered as petowner</p>
+            )}
           </Col>
         </Row>
       </Container>
-      {user.petSitter ? (
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6">
+            <Container>
+              <h2 className="md-2" align="center">
+                Services
+              </h2>
+              <Row className="service container-fluid">
+                <Col>
+                  {service.boarding ? <h3>Boarding</h3> : null}
+                  {service.houseSitting ? <h3>House Sitting</h3> : null}
+                  {service.dropInVisits ? <h3>Drop-In Visits</h3> : null}
+                  {service.doggyDayCare ? <h3>Doggy Day Care</h3> : null}
+                  {service.dogWalking ? <h3>Dog Walking</h3> : null}
+                </Col>
+
+                <Col>
+                  {service.boarding ? <h3>{service.boardingRate}</h3> : null}
+                  {service.houseSitting ? (
+                    <h3> {service.houseSittingRate}</h3>
+                  ) : null}
+                  {service.dropInVisits ? (
+                    <h3>{service.dropInVisitsRate}</h3>
+                  ) : null}
+                  {service.doggyDayCare ? (
+                    <h3>{service.doggyDayCareRate}</h3>
+                  ) : null}
+                  {service.dogWalking ? (
+                    <h3>{service.dogWalkingRate}</h3>
+                  ) : null}
+                </Col>
+              </Row>
+            </Container>{" "}
+          </div>
+          <div class="col-lg-6">Container Right</div>
+        </div>
+      </div>
+
+      {/** {user.petSitter ? (
         <h1 className="headerservice"> services</h1>
       ) : (
         <h1 className="headerpets"> Pets</h1>
       )}
 
-   {/**   <Container>
+      <Container>
         {user.petSitter ? (
           <Row className="mt-5 mb-3">
             <DisplayServices

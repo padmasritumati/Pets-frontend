@@ -1,20 +1,8 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 
-export const ADDRESS = "ADDRESS";
-export const PHONE = "PHONE";
 export const SERVICES = "SERVICES";
 export const PETS = "PETS";
-
-export const setAddress = (address) => ({
-  type: ADDRESS,
-  payload: address,
-});
-
-export const setPhone = (phone) => ({
-  type: PHONE,
-  payload: phone,
-});
 
 export const setServices = (services) => ({
   type: SERVICES,
@@ -25,19 +13,6 @@ export const setPets = (pets) => ({
   type: PETS,
   payload: pets,
 });
-
-export const getaddress = () => {
-  return async (dispatch, getState) => {
-    const token = getState().user.token;
-    const response = await axios.get(`${apiUrl}/user_details/address`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    dispatch(setAddress(response.data));
-  };
-};
 
 export const getservice = () => {
   return async (dispatch, getState) => {
@@ -61,60 +36,6 @@ export const getpets = () => {
       },
     });
     dispatch(setPets(response.data));
-  };
-};
-
-export const address = (house_number, street, city, postcode, country,lat,lng) => {
-  return async (dispatch, getState) => {
-    try {
-      const token = getState().user.token;
-
-      const response = await axios.post(
-        `${apiUrl}/user_details/address`,
-        {
-          house_number,
-          street,
-          city,
-          postcode,
-          country,
-          lat,
-          lng
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      dispatch(setAddress(response.data));
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
-export const phone = (phone, image) => {
-  return async (dispatch, getState) => {
-    try {
-      const token = getState().user.token;
-      console.log("token", token);
-
-      const response = await axios.post(
-        `${apiUrl}/user_details/phone`,
-        {
-          phone,
-          image,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      dispatch(setPhone(response.data.pets));
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 };
 
