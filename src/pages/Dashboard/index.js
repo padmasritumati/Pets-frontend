@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { Card, Container, Row, Col, Image, Button } from "react-bootstrap";
+import {
+  Card,
+  Grid,
+  Jumbotron,
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+} from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
@@ -45,43 +54,33 @@ export default function Dashboard() {
           </Col>
         </Row>
       </Container>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6">
-            <Container>
-              <h2 className="md-2" align="center">
-                Services
-              </h2>
-              <Row className="service container-fluid">
-                <Col>
-                  {service.boarding ? <h3>Boarding</h3> : null}
-                  {service.houseSitting ? <h3>House Sitting</h3> : null}
-                  {service.dropInVisits ? <h3>Drop-In Visits</h3> : null}
-                  {service.doggyDayCare ? <h3>Doggy Day Care</h3> : null}
-                  {service.dogWalking ? <h3>Dog Walking</h3> : null}
-                </Col>
 
-                <Col>
-                  {service.boarding ? <h3>{service.boardingRate}</h3> : null}
-                  {service.houseSitting ? (
-                    <h3> {service.houseSittingRate}</h3>
-                  ) : null}
-                  {service.dropInVisits ? (
-                    <h3>{service.dropInVisitsRate}</h3>
-                  ) : null}
-                  {service.doggyDayCare ? (
-                    <h3>{service.doggyDayCareRate}</h3>
-                  ) : null}
-                  {service.dogWalking ? (
-                    <h3>{service.dogWalkingRate}</h3>
-                  ) : null}
-                </Col>
-              </Row>
-            </Container>{" "}
-          </div>
-          <div class="col-lg-6">Container Right</div>
-        </div>
-      </div>
+      <Container
+        as={Col}
+        md={{ span: 5, offset: 1 }}
+        className="mt-5 mb-5 service"
+        fluid
+        align="center"
+      >
+        <h1>Services</h1>
+        <Row>
+          <Col>
+            {service.boarding ? <h3>Boarding</h3> : null}
+            {service.houseSitting ? <h3>House Sitting</h3> : null}
+            {service.dropInVisits ? <h3>Drop-In Visits</h3> : null}
+            {service.doggyDayCare ? <h3>Doggy Day Care</h3> : null}
+            {service.dogWalking ? <h3>Dog Walking</h3> : null}
+          </Col>
+
+          <Col>
+            {service.boarding ? <h3>{service.boardingRate}</h3> : null}
+            {service.houseSitting ? <h3> {service.houseSittingRate}</h3> : null}
+            {service.dropInVisits ? <h3>{service.dropInVisitsRate}</h3> : null}
+            {service.doggyDayCare ? <h3>{service.doggyDayCareRate}</h3> : null}
+            {service.dogWalking ? <h3>{service.dogWalkingRate}</h3> : null}
+          </Col>
+        </Row>
+      </Container>
 
       {/** {user.petSitter ? (
         <h1 className="headerservice"> services</h1>

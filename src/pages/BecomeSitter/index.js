@@ -1,6 +1,5 @@
-
 import React, { useState } from "react";
-import { Container, Col, Form, Row, Button } from "react-bootstrap";
+import { Container, Col, Form, Row, Button, FormLabel } from "react-bootstrap";
 import { service } from "../../store/userDetails/actions";
 import { useDispatch } from "react-redux";
 
@@ -19,8 +18,10 @@ export default function Services() {
   const [medium, set_Medium] = useState("off");
   const [large, set_Large] = useState("off");
   const [gaint, set_Gaint] = useState("off");
-  const [cat, set_Cat] = useState("false");
+  const [cat, set_Cat] = useState();
   const dispatch = useDispatch();
+
+  
 
   const services = {
     boarding: boarding,
@@ -41,7 +42,10 @@ export default function Services() {
     gaint: gaint,
 
     cat: cat,
+    
   };
+
+  console.log(services);
 
   const handler = () => {
     console.log("services", services);
@@ -49,158 +53,193 @@ export default function Services() {
   };
 
   return (
-    <Container as={Col} md={{ span: 6, offset: 3 }} className="mt-5 form">
-      <h2>Which services would you like to offer?</h2>
-      <Row className="mt-5">
-        <Col>
-          <h3>
-            {" "}
-            <i class="fas fa-luggage-cart"></i> Boarding
-          </h3>
-          <p>The owner's pets come to your home and stay overnight.</p>
-          <Form.Group as={Col} controlId="formGridRate">
-            <Form.Label>Rate</Form.Label>
-            <Form.Control
-              type="number"
-              min="15"
-              max="100"
-              defaultValue="20"
-              onChange={(e) => set_BoardingRate(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Form>
-          <Form.Check
-            type="switch"
-            id="custom-switch-boarding"
-            label=""
-            onChange={(e) => set_Boarding(e.target.value)}
-          />
-        </Form>
-      </Row>
+    <div>
+      <h1 className="headerdashboard">
+        {" "}
+        Which services would you like to offer?
+      </h1>
 
-      <Row className="mt-5">
-        <Col>
-          <h3>
-            <i class="fas fa-house-user"></i> House Sitting
-          </h3>
-          <p>
-            You go to the pet owner's home and stay overnight, taking care of
-            their dogs and home.
-          </p>
-          <Form.Group as={Col} controlId="formGridRate">
-            <Form.Label>Rate</Form.Label>
-            <Form.Control
-              type="number"
-              min="15"
-              max="100"
-              defaultValue="20"
-              onChange={(e) => set_HouseSittingRate(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Form>
-          <Form.Check
-            type="switch"
-            id="custom-switch-house"
-            label=""
-            onChange={(e) => set_HouseSitting(e.target.value)}
-          />
-        </Form>
-      </Row>
+      <Container as={Col} className="mt-5 form" md={{ span: 9, offset: 1.5 }}>
+        <Form.Row className="justify-content-md-center">
+          <Col xs lg="2">
+            <img src="https://img.icons8.com/clouds/100/000000/dog.png" />
+          </Col>
+          <Col xs lg="2">
+            <img src="https://img.icons8.com/clouds/100/000000/cat.png" />
+          </Col>
+        </Form.Row>
+        {/*services and price form */}
+        <Form.Row className="mt-5">
+          <Col>
+            <Row>
+              <Col>
+                <h3>
+                  {" "}
+                  <i className="fas fa-luggage-cart"></i> Boarding
+                </h3>
+              </Col>
+              <Col>
+                <Form.Check
+                  type="switch"
+                  id="custom-switch-boarding"
+                  label=""
+                  onChange={(e) => set_Boarding(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <p>The owner's pets come to your home and stay overnight.</p>
+            <Form.Group as={Col} controlId="formGridRate">
+              <Form.Label>Rate</Form.Label>
+              <Form.Control
+                type="number"
+                min="15"
+                max="100"
+                defaultValue="20"
+                onChange={(e) => set_BoardingRate(e.target.value)}
+              />
+            </Form.Group>{" "}
+          </Col>
+          <Col>
+            <Row>
+              <Col>
+                {" "}
+                <h3>
+                  <i className="fas fa-paw"></i> Dog Walking
+                </h3>
+              </Col>
+              <Col>
+                <Form.Check
+                  type="switch"
+                  id="custom-switch-walking"
+                  label=""
+                  onChange={(e) => set_DogWalking(e.target.value)}
+                />
+              </Col>
+            </Row>
 
-      <Row className="mt-5">
-        <Col>
-          <h3>
-            <i class="fas fa-door-open"></i> Drop-In Visits
-          </h3>
-          <p>
-            Pet Owners ask you to do home visits to feed and play with their
-            pets.
-          </p>
-          <Form.Group as={Col} controlId="formGridRate">
-            <Form.Label>Rate</Form.Label>
-            <Form.Control
-              type="number"
-              min="8"
-              max="50"
-              defaultValue="10"
-              onChange={(e) => set_DropInVisitsRate(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Form>
-          <Form.Check
-            type="switch"
-            id="custom-switch-dropin"
-            label=""
-            onChange={(e) => set_DropInVisits(e.target.value)}
-          />
-        </Form>
-      </Row>
+            <p>Pet Owners request dog walks in their neighbourhood.</p>
+            <Form.Group as={Col} controlId="formGridRate">
+              <Form.Label>Rate</Form.Label>
+              <Form.Control
+                type="number"
+                min="8"
+                max="50"
+                defaultValue="10"
+                onChange={(e) => set_DogWalkingRate(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Row>
+              <Col>
+                {" "}
+                <h3>
+                  <i className="fas fa-sun"></i> Doggy Day Care
+                </h3>
+              </Col>
+              <Col>
+                {" "}
+                <Form.Check
+                  type="switch"
+                  id="custom-switch-doggy"
+                  label=""
+                  onChange={(e) => set_DoggyDayCare(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <p>he owner's pets stay at your home during the day</p>
+            <Form.Group as={Col} controlId="formGridRate">
+              <Form.Label>Rate</Form.Label>
+              <Form.Control
+                type="number"
+                min="15"
+                max="100"
+                defaultValue="17"
+                onChange={(e) => set_DoggyDayCareRate(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+        </Form.Row>
 
-      <Row className="mt-5">
-        <Col>
-          <h3>
-            <i class="fas fa-sun"></i> Doggy Day Care
-          </h3>
-          <p>he owner's pets stay at your home during the day</p>
-          <Form.Group as={Col} controlId="formGridRate">
-            <Form.Label>Rate</Form.Label>
-            <Form.Control
-              type="number"
-              min="15"
-              max="100"
-              defaultValue="17"
-              onChange={(e) => set_DoggyDayCareRate(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Form>
-          <Form.Check
-            type="switch"
-            id="custom-switch-doggy"
-            label=""
-            onChange={(e) => set_DoggyDayCare(e.target.value)}
-          />
-        </Form>
-      </Row>
-
-      <Row className="mt-5">
-        <Col>
-          <h3>
-            <i class="fas fa-paw"></i> Dog Walking
-          </h3>
-          <p>Pet Owners request dog walks in their neighbourhood.</p>
-          <Form.Group as={Col} controlId="formGridRate">
-            <Form.Label>Rate</Form.Label>
-            <Form.Control
-              type="number"
-              min="8"
-              max="50"
-              defaultValue="10"
-              onChange={(e) => set_DogWalkingRate(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Form>
-          <Form.Check
-            type="switch"
-            id="custom-switch-walking"
-            label=""
-            onChange={(e) => set_DogWalking(e.target.value)}
-          />
-        </Form>
-      </Row>
-
-      <Row className="mt-5">
-        <h2>What size dogs do you accept?</h2>
-        <Row>
+        <Form.Row className="mt-5">
+          <Col>
+            <Row>
+              <Col>
+                {" "}
+                <h3>
+                  <i className="fas fa-door-open"></i> Drop-In Visits
+                </h3>
+              </Col>
+              <Col>
+                <Form.Check
+                  type="switch"
+                  id="custom-switch-dropin"
+                  label=""
+                  onChange={(e) => set_DropInVisits(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <p>
+              Pet Owners ask you to do home visits to feed and play with their
+              pets.
+            </p>
+            <Form.Group as={Col} controlId="formGridRate">
+              <Form.Label>Rate</Form.Label>
+              <Form.Control
+                type="number"
+                min="8"
+                max="50"
+                defaultValue="10"
+                onChange={(e) => set_DropInVisitsRate(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Row>
+              <Col>
+                {" "}
+                <h3>
+                  <i className="fas fa-house-user"></i> House Sitting
+                </h3>
+              </Col>
+              <Col>
+                <Form.Check
+                  type="switch"
+                  id="custom-switch-house"
+                  label=""
+                  onChange={(e) => set_HouseSitting(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <p>
+              You go to the pet owner's home and stay overnight, taking care of
+              their dogs and home.
+            </p>
+            <Form.Group as={Col} controlId="formGridRate">
+              <Form.Label>Rate</Form.Label>
+              <Form.Control
+                type="number"
+                min="15"
+                max="100"
+                defaultValue="20"
+                onChange={(e) => set_HouseSittingRate(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+        </Form.Row>
+        {/*size of the dog part */}
+        <h2 className="mt-5 mb-3">What size dogs do you accept?</h2>
+        <Form.Row>
           <Col>
             <Form.Check
               type="checkbox"
               id="custom-switch-small"
-              label="Small(0-7kg)"
+              label={
+                <>
+                  <h5>Small(0-7kg)</h5>
+                  <img src="https://img.icons8.com/carbon-copy/40/000000/dog.png" />
+                </>
+              }
               onChange={(e) => set_Small(e.target.value)}
             ></Form.Check>
           </Col>
@@ -208,7 +247,12 @@ export default function Services() {
             <Form.Check
               type="checkbox"
               id="custom-switch-Medium"
-              label="Medium(7-18kg)"
+              label={
+                <>
+                  <h5>Medium(7-18kg)</h5>
+                  <img src="https://img.icons8.com/carbon-copy/60/000000/dog.png" />
+                </>
+              }
               onChange={(e) => set_Medium(e.target.value)}
             />
           </Col>
@@ -217,7 +261,12 @@ export default function Services() {
             <Form.Check
               type="checkbox"
               id="custom-switch-large"
-              label="Large(18-45kg)"
+              label={
+                <>
+                  <h5>Large(18-45kg)</h5>
+                  <img src="https://img.icons8.com/carbon-copy/80/000000/dog.png" />
+                </>
+              }
               onChange={(e) => set_Large(e.target.value)}
             />
           </Col>
@@ -227,41 +276,51 @@ export default function Services() {
             <Form.Check
               type="checkbox"
               id="custom-switch-Gaint"
-              label="Gaint(45kg +)"
+              label={
+                <>
+                  <h5>Gaint(45kg +)</h5>
+                  <img src="https://img.icons8.com/carbon-copy/100/000000/dog.png" />
+                </>
+              }
               onChange={(e) => set_Gaint(e.target.value)}
             />
           </Col>
-        </Row>
-      </Row>
-
-      <Row className="mt-5">
+        </Form.Row>
+        {/* asking about cat */}
         <h2>
-          Do you accept cats<i class="fas fa-cat"></i>?
-        </h2><br></br>
-        <Row>
+          Do you accept cats <i className="fas fa-cat"></i> ?
+        </h2>
+        <Form.Row className="btn-toolbar pull-left" mt="3">
           <Col>
             <Button
+              className="btn mr-3"
               variant="outline-dark"
               value="true"
               onClick={(e) => set_Cat("true")}
             >
               Yes
             </Button>
-          </Col>{" "}
-          <Col>
-            <Button variant="outline-dark" value="false">
-              No
-            </Button>{" "}
           </Col>
-        </Row>
-      </Row>
-      <Row>
-        <Col>
-          <Button type="submit" variant="outline-dark" className="mt-5" onClick={handler}>
+          <Col>
+            {" "}
+            <Button variant="outline-dark" value="false" className="btn mr-3">
+              No
+            </Button>
+          </Col>
+        </Form.Row>
+        {/*submit button part*/}
+        <Form.Row className="mt-5 justify-content-md-center">
+          <Button
+            style={{ justifyContent: "center" }}
+            type="submit"
+            variant="dark"
+            className="mt-5"
+            onClick={handler}
+          >
             Submit
           </Button>
-        </Col>
-      </Row>
-    </Container>
+        </Form.Row>
+      </Container>
+    </div>
   );
 }
