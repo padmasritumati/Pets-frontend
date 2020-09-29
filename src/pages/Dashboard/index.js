@@ -1,23 +1,12 @@
 import React, { useEffect } from "react";
-import {
-  Card,
-  Grid,
-  Jumbotron,
-  Container,
-  Row,
-  Col,
-  Image,
-  Button,
-} from "react-bootstrap";
+import { Container, Row, Col, Image, CardColumns } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
-//import DisplayServices from "../../components/DisplayServices";
 import { selectservice, selectpets } from "../../store/userDetails/selectors";
 import { getservice, getpets } from "../../store/userDetails/actions";
-//import Pets from "../../components/DisplayPets";
 import "./dashboard.css";
-import { Link } from "react-router-dom";
+import DisplayPets from "../../components/DisplayPets";
 
 export default function Dashboard() {
   const user = useSelector(selectUser);
@@ -26,6 +15,8 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const service = s ? s : {};
   const pets = p ? p : [];
+
+  console.log("pets", pets);
 
   useEffect(() => {
     if (user.id) {
@@ -55,31 +46,60 @@ export default function Dashboard() {
         </Row>
       </Container>
 
-      <Container
-        as={Col}
-        md={{ span: 5, offset: 1 }}
-        className="mt-5 mb-5 service"
-        fluid
-        align="center"
-      >
-        <h1>Services</h1>
-        <Row>
-          <Col>
-            {service.boarding ? <h3>Boarding</h3> : null}
-            {service.houseSitting ? <h3>House Sitting</h3> : null}
-            {service.dropInVisits ? <h3>Drop-In Visits</h3> : null}
-            {service.doggyDayCare ? <h3>Doggy Day Care</h3> : null}
-            {service.dogWalking ? <h3>Dog Walking</h3> : null}
-          </Col>
+      {user.petSitter ? (
+        <Container
+          as={Col}
+          md={{ span: 5, offset: 1 }}
+          className="mt-5 mb-5 service"
+          fluid
+          align="center"
+        >
+          <h1>Services</h1>
+          <Row>
+            <Col>
+              {service.boarding ? <h3>Boarding</h3> : null}
+              {service.houseSitting ? <h3>House Sitting</h3> : null}
+              {service.dropInVisits ? <h3>Drop-In Visits</h3> : null}
+              {service.doggyDayCare ? <h3>Doggy Day Care</h3> : null}
+              {service.dogWalking ? <h3>Dog Walking</h3> : null}
+            </Col>
 
-          <Col>
-            {service.boarding ? <h3>{service.boardingRate}</h3> : null}
-            {service.houseSitting ? <h3> {service.houseSittingRate}</h3> : null}
-            {service.dropInVisits ? <h3>{service.dropInVisitsRate}</h3> : null}
-            {service.doggyDayCare ? <h3>{service.doggyDayCareRate}</h3> : null}
-            {service.dogWalking ? <h3>{service.dogWalkingRate}</h3> : null}
-          </Col>
-        </Row>
+            <Col>
+              {service.boarding ? <h3>{service.boardingRate}</h3> : null}
+              {service.houseSitting ? (
+                <h3> {service.houseSittingRate}</h3>
+              ) : null}
+              {service.dropInVisits ? (
+                <h3>{service.dropInVisitsRate}</h3>
+              ) : null}
+              {service.doggyDayCare ? (
+                <h3>{service.doggyDayCareRate}</h3>
+              ) : null}
+              {service.dogWalking ? <h3>{service.dogWalkingRate}</h3> : null}
+            </Col>
+          </Row>
+        </Container>
+      ) : null}
+      <Container>
+        <CardColumns>
+          {pets
+            ? pets.map((pet, i) => {
+                return (
+                  <DisplayPets
+                    key={i}
+                    name={pet.name}
+                    ageInYears={pet.ageInYears}
+                    ageInMonths={pet.ageInMonths}
+                    breed={pet.breed}
+                    image={pet.image}
+                    weight={pet.weight}
+                    sex={pet.sex}
+                    type={pet.type}
+                  ></DisplayPets>
+                );
+              })
+            : null}
+        </CardColumns>
       </Container>
 
       {/** {user.petSitter ? (

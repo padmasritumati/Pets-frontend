@@ -1,4 +1,3 @@
-
 const initialState = {};
 
 export default (state = initialState, action) => {
@@ -7,9 +6,11 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case "PETS":
-      
-      return { ...state, ...action.payload };
-
+      console.log("from reducer",state,action.payload)
+      return {...state, ...action.payload };
+    case "ALLPETS":
+      console.log("from reducer allpets",state,action.payload)
+      return {...state,pets:[...state.pets,action.payload ] };
     default:
       return state;
   }

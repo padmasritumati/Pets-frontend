@@ -1,0 +1,38 @@
+.body {
+  background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
+  overflow: hidden;
+}
+.card {
+  width: 20rem !important;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 5px 10px 20px 1px rgb(0, 0, 0, 0.253) !important;
+}
+.card-boby {
+  padding: 3rem !important;
+}
+
+.card-title {
+  text-transform: capitalize;
+  font-family: "Prata", serif;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  padding: 0.4rem;
+  font-family: "Lato", serif;
+  text-transform: capitalize;
+}
+
+
+.img{
+  transform: scale(1);
+  transition: 0.5s ease;
+  
+}
+.img:hover{
+  transform: scale(1.8);
+}

@@ -3,6 +3,8 @@ import axios from "axios";
 
 export const SERVICES = "SERVICES";
 export const PETS = "PETS";
+export const ALLPETS="ALLPETS"
+
 
 export const setServices = (services) => ({
   type: SERVICES,
@@ -13,6 +15,13 @@ export const setPets = (pets) => ({
   type: PETS,
   payload: pets,
 });
+
+export const allPets = (pets) => ({
+  type: ALLPETS,
+  payload: pets,
+});
+
+
 
 export const getservice = () => {
   return async (dispatch, getState) => {
@@ -35,6 +44,7 @@ export const getpets = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log("from action get methode",response.data)
     dispatch(setPets(response.data));
   };
 };
@@ -92,7 +102,7 @@ export const pet = (
           },
         }
       );
-      dispatch(setPets(response.data));
+      dispatch(allPets(response.data));
     } catch (error) {
       console.log(error.message);
     }
