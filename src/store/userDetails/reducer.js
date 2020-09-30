@@ -6,11 +6,14 @@ export default (state = initialState, action) => {
       return { ...state, ...action.payload };
 
     case "PETS":
-      console.log("from reducer",state,action.payload)
-      return {...state, ...action.payload };
+      return { ...state, ...action.payload };
     case "ALLPETS":
-      console.log("from reducer allpets",state,action.payload)
-      return {...state,pets:[...state.pets,action.payload ] };
+      return { ...state, pets: [...state.pets, action.payload] };
+    case "UPDATEPET":
+      return { ...state, pets: [...action.payload.pets] };
+
+    case "DELECTPETS":
+      return { ...state, pets: [...action.payload] };
     default:
       return state;
   }

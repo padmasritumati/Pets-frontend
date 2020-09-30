@@ -1,3 +1,6 @@
+.main{
+  background-color:  #e6fff2;
+}
 .back {
   height: 95vh;
   background-image: linear-gradient(
@@ -9,41 +12,42 @@
   background-position: top;
 }
 .headerdashboard {
-  background: #add8e6;
+  background: rgba(135, 206, 235, 0.3);
   margin-bottom: 10px;
   padding: 10px;
-  font-family: "Lato", serif;
+  font-family: "Prata", serif;
+  text-align: center;
 }
 .headerservice,
 .headerpets {
   background:  rgba(135, 206, 235, 0.8);
   margin-bottom: 10px;
   padding: 10px;
-  font-family: "Lato", serif;
+  font-family: "Prata", serif;
 }
 
 .headercontact {
   background: rgba(135, 206, 235, 0.8);
   margin-bottom: 10px;
   padding: 10px;
-  font-family: "Lato", serif;
+  font-family: "Prata", serif;
 }
 .headerdreview{
   background: #87CEEB;
   margin-bottom: 10px;
   padding: 10px;
-  font-family: "Lato", serif;
+  font-family: "Prata", serif;
 }
 .headerdr{
   background: #87CEFA;
   margin-bottom: 10px;
   padding: 10px;
-  font-family: "Lato", serif;
+  font-family: "Prata", serif;
 }
 .service{
   /* display: flex;
   flex-direction: column; */
-  background-color:#87CEFA ;
+  background-color:white ;
   margin: 10px;
   border-radius: 5px;
   padding: 20px;
@@ -55,8 +59,11 @@
   background-color: #ccffff;
 }
 .pet{
-  background: #ffff80;
+  background:rgb(255, 255, 153,.5);
   margin-bottom: 10px;
   padding: 10px;
   font-family: "Prata", serif;
+}
+.detailsContainer{
+  background-color: white;
 }
