@@ -54,22 +54,15 @@ export default function SearchSitters() {
   const sitterList = useSelector(selectSitterList);
   console.log("sitter", sitterList);
 
-
-
-  const token = useSelector(selectToken);
-  const user = useSelector(selectUser);
   const [yes, setYes] = useState();
-  const [radio, setRadio] = useState();
+  const [type, setType] = useState();
   const [size, setSize] = useState();
   const [service, setService] = useState();
   const [query, setQuery] = useState();
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const autoCompleteRef = useRef(null);
-  let lng;
-  console.log(radio,token, user, size, service, query,lng);
-
-  
+  const location = { lat: latitude, log: longitude };
 
   useEffect(() => {
     loadScript(
@@ -81,99 +74,20 @@ export default function SearchSitters() {
   Geocode.setApiKey(apiKeyGoogle);
   Geocode.setRegion("nl");
 
-  const dogSelected = () => {
-    return (
-      <>
-        <Form.Check
-          inline
-          label="Boarding"
-          type="radio"
-          value="Boarding"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-        <Form.Check
-          inline
-          label="House Sitting"
-          type="radio"
-          value="HouseSitting"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-        <Form.Check
-          inline
-          label="Drop-In Visitsing"
-          type="radio"
-          value="Drop-InVisitsing"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-        <Form.Check
-          inline
-          label=" Doggy Day Care"
-          type="radio"
-          value="DoggyDayCare"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-        <Form.Check
-          inline
-          label="Dog Walking"
-          type="radio"
-          id="idforDog"
-          value="DogWalking"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-      </>
-    );
-  };
-
-  const catSelected = () => {
-    return (
-      <>
-        <Form.Check
-          inline
-          label="Boarding"
-          type="radio"
-          value="Boarding"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-        <Form.Check
-          inline
-          label="House Sitting"
-          type="radio"
-          value="HouseSitting"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-        <Form.Check
-          inline
-          label="Drop-In Visitsing"
-          type="radio"
-          value="Drop-InVisitsing"
-          name="service"
-          onChange={(e) => setService(e.target.value)}
-        />
-      </>
-    );
-  };
-  
-  const handlerClick=()=> {
-    if (!query && !radio && !service && !size) {
+  const searchHandler = () => {
+    if (!query && !type && !service) {
       dispatch(
         showMessageWithTimeout("danger", true, "Please enter all fields")
       );
     } else {
+      setYes(true);
       Geocode.fromAddress(query).then(
         (response) => {
           const { lat, lng } = response.results[0].geometry.location;
           setLatitude(lat);
           setLongitude(lng);
-          //setToggle(true);
-          console.log("inside handler",radio,service,size,lat,lng)
-          dispatch(getServices( radio,service,size,lat,lng));
+          console.log("inside handler", type, service, size, lat, lng);
+          dispatch(getServices(type, service, size, lat, lng));
         },
         (error) => {
           console.error(error);
@@ -187,164 +101,128 @@ export default function SearchSitters() {
         }
       );
     }
-  }
-  const handler = (e) => {
-    setYes(e.target.value);
   };
 
   return (
-    <>
-      <div className="row">
-        <div>
-          <Form className="search-box">
-            <Row>
-              <Col className="mt-3">
-                <h2>I'm looking for a service for my:</h2>
-                <Form.Check
-                  inline
-                  label="Dog"
-                  type="radio"
-                  name="catOrDog"
-                  value="Dog"
-                  onChange={(e) => setRadio(e.target.value)}
-                />
-                <Form.Check
-                  inline
-                  label="Cat"
-                  type="radio"
-                  name="catOrDog"
-                  value="Cat"
-                  onChange={(e) => setRadio(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row className="mt-5">
-              <Col>
-                <h2>What service do you need?</h2>
-                {radio === "Cat" ? catSelected() : dogSelected()}
-              </Col>
-            </Row>
-
-            <Row className="mt-5">
-              <Col>
-                {radio === "Cat" ? null : (
-                  <>
-                    <h2>My Dog Size kgs</h2>
-                    <Form.Check
-                      inline
-                      label="Small(0-7)"
-                      type="radio"
-                      name="size"
-                      value="Small"
-                      onChange={(e) => setSize(e.target.value)}
-                    />
-                    <Form.Check
-                      inline
-                      label="Medium(7-18)"
-                      type="radio"
-                      name="size"
-                      value="Medium"
-                      onChange={(e) => setSize(e.target.value)}
-                    />
-                    <Form.Check
-                      inline
-                      label="Large(18-45)"
-                      type="radio"
-                      name="size"
-                      value="Large"
-                      onChange={(e) => setSize(e.target.value)}
-                    />
-                    <Form.Check
-                      inline
-                      label="Gaint(45+)"
-                      type="radio"
-                      name="size"
-                      value="Gaint"
-                      onChange={(e) => setSize(e.target.value)}
-                    />
-                  </>
-                )}
-              </Col>
-            </Row>
-            <Row className="mt-5">
-              <Col>
-                <Form.Group controlId="formGridAddress">
-                  <Form.Label>
-                    <h2>Near</h2>
-                  </Form.Label>
-                  <Form.Control
-                    type="address"
-                    ref={autoCompleteRef}
-                    onChange={(event) => setQuery(event.target.value)}
-                    value={query}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Button value="true" onClick={handlerClick}>
-              Search
-            </Button>
-          </Form>
-        </div>
-        <div className="col-1-of-2">
-          <div className="composition">
-            <Image
-              src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449129/pet_image/one_dazjjf.jpg "
-              width="200"
-              height="200"
-              alt="Photo 1"
-              className="composition__photo composition__photo--p1"
-            />
-            <Image
-              src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449434/pet_image/two_ekx35r.jpg"
-              width="200"
-              height="200"
-              alt="Photo 2"
-              className="composition__photo composition__photo--p2"
-            />
-            <Image
-              src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1596449506/pet_image/three_qagy0r.jpg"
-              width="200"
-              height="200"
-              alt="Photo 3"
-              className="composition__photo composition__photo--p3"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-5 mapdisplay">
-        {yes ? (
-          <Row>
+    <div>
+      <div className="searchPage">
+        <h1 className="headerdashboard">Search for the Pet Sitters</h1>
+        <Container className="searchbar mt-5">
+          <Form.Row>
             <Col>
-              {sitterList.map((sitter) => {
-                console.log(sitter, "from sitter");
-                return (
-                  <Sitter
-                    key={sitter.id}
-                    id={sitter.id}
-                    full_name={sitter.full_name}
-                    image={sitter.image}
-                    street={sitter.address.street}
-                    city={sitter.address.city}
-                    country={sitter.address.country}
-                    postcode={sitter.address.postcode}
-                    service={sitter.service}
-                    zoomLevel={14}
-                  />
-                );
-              })}
+              <Form.Group as={Col} controlId="type">
+                <Form.Label className="label-text">Type</Form.Label>
+                <Form.Control
+                  as="select"
+                  onChange={(e) => {
+                    setType(e.target.value);
+                  }}
+                >
+                  <option>Dog</option>
+                  <option>Cat</option>
+                </Form.Control>
+              </Form.Group>
             </Col>
-            <Col className="col-9">
-              {yes ? (
-                <div>
-                  <Map sitterList={sitterList} />
-                </div>
-              ) : null}
+            <Col>
+              <Form.Group as={Col} controlId="service">
+                <Form.Label className="label-text">Service</Form.Label>
+                <Form.Control
+                  as="select"
+                  onChange={(e) => {
+                    setService(e.target.value);
+                  }}
+                >
+                  {type === "Cat" ? (
+                    <>
+                      <option>Boarding</option>
+                      <option>House Sitting</option>
+                      <option>Drop-In Visits</option>
+                    </>
+                  ) : (
+                    <>
+                      <option>Boarding</option>
+                      <option>House Sitting</option>
+                      <option>Drop-In Visits</option>
+                      <option>Doggy Day Care</option>
+                      <option>Dog Walking</option>
+                    </>
+                  )}
+                </Form.Control>
+              </Form.Group>
             </Col>
-          </Row>
-        ) : null}
+            {type === "Cat" ? null : (
+              <>
+                {" "}
+                <Col>
+                  <Form.Group as={Col} controlId="size">
+                    <Form.Label className="label-text">Size</Form.Label>
+                    <Form.Control
+                      as="select"
+                      onChange={(e) => {
+                        setSize(e.target.value);
+                      }}
+                    >
+                      <option>Small(0-7)kg</option>
+                      <option>Medium(7-18)kg</option>
+                      <option>Large(18-45)kg</option>
+                      <option>Gaint(45+)kg</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </>
+            )}
+            <Col>
+              <Form.Group controlId="near">
+                <Form.Label className="label-text">Near</Form.Label>
+                <Form.Control
+                  type="address"
+                  ref={autoCompleteRef}
+                  onChange={(event) => setQuery(event.target.value)}
+                  defaultValue={query}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Button
+                variant="outline-dark"
+                type="submit"
+                className="button-search"
+                onClick={searchHandler}
+              >
+                <img src="https://img.icons8.com/fluent-systems-filled/20/000000/search.png" />
+                Search
+              </Button>
+            </Col>{" "}
+          </Form.Row>
+        </Container>
+
+        <div className="mt-5 mapdisplay">
+          {yes ? (
+            <Row>
+              <Col>
+                {sitterList.map((sitter) => {
+                  console.log(sitter, "from sitter");
+                  return (
+                    <Sitter
+                      key={sitter.id}
+                      address={sitter.user.address}
+                      name={sitter.user.full_name}
+                      image={sitter.user.image}
+                    />
+                  );
+                })}
+              </Col>
+              <Col className="col-9">
+                {latitude ? (
+                  <div>
+                    <Map sitterList={sitterList} location={location} />
+                  </div>
+                ) : null}
+              </Col>
+            </Row>
+          ) : null}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -50,7 +50,7 @@ export default function Pets() {
   }, []);
 
   return (
-    <div>
+    <div className="petOwner">
       <h1 className="pet">Tell us a bit about your pet</h1>
       <Form.Row className="justify-content-md-center mt-5">
         <Col xs lg="2">
@@ -80,7 +80,7 @@ export default function Pets() {
       </Form.Row>
       <Container
         as={Col}
-        md={{ span: 5, offset: 3 }}
+        md={{ span: 6, offset: 3.5 }}
         className="mt-2 mb-3 form"
       >
         <Form.Row>
