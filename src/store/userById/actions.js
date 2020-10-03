@@ -12,7 +12,7 @@ export const setuserById = (user) => ({
 export const userById = (id) => {
   return async (dispatch, getState) => {
     const response = await axios.get(`${apiUrl}/userById/${id}`);
-    console.log("form action", response.data);
+    //console.log("form action", response.data);
     dispatch(setuserById(response.data.user));
   };
 };

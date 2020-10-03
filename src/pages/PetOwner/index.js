@@ -3,7 +3,6 @@ import { Form, Col, Button, Row, Container } from "react-bootstrap";
 import { pet } from "../../store/userDetails/actions";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
-
 import { CloudinaryContext, Image } from "cloudinary-react";
 import { fetchPhotos, openUploadWidget } from "../../CloudinaryService";
 import { Link } from "react-router-dom";
@@ -57,7 +56,7 @@ export default function Pets() {
           <Form.Check
             inline
             label={
-              <img src="https://img.icons8.com/bubbles/100/000000/dog.png" />
+              <img src="https://img.icons8.com/bubbles/100/000000/dog.png" alt="dog icon" />
             }
             type="radio"
             name="catOrDog"
@@ -69,7 +68,7 @@ export default function Pets() {
           <Form.Check
             inline
             label={
-              <img src="https://img.icons8.com/bubbles/100/000000/cat.png" />
+              <img src="https://img.icons8.com/bubbles/100/000000/cat.png" alt="cat icon"/>
             }
             type="radio"
             name="catOrDog"

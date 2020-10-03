@@ -1,23 +1,15 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Card,
-  CardDeck,
-  Form,
-  Button,
-  Col,
-  Modal,
-} from "react-bootstrap";
+import { Card, Form, Button, Col } from "react-bootstrap";
 import "./DisplayPets.css";
 import { selectToken } from "../../store/user/selectors";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import MydModalWithGrid from "./Edit";
 import DeletePet from "./DeletePet";
 
 export default function DisplayPets(props) {
   const [modalShow, setModalShow] = useState(false);
   const token = useSelector(selectToken);
-  const dispatch = useDispatch();
+
 
   return (
     <>

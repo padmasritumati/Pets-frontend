@@ -26,9 +26,10 @@ export default function Review({ image, name, dateCreated, rating, comment }) {
         reviewsListToDisplay.length ? (
           <div>
             {" "}
-            <h2 className="headerdreview">Reviews ({reviewsListToDisplay.length})</h2>
+            <h2 >Reviews ({reviewsListToDisplay.length})</h2>
             {reviewsListToDisplay.map((review, i) => (
               <DisplayReview
+              
                 key={i}
                 image={review.user.image}
                 name={review.user.full_name}
@@ -38,7 +39,7 @@ export default function Review({ image, name, dateCreated, rating, comment }) {
             ))}
           </div>
         ) : (
-          <h2 className="headerdreview"> No reviews</h2>
+          <h2> No reviews</h2>
         )
       ) : null}
     </>

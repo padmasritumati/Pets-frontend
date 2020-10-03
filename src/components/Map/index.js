@@ -12,24 +12,29 @@ const LocationPin = ({ text }) => (
   </div>
 );
 
-const Map = ({ sitterList,location}) => (
+const Map = ({ sitterList, location }) => (
   <div className="map">
     <h2 className="map-h2">Map</h2>
     <div className="google-map">
+    
       <GoogleMapReact
         bootstrapURLKeys={{
           key: apiKeyGoogle,
           language: "en",
           region: "US",
         }}
-        defaultCenter={{ lat:location.lat, lng:location.log }}
-        defaultZoom={12}
+        
+        defaultCenter={{
+          lat: location.lat,
+          lng: location.log,
+        }}
+        defaultZoom={14}
       >
-        {console.log("from map", location)}
-        {sitterList.map((sitter) => {
+      
+        {sitterList.map((sitter, i) => {
           return (
             <LocationPin
-              key={sitter.id}
+              key={i}
               lat={sitter.user.latitude}
               lng={sitter.user.longitude}
               text={sitter.user.full_name}

@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { getServices } from "../../store/searchSitter/actions";
 import { selectSitterList } from "../../store/searchSitter/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
-import { selectToken, selectUser } from "../../store/user/selectors";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Geocode from "react-geocode";
 import Map from "../../components/Map";
 import Sitter from "./Sitter";
@@ -52,8 +51,6 @@ async function handlePlaceSelect(updateQuery) {
 export default function SearchSitters() {
   const dispatch = useDispatch();
   const sitterList = useSelector(selectSitterList);
-  console.log("sitter", sitterList);
-
   const [yes, setYes] = useState();
   const [type, setType] = useState();
   const [size, setSize] = useState();
@@ -86,7 +83,7 @@ export default function SearchSitters() {
           const { lat, lng } = response.results[0].geometry.location;
           setLatitude(lat);
           setLongitude(lng);
-          console.log("inside handler", type, service, size, lat, lng);
+          //console.log("inside handler", type, service, size, lat, lng);
           dispatch(getServices(type, service, size, lat, lng));
         },
         (error) => {
@@ -189,7 +186,7 @@ export default function SearchSitters() {
                 className="button-search"
                 onClick={searchHandler}
               >
-                <img src="https://img.icons8.com/fluent-systems-filled/20/000000/search.png" />
+                <img src="https://img.icons8.com/fluent-systems-filled/20/000000/search.png" alt="search icon"/>
                 Search
               </Button>
             </Col>{" "}
@@ -198,13 +195,15 @@ export default function SearchSitters() {
 
         <div className="mt-5 mapdisplay">
           {yes ? (
-            <Row>
-              <Col>
-                {sitterList.map((sitter) => {
+            <Container>
+            <Row >
+              <Col className="service">
+                {sitterList.map((sitter,i) => {
                   console.log(sitter, "from sitter");
                   return (
                     <Sitter
-                      key={sitter.id}
+                      key={i}
+                      id={sitter.user.id}
                       address={sitter.user.address}
                       name={sitter.user.full_name}
                       image={sitter.user.image}
@@ -212,7 +211,7 @@ export default function SearchSitters() {
                   );
                 })}
               </Col>
-              <Col className="col-9">
+              <Col className="col-9 service">
                 {latitude ? (
                   <div>
                     <Map sitterList={sitterList} location={location} />
@@ -220,6 +219,7 @@ export default function SearchSitters() {
                 ) : null}
               </Col>
             </Row>
+            </Container>
           ) : null}
         </div>
       </div>

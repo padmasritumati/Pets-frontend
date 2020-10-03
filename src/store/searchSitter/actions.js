@@ -1,4 +1,4 @@
-import { apiUrl, DEFAULT_PAGINATION_LIMIT } from "../../config/constants";
+import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { showMessageWithTimeout } from "../appState/actions";
 
@@ -12,11 +12,11 @@ export const service_success = (serviceList) => ({
 export const getServices = (type, service, size, lat, lng) => {
   return async (dispatch, getState) => {
     try {
-      console.log("from action",type, service, size, lat, lng)
+      console.log("from action", type, service, size, lat, lng);
       const response = await axios.get(
         `${apiUrl}/search_sitters/${type}/${service}/${size}/${lat}/${lng}`
       );
-      console.log("from action",response.data)
+      //console.log("from action",response.data)
       dispatch(service_success(response.data.filteredList));
     } catch (e) {
       console.log("error", e);

@@ -37,7 +37,7 @@ export default function SignUp() {
                 Log in
               </h1>
               <Form.Group controlId="formBasicEmail">
-                <img src="https://img.icons8.com/fluent-systems-regular/24/000000/new-post.png" />
+                <img src="https://img.icons8.com/fluent-systems-regular/24/000000/new-post.png" alt="email icon" />
                 <Form.Label className=" mb-2">Email address</Form.Label>
                 <Form.Control
                   value={email}
@@ -49,7 +49,7 @@ export default function SignUp() {
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
-                <img src="https://img.icons8.com/fluent-systems-regular/24/000000/password-window.png" />
+                <img src="https://img.icons8.com/fluent-systems-regular/24/000000/password-window.png" alt="password icon"/>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   value={password}

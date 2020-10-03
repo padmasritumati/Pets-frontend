@@ -93,7 +93,7 @@ export default function MydModalWithGrid(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="outline-dark" onClick={props.onHide}>Close</Button>
-       <Button variant="outline-dark" onClick={props.onHide,handlerUpdate} >Save</Button>
+       <Button variant="outline-dark" onClick={ handlerUpdate} >Save</Button>
      
       </Modal.Footer>
     </Modal>

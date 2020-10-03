@@ -56,7 +56,7 @@ export const getpets = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("from action get methode", response.data);
+    //console.log("from action get methode", response.data);
     dispatch(setPets(response.data));
   };
 };
@@ -67,7 +67,7 @@ export const service = (services) => {
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/user_details/pets`,
+        `${apiUrl}/user_details/services`,
         services,
         {
           headers: {

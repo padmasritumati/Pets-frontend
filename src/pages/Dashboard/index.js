@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Button,
-  Form,
-  Row,
-  Col,
-  Image,
-  CardColumns,
-} from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container, Form, Row, Col, Image, CardColumns } from "react-bootstrap";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { userById } from "../../store/userById/actions";
@@ -37,7 +29,7 @@ export default function Dashboard() {
     if (user.petOwner) {
       dispatch(getpets());
     }
-  }, [dispatch, user.id]);
+  });
 
   return (
     <div className="main">

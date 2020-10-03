@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Container, Col, Form, Row, Button, FormLabel } from "react-bootstrap";
+import { Container, Col, Form, Row, Button } from "react-bootstrap";
 import { service } from "../../store/userDetails/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { selectUser } from "../../store/user/selectors";
 
 export default function Services() {
   const [boarding, set_Boarding] = useState("off");
@@ -20,8 +22,7 @@ export default function Services() {
   const [gaint, set_Gaint] = useState("off");
   const [cat, set_Cat] = useState();
   const dispatch = useDispatch();
-
-  
+  const user = useSelector(selectUser);
 
   const services = {
     boarding: boarding,
@@ -42,13 +43,12 @@ export default function Services() {
     gaint: gaint,
 
     cat: cat,
-    
   };
 
-  console.log(services);
+  //console.log(services);
 
   const handler = () => {
-    console.log("services", services);
+    // console.log("services", services);
     dispatch(service(services));
   };
 
@@ -62,10 +62,10 @@ export default function Services() {
       <Container as={Col} className="mt-5 form" md={{ span: 9, offset: 1.5 }}>
         <Form.Row className="justify-content-md-center">
           <Col xs lg="2">
-            <img src="https://img.icons8.com/clouds/100/000000/dog.png" />
+            <img src="https://img.icons8.com/clouds/100/000000/dog.png" alt="dog icon"/>
           </Col>
           <Col xs lg="2">
-            <img src="https://img.icons8.com/clouds/100/000000/cat.png" />
+            <img src="https://img.icons8.com/clouds/100/000000/cat.png" alt="cat icon"/>
           </Col>
         </Form.Row>
         {/*services and price form */}
@@ -237,7 +237,7 @@ export default function Services() {
               label={
                 <>
                   <h5>Small(0-7kg)</h5>
-                  <img src="https://img.icons8.com/carbon-copy/40/000000/dog.png" />
+                  <img src="https://img.icons8.com/carbon-copy/40/000000/dog.png" alt="dog icon"/>
                 </>
               }
               onChange={(e) => set_Small(e.target.value)}
@@ -250,7 +250,7 @@ export default function Services() {
               label={
                 <>
                   <h5>Medium(7-18kg)</h5>
-                  <img src="https://img.icons8.com/carbon-copy/60/000000/dog.png" />
+                  <img src="https://img.icons8.com/carbon-copy/60/000000/dog.png" alt="dog icon" />
                 </>
               }
               onChange={(e) => set_Medium(e.target.value)}
@@ -264,7 +264,7 @@ export default function Services() {
               label={
                 <>
                   <h5>Large(18-45kg)</h5>
-                  <img src="https://img.icons8.com/carbon-copy/80/000000/dog.png" />
+                  <img src="https://img.icons8.com/carbon-copy/80/000000/dog.png" alt="dog icon"/>
                 </>
               }
               onChange={(e) => set_Large(e.target.value)}
@@ -279,7 +279,7 @@ export default function Services() {
               label={
                 <>
                   <h5>Gaint(45kg +)</h5>
-                  <img src="https://img.icons8.com/carbon-copy/100/000000/dog.png" />
+                  <img src="https://img.icons8.com/carbon-copy/100/000000/dog.png" alt="dog icon" />
                 </>
               }
               onChange={(e) => set_Gaint(e.target.value)}
@@ -310,15 +310,17 @@ export default function Services() {
         </Form.Row>
         {/*submit button part*/}
         <Form.Row className="mt-5 justify-content-md-center">
-          <Button
-            style={{ justifyContent: "center" }}
-            type="submit"
-            variant="dark"
-            className="mt-5"
-            onClick={handler}
-          >
-            Submit
-          </Button>
+          <Link to={`/dashboard/${user.id}`}>
+            <Button
+              style={{ justifyContent: "center" }}
+              type="submit"
+              variant="dark"
+              className="mt-5"
+              onClick={handler}
+            >
+              Submit
+            </Button>
+          </Link>
         </Form.Row>
       </Container>
     </div>
