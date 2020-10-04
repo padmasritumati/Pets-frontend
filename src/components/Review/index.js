@@ -31,44 +31,45 @@ export default function Review() {
     <>
       {token ? (
         <div>
-        <h2 className="headerdr">Leave a review</h2>
-        <Form className="form">
-          <Form.Group>
-            <Row><h3>Rating</h3></Row>
-          
-            <Row>
-              {" "}
-              
-              <StarRatings
-                rating={rating}
-                starRatedColor="#ebcc34"
-                changeRating={changeRating}
-                numberOfStars={5}
-                name="rating"
-                starDimension="35px"
-                starSpacing="5px"
-              />
-            </Row>
-          </Form.Group>
-          <Form.Group>
-            <Row>
-              <Form.Label>
-                <h3>Comment</h3>
-              </Form.Label>
-            </Row>
-            <Row>
-              <textarea
-                name="Comment"
-                rows="3"
-                value={comment}
-                onChange={(e) => set_comment(e.target.value)}
-              ></textarea>
-            </Row>
-          </Form.Group>
-          <Button variant="outline-dark" onClick={clickHandler}>
-            Submit
-          </Button>
-        </Form>
+          <h2>Leave a review</h2>
+          <Form className="form">
+            <Form.Group>
+              <Row>
+                <h3>Rating</h3>
+              </Row>
+
+              <Row>
+                {" "}
+                <StarRatings
+                  rating={rating}
+                  starRatedColor="#ebcc34"
+                  changeRating={changeRating}
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="35px"
+                  starSpacing="5px"
+                />
+              </Row>
+            </Form.Group>
+            <Form.Group>
+              <Row>
+                <Form.Label>
+                  <h3>Comment</h3>
+                </Form.Label>
+              </Row>
+              <Row>
+                <textarea
+                  name="Comment"
+                  rows="3"
+                  value={comment}
+                  onChange={(e) => set_comment(e.target.value)}
+                ></textarea>
+              </Row>
+            </Form.Group>
+            <Button variant="outline-dark" onClick={clickHandler}>
+              Submit
+            </Button>
+          </Form>
         </div>
       ) : null}
     </>

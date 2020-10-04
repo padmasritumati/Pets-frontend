@@ -18,7 +18,6 @@ export const getReviews = () => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${apiUrl}/review`);
-
       dispatch(fetch_reviews(response.data));
     } catch (e) {
       console.log("error", e.message);

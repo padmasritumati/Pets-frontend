@@ -1,10 +1,8 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 import "./map.css";
-
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
-//import Sitter from "../../pages/SearchSitters/Sitter";
 import { apiKeyGoogle } from "../../config/constants";
 
 const LocationPin = ({ text }) => (
@@ -14,26 +12,32 @@ const LocationPin = ({ text }) => (
   </div>
 );
 
-const Map = ({ sitterList }) => (
+const Map = ({ sitterList, location }) => (
   <div className="map">
     <h2 className="map-h2">Map</h2>
     <div className="google-map">
+    
       <GoogleMapReact
         bootstrapURLKeys={{
           key: apiKeyGoogle,
           language: "en",
-          region: "US"
+          region: "US",
         }}
-        defaultCenter={{ lat:52.0907, lng: 5.1214 }}
-        defaultZoom={12}
+        
+        defaultCenter={{
+          lat: location.lat,
+          lng: location.log,
+        }}
+        defaultZoom={14}
       >
-        {sitterList.map((sitter,i) => {
+      
+        {sitterList.map((sitter, i) => {
           return (
             <LocationPin
-            key={i}
-              lat={sitter.address.latitude}
-              lng={sitter.address.longitude}
-              text={sitter.full_name}
+              key={i}
+              lat={sitter.user.latitude}
+              lng={sitter.user.longitude}
+              text={sitter.user.full_name}
             />
           );
         })}

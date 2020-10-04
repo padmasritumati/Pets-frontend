@@ -1,20 +1,12 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
+import { selectToken } from "../user/selectors";
 
-export const ADDRESS = "ADDRESS";
-export const PHONE = "PHONE";
 export const SERVICES = "SERVICES";
 export const PETS = "PETS";
-
-export const setAddress = (address) => ({
-  type: ADDRESS,
-  payload: address,
-});
-
-export const setPhone = (phone) => ({
-  type: PHONE,
-  payload: phone,
-});
+export const ALLPETS = "ALLPETS";
+export const UPDATEPET = "UPDATEPET";
+export const DELECTPETS = "DELECTPETS";
 
 export const setServices = (services) => ({
   type: SERVICES,
@@ -26,16 +18,20 @@ export const setPets = (pets) => ({
   payload: pets,
 });
 
-export const getaddress = () => {
-  return async (dispatch, getState) => {
-    const token = getState().user.token;
-    const response = await axios.get(`${apiUrl}/user_details/address`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    dispatch(setAddress(response.data));
+export const allPets = (pets) => ({
+  type: ALLPETS,
+  payload: pets,
+});
+export const upadtePetSuccess = (pets) => {
+  return {
+    type: DELECTPETS,
+    payload: pets,
+  };
+};
+export const deletePetSuccess = (pets) => {
+  return {
+    type: DELECTPETS,
+    payload: pets,
   };
 };
 
@@ -60,61 +56,8 @@ export const getpets = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    //console.log("from action get methode", response.data);
     dispatch(setPets(response.data));
-  };
-};
-
-export const address = (house_number, street, city, postcode, country,lat,lng) => {
-  return async (dispatch, getState) => {
-    try {
-      const token = getState().user.token;
-
-      const response = await axios.post(
-        `${apiUrl}/user_details/address`,
-        {
-          house_number,
-          street,
-          city,
-          postcode,
-          country,
-          lat,
-          lng
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      dispatch(setAddress(response.data));
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
-export const phone = (phone, image) => {
-  return async (dispatch, getState) => {
-    try {
-      const token = getState().user.token;
-      console.log("token", token);
-
-      const response = await axios.post(
-        `${apiUrl}/user_details/phone`,
-        {
-          phone,
-          image,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      dispatch(setPhone(response.data.pets));
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 };
 
@@ -124,7 +67,7 @@ export const service = (services) => {
       const token = getState().user.token;
 
       const response = await axios.post(
-        `${apiUrl}/user_details/pets`,
+        `${apiUrl}/user_details/services`,
         services,
         {
           headers: {
@@ -171,9 +114,62 @@ export const pet = (
           },
         }
       );
-      dispatch(setPets(response.data));
+      dispatch(allPets(response.data));
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const updatePet = (
+  id,
+  name,
+  weight,
+  breed,
+  ageInYears,
+  ageInMonths,
+  sex
+) => {
+  return async (dispatch, getState) => {
+    try {
+      const token = getState().user.token;
+
+      const response = await axios.patch(
+        `${apiUrl}/user_details/pets/${id}`,
+        {
+          id,
+          name,
+          weight,
+          breed,
+          ageInYears,
+          ageInMonths,
+          sex,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(upadtePetSuccess(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const delectPet = (id) => {
+  console.log("from action id", id);
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    try {
+      const response = await axios.delete(`${apiUrl}/user_details/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("action", response.data);
+      dispatch(deletePetSuccess(response.data));
+    } catch (e) {
+      console.log(e);
     }
   };
 };

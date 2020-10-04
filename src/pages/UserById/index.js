@@ -3,26 +3,30 @@ import { userById } from "../../store/userById/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { selectUserById } from "../../store/userById/selectors";
-import { Container, Row, Image, Col, Button } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  Card,
+  Image,
+  Col,
+  Button,
+  CardColumns,
+} from "react-bootstrap";
 import Review from "../../components/Review";
 import ReviewList from "../../components/Review/ReviewList";
 import { reviewsSelector } from "../../store/Review/selectors";
 import StarRatings from "react-star-ratings";
-import DisplayServices from "../../components/DisplayServices";
-import { getaddress, getservice } from "../../store/userDetails/actions";
 import { selectToken } from "../../store/user/selectors";
 
 export default function SitterById() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector(selectUserById);
+  const data = useSelector(selectUserById);
   const token = useSelector(selectToken);
-
-  const address = user.address ? user.address : {};
-  const service = user.service ? user.service : {};
-
   const reviwe = useSelector(reviewsSelector);
-
+  const user = data.user ? data.user : {};
+  const pets = data.pets ? data.pets : [];
   const reviewsFiltered = reviwe.filter((r) => {
     return parseInt(id) === r.sitterUserId;
   });
@@ -34,63 +38,180 @@ export default function SitterById() {
 
   useEffect(() => {
     dispatch(userById(id));
-   
   }, [dispatch, id]);
 
   return (
     <>
       <h1 className="headerdashboard"> {user.full_name}</h1>
-      <Container>
+      <Container as={Col} md={{ span: 5, offset: 1 }}>
         <Row className="mt-5 mb-3">
           <Image src={user.image} width={171} height={180} roundedCircle />
           <Col>
             <h1>{user.full_name}</h1>
-            <h3>
-              {address.street},{address.city},{address.postcode}
-            </h3>
-            <StarRatings
+            {user.petSitter?<StarRatings
               rating={averageOfRating ? averageOfRating : 0}
               starRatedColor="#000000"
               starEmptyColor="grey"
               starDimension="20px"
               starSpacing="5px"
-            />
+            />:null}
+
+            <Row className="mt-3 mb-3">
+              <Col>
+                {token ? (
+                  <Link to={`/contact/${user.id}`}>
+                    <Button variant="outline-dark" className="mb-4">
+                      Contact {user.full_name}
+                    </Button>
+                  </Link>
+                ) : null}
+              </Col>
+            </Row>
           </Col>
         </Row>
-        {token ? (
+      </Container>
+      {user.pet ? (
+        <Container className="mt-5">
+          <CardColumns>
+            {pets.map((pet, i) => {
+              return (
+                <Card
+                  key={i}
+                  className="card-img-top"
+                  style={{ width: "18rem" }}
+                >
+                  <Card.Img
+                    className="img"
+                    variant="top"
+                    src={pet.image}
+                    width="100"
+                    height="200"
+                  />
+                  <Card.Body>
+                    <Card.Title>{pet.name}</Card.Title>
+
+                    <Form.Row className="justify-content-md-center">
+                      <Col xs lg="6">
+                        <Card.Text>
+                          <strong>Type:</strong>
+                          {pet.type}
+                          <br></br>
+                          <strong>Age:</strong> {pet.ageInYears}years,
+                          {pet.ageInMonths}
+                          months
+                          <br></br>
+                          <strong>weight:</strong>
+                          {pet.weight}Kgs
+                          <br></br>
+                        </Card.Text>
+                      </Col>
+                      <Col xs lg="6">
+                        <Card.Text>
+                          <strong>Breed:</strong>
+                          {pet.breed}
+                          <br></br>
+                          <strong>Sex:</strong>
+                          {pet.sex}
+                        </Card.Text>
+                      </Col>
+                    </Form.Row>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </CardColumns>
+        </Container>
+      ) : null}
+
+      {user.service ? (
+        <Container className="mt-5 mb-5 " fluid align="center">
           <Row>
-            <Link to={`/contact/${user.id}`}>
-              <Button variant="outline-dark" className="mb-4" >Contact {user.full_name}</Button>
-            </Link>
+            <Col>
+              <Row>
+                <Container
+                  className="service"
+                  as={Col}
+                  md={{ span: 9, offset: 1 }}
+                >
+                  <h1>Services</h1>
+                  <Row>
+                    <Col>
+                      {user.service.boarding ? <h3>Boarding</h3> : null}
+                      {user.service.houseSitting ? (
+                        <h3>House Sitting</h3>
+                      ) : null}
+                      {user.service.dropInVisits ? (
+                        <h3>Drop-In Visits</h3>
+                      ) : null}
+                      {user.service.doggyDayCare ? (
+                        <h3>Doggy Day Care</h3>
+                      ) : null}
+                      {user.service.dogWalking ? <h3>Dog Walking</h3> : null}
+                    </Col>
+
+                    <Col>
+                      {user.service.boarding ? (
+                        <h3>€{user.service.boardingRate}</h3>
+                      ) : null}
+                      {user.service.houseSitting ? (
+                        <h3> €{user.service.houseSittingRate}</h3>
+                      ) : null}
+                      {user.service.dropInVisits ? (
+                        <h3>€{user.service.dropInVisitsRate}</h3>
+                      ) : null}
+                      {user.service.doggyDayCare ? (
+                        <h3>€{user.service.doggyDayCareRate}</h3>
+                      ) : null}
+                      {user.service.dogWalking ? (
+                        <h3>€{user.service.dogWalkingRate}</h3>
+                      ) : null}
+                    </Col>
+                  </Row>
+                </Container>
+              </Row>
+              <Row>
+                <Container
+                  className="service"
+                  as={Col}
+                  md={{ span: 9, offset: 1 }}
+                >
+                  <h2 className="mb-2">Type of pet</h2>
+                  <Form.Row className="justify-content-md-center mt-3 ">
+                    <Col xs lg="2">
+                      <h4>Dog</h4>
+                    </Col>
+                    <Col xs lg="2">
+                      {user.service.cat ? <h4> Cat</h4> : null}
+                    </Col>
+                  </Form.Row>
+                  <h2 className="mt-3 mb-2">Size of Dog </h2>
+                  <Form.Row className="justify-content-md-center mt-3 ">
+                    <Col xs lg="3">
+                      {user.service.small ? <h4>Small</h4> : null}
+                      {user.service.medium ? <h4>Medium</h4> : null}
+                    </Col>
+                    <Col xs lg="3">
+                      {user.service.large ? <h4>Large</h4> : null}
+                      {user.service.gaint ? <h4>Gaint</h4> : null}
+                    </Col>
+                  </Form.Row>
+                </Container>
+              </Row>
+            </Col>
+            <Col>
+              <Container as={Col}>
+                <Col className="service">
+                  <ReviewList></ReviewList>
+                </Col>
+
+                <Col className="service">
+                  <Review> </Review>
+                </Col>
+              </Container>
+            </Col>
           </Row>
-        ) : null}
-      </Container>
-      <h1 className="headerdashboard"> services</h1>
-      <Container>
-        <DisplayServices
-          boarding={service.boarding}
-          houseSitting={service.houseSitting}
-          dropInVisits={service.dropInVisits}
-          doggyDayCare={service.doggyDayCare}
-          dogWalking={service.dogWalking}
-          boardingRate={service.boardingRate}
-          houseSittingRate={service.houseSittingRate}
-          dropInVisitsRate={service.dropInVisitsRate}
-          doggyDayCareRate={service.doggyDayCareRate}
-          dogWalkingRate={service.dogWalkingRate}
-          small={service.small}
-          medium={service.medium}
-          large={service.large}
-          gaint={service.gaint}
-          cat={service.cat}
-          full_name={user.full_name}
-        />
-        <Row></Row>
-      </Container>
-
-      <ReviewList></ReviewList>
-
-      <Review> </Review>
+        </Container>
+      ) : null}
     </>
   );
 }

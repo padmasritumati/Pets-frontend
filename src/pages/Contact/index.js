@@ -21,10 +21,12 @@ export default function Contact() {
   const [time, setTime] = useState();
   const [pet, setPet] = useState();
   const userId = user.id;
-  const userbyid = useSelector(selectUserById);
+  const userDetails= useSelector(selectUserById);
+  const userbyid=userDetails.user?userDetails.user:{};
   const service = userbyid.service ? userbyid.service : {};
   const p = useSelector(selectpets);
   const pets = p ? p : [];
+
 
   useEffect(() => {
     dispatch(userById(id));
@@ -48,7 +50,8 @@ export default function Contact() {
   return (
     <div>
       <h1 className="headercontact">Contact Form</h1>
-      <Container className="form">
+      <Container className="form"  as={Col}
+                  md={{ span: 6, offset: 2 }}>
         <Row>
           <Col>
             {userbyid.petSitter ? (
@@ -148,7 +151,7 @@ export default function Contact() {
                   ></textarea>
                 </Row>
                 <Row className="mt-3 mb-3">
-                  <h3>select pet</h3>
+                  <h3>Select Pet</h3>
                 </Row>
                 <Row>
                   {pets.map((pet, i) => {
@@ -194,12 +197,12 @@ export default function Contact() {
                     ></textarea>
                   </Row>
                   <br></br>
-                  <Button onClick={handler}> Send</Button>
+                  <Button variant="outline-dark" onClick={handler}> Send</Button>
                 </Form.Group>
               </Form>
             )}
           </Col>
-          <Col className="col-8">
+          <Col >
             <Image
               className="contact-image"
               src="https://res.cloudinary.com/dsuvhhlxm/image/upload/v1597387606/pet_image/dogwithpeople_g6m85h.jpg"

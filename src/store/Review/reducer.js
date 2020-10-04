@@ -6,7 +6,6 @@ export default (state = initialState, action) => {
       return action.payload;
     case "ADD_REVIWES":
       return action.payload;
-
     default:
       return state;
   }
