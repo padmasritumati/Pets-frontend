@@ -29,7 +29,7 @@ export default function Dashboard() {
     if (user.petOwner) {
       dispatch(getpets());
     }
-  });
+  },[dispatch,user.id]);
 
   return (
     <div className="main">

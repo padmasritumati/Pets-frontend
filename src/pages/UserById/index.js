@@ -3,7 +3,16 @@ import { userById } from "../../store/userById/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { selectUserById } from "../../store/userById/selectors";
-import { Container, Form, Row, Image, Col, Button } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  Card,
+  Image,
+  Col,
+  Button,
+  CardColumns,
+} from "react-bootstrap";
 import Review from "../../components/Review";
 import ReviewList from "../../components/Review/ReviewList";
 import { reviewsSelector } from "../../store/Review/selectors";
@@ -12,14 +21,12 @@ import { selectToken } from "../../store/user/selectors";
 
 export default function SitterById() {
   const { id } = useParams();
- // console.log("from detailed page", id);
   const dispatch = useDispatch();
-  const user = useSelector(selectUserById);
+  const data = useSelector(selectUserById);
   const token = useSelector(selectToken);
   const reviwe = useSelector(reviewsSelector);
-
-  //console.log("from details page user", user);
-
+  const user = data.user ? data.user : {};
+  const pets = data.pets ? data.pets : [];
   const reviewsFiltered = reviwe.filter((r) => {
     return parseInt(id) === r.sitterUserId;
   });
@@ -41,28 +48,80 @@ export default function SitterById() {
           <Image src={user.image} width={171} height={180} roundedCircle />
           <Col>
             <h1>{user.full_name}</h1>
-            <StarRatings 
+            {user.petSitter?<StarRatings
               rating={averageOfRating ? averageOfRating : 0}
               starRatedColor="#000000"
               starEmptyColor="grey"
               starDimension="20px"
               starSpacing="5px"
-            />
+            />:null}
 
             <Row className="mt-3 mb-3">
               <Col>
-              {token ? (
-                <Link to={`/contact/${user.id}`}>
-                  <Button variant="outline-dark" className="mb-4">
-                    Contact {user.full_name}
-                  </Button>
-                </Link>
-              ) : null}
+                {token ? (
+                  <Link to={`/contact/${user.id}`}>
+                    <Button variant="outline-dark" className="mb-4">
+                      Contact {user.full_name}
+                    </Button>
+                  </Link>
+                ) : null}
               </Col>
             </Row>
           </Col>
         </Row>
       </Container>
+      {user.pet ? (
+        <Container className="mt-5">
+          <CardColumns>
+            {pets.map((pet, i) => {
+              return (
+                <Card
+                  key={i}
+                  className="card-img-top"
+                  style={{ width: "18rem" }}
+                >
+                  <Card.Img
+                    className="img"
+                    variant="top"
+                    src={pet.image}
+                    width="100"
+                    height="200"
+                  />
+                  <Card.Body>
+                    <Card.Title>{pet.name}</Card.Title>
+
+                    <Form.Row className="justify-content-md-center">
+                      <Col xs lg="6">
+                        <Card.Text>
+                          <strong>Type:</strong>
+                          {pet.type}
+                          <br></br>
+                          <strong>Age:</strong> {pet.ageInYears}years,
+                          {pet.ageInMonths}
+                          months
+                          <br></br>
+                          <strong>weight:</strong>
+                          {pet.weight}Kgs
+                          <br></br>
+                        </Card.Text>
+                      </Col>
+                      <Col xs lg="6">
+                        <Card.Text>
+                          <strong>Breed:</strong>
+                          {pet.breed}
+                          <br></br>
+                          <strong>Sex:</strong>
+                          {pet.sex}
+                        </Card.Text>
+                      </Col>
+                    </Form.Row>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </CardColumns>
+        </Container>
+      ) : null}
 
       {user.service ? (
         <Container className="mt-5 mb-5 " fluid align="center">

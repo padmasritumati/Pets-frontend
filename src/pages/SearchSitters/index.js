@@ -115,6 +115,7 @@ export default function SearchSitters() {
                     setType(e.target.value);
                   }}
                 >
+                  <option>select</option>
                   <option>Dog</option>
                   <option>Cat</option>
                 </Form.Control>
@@ -131,12 +132,14 @@ export default function SearchSitters() {
                 >
                   {type === "Cat" ? (
                     <>
+                     <option>select</option>
                       <option>Boarding</option>
                       <option>House Sitting</option>
                       <option>Drop-In Visits</option>
                     </>
                   ) : (
                     <>
+                     <option>select</option>
                       <option>Boarding</option>
                       <option>House Sitting</option>
                       <option>Drop-In Visits</option>
@@ -159,6 +162,7 @@ export default function SearchSitters() {
                         setSize(e.target.value);
                       }}
                     >
+                       <option>select</option>
                       <option>Small(0-7)kg</option>
                       <option>Medium(7-18)kg</option>
                       <option>Large(18-45)kg</option>

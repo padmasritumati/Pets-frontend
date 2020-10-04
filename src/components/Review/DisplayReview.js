@@ -6,7 +6,7 @@ export default function Review(props) {
   return (
     <div className="form">
       <Form.Row>
-        <Col xs lg="1">
+        <Col xs lg="2">
           <Image
             style={{
               width: "50px",

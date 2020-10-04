@@ -21,10 +21,12 @@ export default function Contact() {
   const [time, setTime] = useState();
   const [pet, setPet] = useState();
   const userId = user.id;
-  const userbyid = useSelector(selectUserById);
+  const userDetails= useSelector(selectUserById);
+  const userbyid=userDetails.user?userDetails.user:{};
   const service = userbyid.service ? userbyid.service : {};
   const p = useSelector(selectpets);
   const pets = p ? p : [];
+
 
   useEffect(() => {
     dispatch(userById(id));
@@ -195,7 +197,7 @@ export default function Contact() {
                     ></textarea>
                   </Row>
                   <br></br>
-                  <Button onClick={handler}> Send</Button>
+                  <Button variant="outline-dark" onClick={handler}> Send</Button>
                 </Form.Group>
               </Form>
             )}

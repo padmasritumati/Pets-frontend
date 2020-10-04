@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Container, Col, Form, Row, Button } from "react-bootstrap";
-import { service } from "../../store/userDetails/actions";
+import { service,getservice } from "../../store/userDetails/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectUser } from "../../store/user/selectors";
+//import {selectservice} from "../../store/userDetails/selectors"
 
 export default function Services() {
   const [boarding, set_Boarding] = useState("off");
@@ -23,6 +24,7 @@ export default function Services() {
   const [cat, set_Cat] = useState();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  //const serviceCheck=useSelector(selectservice);
 
   const services = {
     boarding: boarding,
@@ -50,6 +52,7 @@ export default function Services() {
   const handler = () => {
     // console.log("services", services);
     dispatch(service(services));
+    dispatch(getservice())
   };
 
   return (

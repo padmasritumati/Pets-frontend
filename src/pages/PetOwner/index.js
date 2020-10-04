@@ -161,7 +161,7 @@ export default function Pets() {
                     console.log("images", images);
                   }}
                 >
-                  <i class="fas fa-camera"></i> Upload Image
+                  <i className="fas fa-camera"></i> Upload Image
                 </Button>{" "}
                 {images ? (
                   <Image
