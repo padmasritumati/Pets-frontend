@@ -42,7 +42,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/contact/:id" component={Contact} />
-        <Route exact path="/" component={HomePage} />
+        <Route path="/" component={HomePage} />
       </Switch>
     </div>
   );
