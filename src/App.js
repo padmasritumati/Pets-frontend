@@ -32,7 +32,7 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={HomePage} />
+      
         <Route path="/become_a_sitter" component={BecomeSitter} />
         <Route path="/petowner" component={PetOwner} />
         <Route path="/our_services" component={OurServices} />
@@ -42,6 +42,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/contact/:id" component={Contact} />
+        <Route exact path="/" component={HomePage} />
       </Switch>
     </div>
   );
